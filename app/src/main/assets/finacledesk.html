@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Finacle Desk — India Post counter reference</title>
+<style>
+:root{
+  --masth:57px;
+  --post-red:#C8102E;
+  --post-red-dk:#96001F;
+  --sup-gold:#B57A00;
+  --sup-gold-bg:#FFF6E0;
+  --ink:#14202E;
+  --ink-2:#3D4E60;
+  --slate:#66788B;
+  --paper:#EEF1F4;
+  --surface:#FFFFFF;
+  --line:#D3DAE2;
+  --line-soft:#E5EAF0;
+  --ok:#0B6E4F;
+  --warn-bg:#FFF3F4;
+  --r:10px;
+  --mono:ui-monospace,"SFMono-Regular","SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+button{font:inherit;color:inherit;cursor:pointer}
+input{font:inherit}
+
+/* ---------- masthead ---------- */
+.topbar{position:sticky;top:calc(-1 * var(--masth));z-index:40}
+.mast{
+  background:var(--ink);color:#fff;
+  padding:10px 16px;display:flex;align-items:center;gap:10px;
+}
+.seal{
+  width:26px;height:26px;border-radius:50%;background:var(--post-red);
+  display:grid;place-items:center;flex:none;
+  font-weight:800;font-size:11px;letter-spacing:.02em;color:#fff;
+  box-shadow:0 0 0 2px rgba(255,255,255,.18);
+}
+.mast h1{
+  font-size:15px;margin:0;font-weight:700;letter-spacing:-.01em;
+}
+.mast .sub{
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:#93A5B8;font-weight:600;margin-top:1px;
+}
+.mast .spacer{flex:1}
+.stamp{
+  font-family:var(--mono);font-size:10px;letter-spacing:.06em;
+  border:1px solid #46586C;color:#A9BBCD;padding:3px 7px;border-radius:4px;
+  white-space:nowrap;
+}
+
+/* ---------- search ---------- */
+.searchwrap{background:var(--ink);padding:0 12px 12px}
+.searchbox{position:relative}
+.searchbox input{
+  width:100%;padding:13px 40px 13px 40px;border-radius:var(--r);
+  border:2px solid transparent;background:#fff;color:var(--ink);
+  font-size:16px;outline:none;
+}
+.searchbox input:focus{border-color:var(--post-red)}
+.searchbox input::-webkit-search-decoration,
+.searchbox input::-webkit-search-cancel-button,
+.searchbox input::-webkit-search-results-button{-webkit-appearance:none;appearance:none}
+.searchbox .ico{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  color:var(--slate);font-size:15px;pointer-events:none
+}
+.clearbtn{
+  position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  border:0;background:var(--line-soft);color:var(--ink-2);
+  width:26px;height:26px;border-radius:50%;display:none;
+  align-items:center;justify-content:center;font-size:16px;line-height:1;
+}
+.clearbtn.on{display:flex}
+
+/* ---------- tabs ---------- */
+.tabs{
+  display:flex;gap:2px;background:var(--ink);padding:0 8px;
+  overflow-x:auto;scrollbar-width:none;
+  border-bottom:3px solid var(--post-red);
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  border:0;background:transparent;color:#8FA2B5;
+  padding:9px 13px 10px;font-size:12.5px;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;
+  border-radius:6px 6px 0 0;
+}
+.tab[aria-selected="true"]{background:var(--post-red);color:#fff}
+
+/* ---------- layout ---------- */
+main{max-width:940px;margin:0 auto;padding:14px 12px 60px}
+.hint{
+  font-size:12.5px;color:var(--slate);margin:2px 0 14px;
+}
+.sechead{
+  display:flex;align-items:baseline;gap:8px;margin:22px 0 8px;
+}
+.sechead:first-child{margin-top:4px}
+.sechead h2{
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  margin:0;color:var(--post-red);font-weight:800;
+}
+.sechead .rule{flex:1;height:1px;background:var(--line)}
+.sechead .count{font-family:var(--mono);font-size:11px;color:var(--slate)}
+
+/* ---------- cards ---------- */
+.card{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r);margin-bottom:8px;overflow:hidden;
+}
+.cardhead{
+  width:100%;border:0;background:transparent;text-align:left;
+  padding:13px 14px;display:flex;align-items:center;gap:10px;
+}
+.cardhead:hover{background:#F7F9FB}
+.cardhead .t{flex:1;min-width:0}
+.cardhead .name{font-weight:650;font-size:15px;line-height:1.3;letter-spacing:-.005em}
+.cardhead .meta{
+  font-size:11.5px;color:var(--slate);margin-top:3px;
+  display:flex;flex-wrap:wrap;gap:5px;align-items:center
+}
+.xtab{
+  display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  background:#fff;border:1px solid var(--line);border-left:3px solid var(--sup-gold);
+  border-radius:0 8px 8px 0;padding:9px 12px;margin:0 0 12px;font-size:13px;color:var(--ink-2)
+}
+.xtab b{color:var(--ink)}
+.xtab button{
+  border:1px solid var(--line);background:#F5F8FA;border-radius:6px;
+  padding:3px 9px;font-size:12.5px;font-weight:650;color:var(--post-red-dk)
+}
+.xtab button:hover{background:#FCEDEF;border-color:#F2CBD1}
+.ctx{
+  font-size:12.5px;color:var(--slate);margin-top:5px;line-height:1.45;
+  border-left:2px solid var(--line);padding-left:8px;
+}
+.chev{
+  flex:none;color:var(--slate);font-size:12px;transition:transform .18s ease;
+}
+.card.open .xtab{
+  display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  background:#fff;border:1px solid var(--line);border-left:3px solid var(--sup-gold);
+  border-radius:0 8px 8px 0;padding:9px 12px;margin:0 0 12px;font-size:13px;color:var(--ink-2)
+}
+.xtab b{color:var(--ink)}
+.xtab button{
+  border:1px solid var(--line);background:#F5F8FA;border-radius:6px;
+  padding:3px 9px;font-size:12.5px;font-weight:650;color:var(--post-red-dk)
+}
+.xtab button:hover{background:#FCEDEF;border-color:#F2CBD1}
+.ctx{
+  font-size:12.5px;color:var(--slate);margin-top:5px;line-height:1.45;
+  border-left:2px solid var(--line);padding-left:8px;
+}
+.chev{transform:rotate(90deg)}
+.cardbody{display:none;padding:2px 14px 16px;border-top:1px solid var(--line-soft)}
+.card.open .cardbody{display:block}
+
+/* ---------- code chip ---------- */
+.code{
+  font-family:var(--mono);font-size:12px;font-weight:600;
+  background:#FCEDEF;color:var(--post-red-dk);
+  border:1px solid #F2CBD1;border-radius:5px;padding:2px 6px;
+  letter-spacing:.02em;white-space:nowrap;display:inline-block
+}
+.code.g{background:var(--sup-gold-bg);color:#8A5D00;border-color:#EDD9A6}
+.code.n{background:#EDF1F6;color:var(--ink-2);border-color:var(--line)}
+
+/* ---------- badges ---------- */
+.badge{
+  font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:2.5px 6px;border-radius:4px;white-space:nowrap;
+}
+.b-new{background:#FDE9EC;color:var(--post-red-dk);border:1px solid #F5C6CE}
+.b-role{background:#EDF1F6;color:var(--ink-2);border:1px solid var(--line)}
+.b-type{background:var(--ink);color:#fff}
+
+/* ---------- the step ladder (signature) ---------- */
+.ladder{margin:14px 0 0;padding:0;list-style:none;position:relative}
+.step{
+  position:relative;padding:0 0 14px 34px;
+}
+.step:before{ /* rail */
+  content:"";position:absolute;left:11px;top:20px;bottom:-2px;width:2px;
+  background:var(--line);
+}
+.step:last-child:before{display:none}
+.step .num{
+  position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;
+  background:#fff;border:2px solid var(--post-red);color:var(--post-red);
+  font-family:var(--mono);font-size:11px;font-weight:700;
+  display:grid;place-items:center;
+}
+.step.sup .num{border-color:var(--sup-gold);color:var(--sup-gold)}
+.step.sup:before{background:#EDD9A6}
+.step .txt{padding-top:2px;font-size:14.5px;line-height:1.5}
+.step.sup .txt{background:var(--sup-gold-bg);border-radius:6px;padding:7px 10px;margin-top:-4px}
+.step .who{
+  display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:800;color:var(--sup-gold);margin-bottom:2px
+}
+
+/* ---------- notes ---------- */
+.note{
+  border-left:3px solid var(--slate);background:#F5F8FA;
+  padding:9px 12px;border-radius:0 7px 7px 0;margin:11px 0 0;
+  font-size:13.5px;line-height:1.5;color:var(--ink-2)
+}
+.note.warn{border-left-color:var(--post-red);background:var(--warn-bg)}
+.note.upd{border-left-color:var(--sup-gold);background:var(--sup-gold-bg)}
+.note b{color:var(--ink)}
+.note .lbl{
+  display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:800;margin-bottom:3px;color:var(--slate)
+}
+.note.warn .lbl{color:var(--post-red)}
+.note.upd .lbl{color:var(--sup-gold)}
+
+/* ---------- menu code table ---------- */
+.mrow{
+  display:flex;gap:11px;align-items:flex-start;padding:10px 12px;
+  border-bottom:1px solid var(--line-soft);background:var(--surface)
+}
+.mrow:last-child{border-bottom:0}
+.mrow .codes{flex:none;width:112px;display:flex;flex-direction:column;gap:3px}
+.mrow .purpose{font-size:14px;line-height:1.4;padding-top:1px}
+.mgroup{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r);overflow:hidden;margin-bottom:8px
+}
+.mgroup > h3{
+  margin:0;padding:9px 12px;font-size:11px;letter-spacing:.13em;
+  text-transform:uppercase;background:#F5F8FA;
+  border-bottom:1px solid var(--line);color:var(--ink-2);font-weight:800
+}
+
+/* ---------- reference tables ---------- */
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th{
+  text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--slate);font-weight:800;padding:7px 10px;
+  border-bottom:1.5px solid var(--line);white-space:nowrap
+}
+.tbl td{padding:9px 10px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td.num{font-family:var(--mono);font-weight:600;white-space:nowrap}
+.scroller{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* ---------- empty ---------- */
+.empty{
+  text-align:center;padding:46px 20px;color:var(--slate);
+}
+.empty .big{font-size:15px;color:var(--ink-2);font-weight:600;margin-bottom:5px}
+
+/* ---------- disclaimer ---------- */
+.disc{
+  margin-top:26px;padding:13px 14px;border-radius:var(--r);
+  background:#E4E9EF;border:1px solid var(--line);
+  font-size:12px;line-height:1.55;color:var(--ink-2)
+}
+.disc b{color:var(--ink)}
+
+mark{background:#FFE9A8;color:inherit;padding:0 1px;border-radius:2px}
+.extlink{color:var(--post-red-dk);font-weight:650;text-decoration:underline;text-underline-offset:2px}
+
+@media (min-width:720px){
+  body{font-size:16px}
+  .mast{padding:12px 20px}
+  .mast h1{font-size:17px}
+  main{padding:18px 20px 70px}
+  .mrow .codes{width:150px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+:focus-visible{outline:3px solid var(--post-red);outline-offset:2px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+<header class="mast">
+  <div class="seal">IP</div>
+  <div>
+    <h1>Finacle Desk</h1>
+    <div class="sub">POSB counter reference</div>
+  </div>
+  <div class="spacer"></div>
+  <div class="stamp" id="stamp">rev 12·08·2026</div>
+</header>
+
+<div class="searchwrap">
+  <div class="searchbox">
+    <span class="ico">⌕</span>
+    <input id="q" type="search" autocomplete="off" autocapitalize="off" spellcheck="false"
+           placeholder="Search a task, menu code, or error…" aria-label="Search">
+    <button class="clearbtn" id="clr" aria-label="Clear search">×</button>
+  </div>
+</div>
+
+<nav class="tabs" role="tablist" id="tabs"></nav>
+</div>
+
+<main id="out" role="tabpanel" aria-label="Results"></main>
+
+<script id="DATA">
+let REV = "12 August 2026";
+let RATE_ASON = "Q2 FY 2026-27 · 1 Jul – 30 Sep 2026";
+
+/* ============ PROCEDURES ============
+   sup:1  => supervisor step (renders on the gold rail)
+   flag:1 => rule changed after the 2021 manual / 2016 guide
+================================================ */
+const PROC = [
+
+/* ---------------- SAVINGS ACCOUNT ---------------- */
+{g:"Savings account", n:"Deposit or withdraw by cash", c:["CTM"],
+ k:"sb savings cash deposit withdrawal ctm counter transaction",
+ s:[
+  {t:"Open <b>CTM</b>. Function: <b>Add</b>."},
+  {t:"Transaction type: <b>Deposit</b> or <b>Withdraw</b>, then <b>Go (F4)</b>."},
+  {t:"Enter the account number and the amount."},
+  {t:"Press <b>F9</b> to pull up the specimen signature and match it against the form."},
+  {t:"For a cheque withdrawal, fill in the cheque details."},
+  {t:"<b>Submit (F10)</b> and write down the transaction ID."},
+  {t:"Verify the same transaction ID in <b>CTM</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"warn",l:"Before you pay out",t:"Withdrawals above ₹5,000 must be verified before cash leaves the drawer. Up to ₹5,000 the counter can pay without waiting for verification — but the entry still has to be verified the same day."}]},
+
+{g:"Savings account", n:"Deposit by POSB cheque", c:["CXFER"],
+ k:"sb posb cheque deposit transfer cxfer",
+ s:[
+  {t:"Open <b>CXFER</b>. Function: <b>Add</b>."},
+  {t:"Transaction type / sub type: <b>T / Customer Induced</b>, then <b>Go (F4)</b>."},
+  {t:"Enter the <b>debit account ID</b> and check the signature with <b>F9</b>."},
+  {t:"Enter the <b>credit account ID</b> and the amount."},
+  {t:"Set mode of transaction to <b>Cheque</b> and fill in cheque date and number."},
+  {t:"Confirm the mode of operation (self / joint A / joint B / minor) and that the debit account has the balance."},
+  {t:"<b>Post</b>, then note the transaction ID."},
+  {t:"Verify the transaction ID in <b>CXFER</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Bank cheque instead",t:"A cheque drawn on a bank does not go through CXFER. Send it for clearing first — see <b>Send bank cheques for clearing</b> under Cheques."}]},
+
+{g:"Savings account", n:"Open a savings account", c:["CASBAO","QDESA","CASBAV"],
+ k:"sb open new savings account casbao qdesa aof opening",
+ s:[
+  {t:"Create the CIF first, or modify the existing one if the customer already has a CIF."},
+  {t:"Open <b>CASBAO</b> and enter the customer's <b>CIF ID</b>."},
+  {t:"Pick the scheme code: <b>SBGEN</b> (no cheque book), <b>SBCHQ</b> (with cheque book), <b>SBPEN</b> / <b>SBPWC</b> (pension, with / without cheque book)."},
+  {t:"<b>Go (F4)</b>, then set the mode of operation."},
+  {t:"Add related party 2 and 3 for joint and minor accounts."},
+  {t:"Enter nomination details."},
+  {t:"<b>Submit (F10)</b> and write down the new account number."},
+  {t:"Verify the account in <b>CASBAV</b> from the supervisor login.",sup:1},
+  {t:"Only after verification, fund the account through <b>CTM</b>."}
+ ],
+ no:[{k:"upd",l:"Changed since your manual",flag:1,t:"Aadhaar e-KYC account opening is now live for POSA and has been extended to MIS, TD, KVP, NSC, RD and PPF (SB Orders 01, 07 and 07A of 2025). Where e-KYC is used the paper AOF workflow is reduced — follow your circle's current SOP."},
+     {k:"note",l:"Cheque account",t:"If you opened an SBCHQ or SBPEN account, issue the cheque book separately through HICHB."}]},
+
+{g:"Savings account", n:"Issue a cheque book", c:["HICHB","HICHBA"],
+ k:"cheque book issue hichb counter chq",
+ s:[
+  {t:"Confirm the account is a cheque-book scheme (SBCHQ or SBPEN)."},
+  {t:"Open <b>HICHB</b>. Function: <b>Issue</b>."},
+  {t:"Enter the account ID and set acknowledgement obtained to <b>Yes</b>."},
+  {t:"Cheque type: <b>CHQ</b>, then <b>Go (F4)</b>."},
+  {t:"Pick one cheque book from the stock list."},
+  {t:"<b>Submit (F10)</b>."},
+  {t:"Verify in <b>HICHB</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"upd",l:"New since your manual",flag:1,t:"Personalised Cheque Books (PCB) were introduced by SB Order 05/2026. Check the current SOP before issuing — the stock handling and issue flow differ from the old across-the-counter book."}]},
+
+{g:"Savings account", n:"Close a savings account", c:["HCAAC","CLOSE"],
+ k:"sb close closure hcaac account closing",
+ s:[
+  {t:"Open <b>HCAAC</b>. Function: <b>Close</b>."},
+  {t:"Enter the account number and choose transaction type <b>Cash</b> or <b>Transfer</b>."},
+  {t:"<b>Go (F4)</b>, then work through the account information and closure tabs."},
+  {t:"Enter the correct closure reason code on the closure tab."},
+  {t:"<b>Submit (F10)</b>."},
+  {t:"Verify the closure in <b>HCAAC</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"warn",l:"If closure fails",t:"<b>Interest-credit account still linked</b> — close that account first, then close the SB the next day.<br><b>Status is silent</b> — revive it through CASBAM (and verify) before closing.<br><b>Account modification unverified</b> — verify it in CASBAM.<br><b>CIF modification unverified</b> — verify the CIF in CMRC.<br>An SB and its linked interest-credit account cannot both be closed on the same day."}]},
+
+{g:"Savings account", n:"Convert SBGEN ↔ SBCHQ", c:["HACXFRSC","TFRSCH"],
+ k:"convert scheme change sbgen sbchq hacxfrsc cheque facility",
+ s:[
+  {t:"Open <b>HACXFRSC</b>. Function: <b>Transfer</b>, then <b>Go (F4)</b>."},
+  {t:"Enter the account ID — the source scheme code and GL subhead fill in on their own."},
+  {t:"Pick the <b>target scheme code</b> from the searcher. The target GL subhead fills in automatically."},
+  {t:"<b>Submit</b> and note the transaction ID."},
+  {t:"Verify the transaction ID in <b>HACXFRSC</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Searcher shows nothing?",t:"Click submit inside the searcher pop-up window first — the scheme list then appears below."}]},
+
+{g:"Savings account", n:"Single ↔ joint conversion", c:["CASBAM","QDEMSA"],
+ k:"single joint conversion casbam mode of operation 012 017",
+ s:[
+  {t:"Open <b>CASBAM</b>. Function: <b>Modify</b>."},
+  {t:"Enter the account number and press Tab. Check the signature with <b>F9</b> if needed. <b>Go (F4)</b>."},
+  {t:"<b>Single → joint:</b> set mode of operation to <b>017</b>, then add related party 2 — relation type <i>joint holder</i> and the joint depositor's CIF ID. The rest fills in automatically."},
+  {t:"<b>Joint → single:</b> set mode of operation to <b>012</b>, then delete the joint holder's CIF from related party 2."},
+  {t:"<b>Submit (F10)</b>."},
+  {t:"Verify the account in <b>CASBAM</b> from the supervisor login.",sup:1}
+ ]},
+
+{g:"Savings account", n:"Add, change or delete a nomination", c:["CASBAM"],
+ k:"nomination nominee change delete add casbam sb-1",
+ s:[
+  {t:"Open <b>CASBAM</b>. Function: <b>Modify</b>. Enter the account number, press Tab, then <b>Go (F4)</b>."},
+  {t:"<b>To add:</b> set nomination to <b>Yes</b>, note the nomination number, then enter nominee details, the numeric relation code and the percentage."},
+  {t:"<b>To delete:</b> tick the <b>Del</b> checkbox beside the existing nominee details."},
+  {t:"<b>To change:</b> delete the existing nomination first, then add the new one."},
+  {t:"<b>Submit (F10)</b>."},
+  {t:"Verify the account in <b>CASBAM</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"upd",l:"Changed since your manual",flag:1,t:"The ₹50 charge for changing or cancelling a nomination was <b>abolished</b> by SB Order 05/2025. Do not collect it.<br><br>Since SB Order 04/2026 customers can also add, modify or delete nominees themselves through DOP Internet Banking."}]},
+
+{g:"Savings account", n:"Check cheque book and leaf status", c:["HCHBI","HCHBM"],
+ k:"cheque book inquiry status leaf hchbi",
+ s:[
+  {t:"Open <b>HCHBI</b> (or HCHBM). Function: <b>Inquire</b>."},
+  {t:"Enter the account ID and <b>Go (F4)</b>."},
+  {t:"Finacle lists every cheque book issued on that account with its status."},
+  {t:"Click <b>view details</b> to see the status of each individual leaf."}
+ ],
+ no:[{k:"note",l:"Working backwards",t:"To find the account from a cheque number instead, use <b>HINQACHQ</b>."}]},
+
+{g:"Savings account", n:"Revive a silent account", c:["CASBAM"],
+ k:"silent dormant revive revival casbam status live",
+ s:[
+  {t:"Open <b>CASBAM</b>. Function: <b>Modify</b>. Enter the account number, then <b>Go (F4)</b>."},
+  {t:"Change the account status from <b>silent</b> to <b>live</b>."},
+  {t:"Enter today's date as the revival date."},
+  {t:"<b>Submit (F10)</b>."},
+  {t:"Verify the account in <b>CASBAM</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Why this comes up",t:"A silent account cannot be closed. Revive it first, then run the closure."}]},
+
+{g:"Savings account", n:"Stop payment of a cheque", c:["HSPP","HSPPAU"],
+ k:"stop payment cheque hspp revoke hsppau chstop",
+ s:[
+  {t:"Open <b>HSPP</b>. Function: <b>Stop Pay</b>."},
+  {t:"Enter the account ID, the beginning cheque number and the number of leaves. <b>Go (F4)</b>."},
+  {t:"Enter payee name, cheque amount and the reason code."},
+  {t:"<b>Submit (F10)</b>."},
+  {t:"Verify in <b>HSPPAU</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"To revoke",t:"HSPP → function <b>Revoke Stop Pay</b> → account ID and beginning cheque number → Go → Submit → verify in HSPPAU."},
+     {k:"note",l:"Register",t:"Set the function to <b>Print</b> and enter the account number to spool the stop-payment register; collect it from HPR. Full register: <b>HSPRG</b>."}]},
+
+{g:"Savings account", n:"Issue an ATM card", c:["CCMM"],
+ k:"atm card issue ccmm debit card kit number",
+ s:[
+  {t:"Check first: minimum balance held, KYC current in the CIF, mobile and email updated, and no digits or special characters in the account name."},
+  {t:"Open <b>CCMM</b>. Function: <b>Add</b>. Enter the CIF ID, then <b>Go (F4)</b>."},
+  {t:"Enter the account number and confirm the customer's name."},
+  {t:"Card type: <b>Instant</b>. Enter the <b>KIT number</b> printed on the card envelope."},
+  {t:"Primary account flag: <b>Yes</b>. Action: <b>New Card Request</b>."},
+  {t:"<b>Submit (F10)</b> — you should see \"record added successfully\"."},
+  {t:"In supervisor login open <b>CCMM</b>, function <b>Verify</b>, enter the CIF ID, <b>Go (F4)</b>, check the details against the application and envelope, then <b>Submit (F10)</b>.",sup:1}
+ ],
+ no:[{k:"note",l:"Name has stray characters",t:"Correct it at CIF level in <b>CMRC</b> and at account level in <b>HAALM</b>. HAALM is supervisor-only, and one supervisor must modify while a second verifies."}]},
+
+{g:"Savings account", n:"Enable internet, mobile or SMS banking", c:["CMRC","IES"],
+ k:"internet mobile sms banking ebanking cmrc enable ies pin",
+ s:[
+  {t:"Confirm the account is at a CBS post office and that the customer has submitted the ATM / e-Banking / Mobile Banking request form. A joint 'B' account needs both signatures; joint 'A' accounts are not eligible."},
+  {t:"Verify the applicant's signature in <b>IES</b>."},
+  {t:"Open <b>CMRC</b> → <b>Modify</b> and tick <b>enable internet banking</b> / <b>mobile banking</b> / <b>SMS banking</b> as marked on the form."},
+  {t:"Email ID and mobile number are mandatory — fill both."},
+  {t:"<b>Submit</b>."},
+  {t:"Verify the CIF modification in <b>CMRC</b>, then make the entry in the office register: date applied, account number, customer name, mobile, email, depositor's signature.",sup:1}
+ ],
+ no:[{k:"note",l:"What to tell the customer",t:"Login ID is the CIF ID. Internet banking PIN comes by insured post — ask them to return after about 10 working days. Mobile banking MPIN can be self-generated after roughly 24 working hours. SMS banking PIN arrives by SMS within 48 hours."},
+     {k:"upd",l:"New since your manual",flag:1,t:"Internet banking now also offers downloadable interest certificates (SB Order 08/2025), nominee management (SB Order 04/2026) and standing instructions."}]},
+
+/* ---------------- RECURRING DEPOSIT ---------------- */
+{g:"Recurring deposit", n:"Accept an RD instalment", c:["CRDP","RDAMT"],
+ k:"rd deposit instalment installment crdp cash cheque",
+ s:[
+  {t:"Open <b>CRDP</b>. Function: <b>Add</b>."},
+  {t:"Transaction type — <b>Cash deposit</b> for cash; <b>Customer induced</b> for a cheque or transfer. <b>Go (F4)</b>."},
+  {t:"Enter the RD account number and the amount, and note any default shown."},
+  {t:"<b>By POSB cheque:</b> scroll down, set transaction type to <b>Cheque</b>, then enter the customer's SB account as the account ID along with cheque date, number and amount."},
+  {t:"<b>By bank cheque</b> (only after OSL intimation): set the clearance date as value date, transaction type <b>Transfer</b>, account ID <b>SOL ID + 0017</b>."},
+  {t:"<b>Submit (F10)</b> and note the transaction ID."},
+  {t:"Post the transaction ID in <b>CRDP</b> from the supervisor login.",sup:1}
+ ]},
+
+{g:"Recurring deposit", n:"Open an RD account", c:["CRDOAAC","CRDOAACV"],
+ k:"rd open new account crdoaac rdipn agent",
+ s:[
+  {t:"Open <b>CRDOAAC</b> and enter the CIF ID."},
+  {t:"Scheme code: <b>RDIPN</b>. <b>Go (F4)</b>."},
+  {t:"Set mode of operation and the monthly instalment amount."},
+  {t:"Select the agent (Direct Sales Agent) if the account is being opened through one."},
+  {t:"Transaction type cash or transfer — for transfer enter the debit account ID."},
+  {t:"Enter the number of instalments and note any rebate."},
+  {t:"Add related party 2 for joint or minor accounts, and the nomination details."},
+  {t:"<b>Submit (F10)</b> and note the account number."},
+  {t:"Verify in <b>CRDOAACV</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Funding",t:"Opening by POSB cheque: use the customer's SB account as debit account ID. Opening by bank cheque: use <b>SOL ID + 0382</b> and set the value date to the cheque clearance date. If you missed the transaction details at opening, fund through CRDP after verification."},
+     {k:"warn",l:"Agent accounts",t:"If the agent was not selected at opening, it cannot simply be added later — see <b>Account opened without the agent</b> under Fixes."}]},
+
+{g:"Recurring deposit", n:"Close an RD account", c:["CRDCAAC","CRDCAACV","HCASHPND"],
+ k:"rd close closure crdcaac maturity premature",
+ s:[
+  {t:"Open <b>CRDCAAC</b>. Function: <b>Close</b>. Enter the account ID, check the signature with <b>F9</b>, then <b>Go (F4)</b>."},
+  {t:"Tick the box next to <b>Close</b> and enter the closure reason code."},
+  {t:"Repayment mode cash or transfer — for transfer enter the repayment account ID."},
+  {t:"<b>Submit (F10)</b>."},
+  {t:"Verify the closure in <b>CRDCAACV</b> from the supervisor login.",sup:1},
+  {t:"For cash payment, open <b>HCASHPND</b>, click the transaction ID and post it. It then shows in teller cash."}
+ ],
+ no:[{k:"warn",l:"\"Closure pending on SI\"",t:"There is a live standing instruction on the account. In counter login open <b>HSSIM</b>, function <b>Delete</b>, use the searcher beside instruction number, enter the RD account number, submit, then click the instruction number and submit. Supervisor verifies the instruction number in HSSIM. Then run the closure again."},
+     {k:"note",l:"Account has a loan",t:"On premature closure Finacle deducts the outstanding loan automatically and shows the net payable."}]},
+
+{g:"Recurring deposit", n:"Extend an RD account", c:["PRDCM"],
+ k:"rd extension extend prdcm continue after maturity",
+ s:[
+  {t:"Open <b>PRDCM</b> and enter the RD account number."},
+  {t:"Set the extension period as applied for by the depositor."},
+  {t:"<b>Submit</b>."},
+  {t:"Verify in <b>PRDCM</b> from the supervisor login.",sup:1}
+ ]},
+
+{g:"Recurring deposit", n:"Set up SB → RD standing instruction", c:["HSSIM","HSIM"],
+ k:"standing instruction si rd sb hssim auto debit",
+ s:[
+  {t:"Open <b>HSSIM</b>. Function: <b>Add</b>."},
+  {t:"Enter the debit SB account and the credit RD account."},
+  {t:"Set the amount, the frequency and the start date."},
+  {t:"<b>Submit</b> and note the instruction number."},
+  {t:"Verify the instruction number in <b>HSSIM</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Checking later",t:"Inquire on an SI with <b>HSSII</b>. Reports: <b>HSIREPTS</b>. Register print: <b>HSIRP</b>. Remember to delete the SI before closing the RD."}]},
+
+{g:"Recurring deposit", n:"Post an agent's bulk list", c:["HAGTXP","HDSAMM"],
+ k:"agent bulk list mpkby rd agent portal hagtxp commission",
+ s:[
+  {t:"Check that the agent has a valid agent ID in <b>HDSAMM</b>."},
+  {t:"Open <b>HAGTXP</b> and pull up the agent's uploaded list."},
+  {t:"Tally the total against the cash or cheque tendered by the agent."},
+  {t:"Post the transactions."},
+  {t:"Verify the posting in <b>HAGTXP</b> from the supervisor login.",sup:1}
+ ]},
+
+{g:"Recurring deposit", n:"Open an RD loan account", c:["CAOLARD","CAOVLARD"],
+ k:"rd loan open lard half withdrawal caolard",
+ s:[
+  {t:"Open <b>CAOLARD</b> and enter the CIF ID with scheme code <b>LARD</b>."},
+  {t:"Link the RD account the loan is being raised against."},
+  {t:"Enter the loan amount within the permitted limit."},
+  {t:"<b>Submit (F10)</b> and note the loan account number."},
+  {t:"Verify in <b>CAOVLARD</b> from the supervisor login.",sup:1}
+ ]},
+
+{g:"Recurring deposit", n:"Disburse and repay an RD loan", c:["LARDD","HLAUPAY","HPAYOFF"],
+ k:"rd loan disbursement repayment lardd hlaupay payoff closure",
+ s:[
+  {t:"<b>Disburse:</b> open <b>LARDD</b>, enter the loan account, set the disbursement amount and mode, submit."},
+  {t:"Verify the disbursement from the supervisor login.",sup:1},
+  {t:"<b>Repay (unscheduled):</b> open <b>HLAUPAY</b>, enter the loan account and the amount tendered, submit."},
+  {t:"Verify the repayment from the supervisor login.",sup:1},
+  {t:"<b>Final repayment:</b> use <b>HPAYOFF</b> to clear the balance, then close the loan account in <b>CAACLA</b>."}
+ ],
+ no:[{k:"note",l:"Scheduled repayments",t:"Use <b>HLASPAY</b> where repayment follows a schedule rather than an ad-hoc payment."}]},
+
+{g:"Recurring deposit", n:"Check pending instalments", c:["HPLIST","RDPENINS"],
+ k:"rd pending instalments default hplist rdpenins arrears",
+ s:[
+  {t:"Open <b>HPLIST</b> (or RDPENINS)."},
+  {t:"Enter the RD account number and <b>Go</b>."},
+  {t:"Finacle lists the instalments still due and any default fee payable."}
+ ]},
+
+/* ---------------- TIME DEPOSIT ---------------- */
+{g:"Time deposit", n:"Open a TD account", c:["CMISAOP","MISAO","CMISAOPV"],
+ k:"td time deposit open cmisaop tdip1 tdip2 tdip3 tdip5",
+ s:[
+  {t:"Open <b>CMISAOP</b> and enter the CIF ID."},
+  {t:"Scheme code by term: <b>TDIP1</b> 1 year, <b>TDIP2</b> 2 years, <b>TDIP3</b> 3 years, <b>TDIP5</b> 5 years. <b>Go (F4)</b>."},
+  {t:"Set mode of operation and the deposit amount."},
+  {t:"Choose transaction type cash or transfer, and enter the debit account for transfer."},
+  {t:"Add related party 2 for joint or minor accounts, plus nomination details."},
+  {t:"Link the SB account for interest credit if the depositor wants auto-credit."},
+  {t:"<b>Submit (F10)</b> and note the account number."},
+  {t:"Verify in <b>CMISAOPV</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"5-year TD",t:"Only the 5-year TD qualifies for deduction under section 80C."}]},
+
+{g:"Time deposit", n:"Close a TD account", c:["HCAACTD","HCAACVTD","HCASHPND"],
+ k:"td close closure hcaactd maturity premature tdactcl",
+ s:[
+  {t:"Open <b>HCAACTD</b>. Function: <b>Close</b>. Enter the account ID and <b>Go (F4)</b>."},
+  {t:"Check the closure reason code and the repayment mode."},
+  {t:"<b>Submit (F10)</b>."},
+  {t:"Verify the closure in <b>HCAACVTD</b> from the supervisor login.",sup:1},
+  {t:"For cash payment, post the pending entry in <b>HCASHPND</b>."}
+ ],
+ no:[{k:"warn",l:"Premature closure",t:"A TD cannot be closed before six months. Between six months and one year on a longer-term deposit, only PO savings account rate is payable. Confirm the current rule before quoting a figure to the customer."}]},
+
+{g:"Time deposit", n:"Pay annual TD interest", c:["HTM","CTM"],
+ k:"td interest payment annual withdrawal 0335 auto credit",
+ s:[
+  {t:"For cash payment of interest, open <b>HTM</b> and debit the interest office account <b>SOL ID + 0335</b>."},
+  {t:"Enter the amount as computed and the depositor's details."},
+  {t:"<b>Submit</b> and note the transaction ID."},
+  {t:"Verify from the supervisor login, then pay out.",sup:1}
+ ],
+ no:[{k:"note",l:"Auto credit is better",t:"Link the depositor's SB account at opening (or later through CMISAM) and interest credits automatically — no counter transaction each year."}]},
+
+{g:"Time deposit", n:"Extend or re-deposit a TD", c:["TDRED","HTDREN","HRENHIST"],
+ k:"td extension renewal redeposit tdred htdren",
+ s:[
+  {t:"Open <b>TDRED</b> (or HTDREN) and enter the TD account number."},
+  {t:"Set the renewal period and confirm the renewal date."},
+  {t:"<b>Submit</b>."},
+  {t:"Verify from the supervisor login.",sup:1},
+  {t:"Check the result in <b>HRENHIST</b> if you need the renewal history."}
+ ]},
+
+/* ---------------- MIS ---------------- */
+{g:"Monthly income scheme", n:"Check the depositor's MIS limit", c:["CLIMIT"],
+ k:"mis limit climit ceiling holding existing",
+ s:[
+  {t:"Open <b>CLIMIT</b> and enter the CIF ID."},
+  {t:"Finacle shows the MIS amount the depositor already holds across accounts."},
+  {t:"Work out the headroom before accepting a fresh deposit."}
+ ],
+ no:[{k:"warn",l:"Do this first",t:"Accepting a deposit over the ceiling means an irregular account and a refund later. Always check CLIMIT before opening MIS."}]},
+
+{g:"Monthly income scheme", n:"Open an MIS account", c:["CMISAOP","MISAO","CMISAOPV"],
+ k:"mis open cmisaop misn1 monthly income",
+ s:[
+  {t:"Check the depositor's existing holding in <b>CLIMIT</b>."},
+  {t:"Open <b>CMISAOP</b>, enter the CIF ID, scheme code <b>MISN1</b>, then <b>Go (F4)</b>."},
+  {t:"Set mode of operation and the deposit amount."},
+  {t:"Choose transaction type cash or transfer, with the debit account for transfer."},
+  {t:"Add related party 2 for joint or minor accounts, and nomination details."},
+  {t:"Link the SB account for monthly interest credit."},
+  {t:"<b>Submit (F10)</b> and note the account number."},
+  {t:"Verify in <b>CMISAOPV</b> from the supervisor login.",sup:1}
+ ]},
+
+{g:"Monthly income scheme", n:"Pay MIS monthly interest by cash", c:["HTM","HIOT"],
+ k:"mis interest monthly payment cash 0337 sundry htm",
+ s:[
+  {t:"Check the interest lying in the sundry account with <b>HIOT</b>."},
+  {t:"Open <b>HTM</b> and debit <b>SOL ID + 0337</b> for the interest amount."},
+  {t:"<b>Submit</b> and note the transaction ID."},
+  {t:"Verify from the supervisor login, then pay out.",sup:1}
+ ],
+ no:[{k:"note",l:"Reduce this work",t:"Linking the SB account for auto-credit removes the monthly counter transaction entirely."}]},
+
+{g:"Monthly income scheme", n:"Close an MIS account", c:["HCAACTD","HCAACVTD"],
+ k:"mis close closure hcaactd maturity",
+ s:[
+  {t:"Open <b>HCAACTD</b>. Function: <b>Close</b>. Enter the account ID and <b>Go (F4)</b>."},
+  {t:"Enter the closure reason code and the repayment mode."},
+  {t:"<b>Submit (F10)</b>."},
+  {t:"Verify in <b>HCAACVTD</b> from the supervisor login.",sup:1},
+  {t:"Post any cash payment pending in <b>HCASHPND</b>."}
+ ]},
+
+/* ---------------- SCSS ---------------- */
+{g:"Senior citizens (SCSS)", n:"Open an SCSS account", c:["CSCAOP","SCSSAO","CSCAOPV"],
+ k:"scss senior citizen open cscaop scscm scdef scvrs",
+ s:[
+  {t:"Check eligibility and the scheme code: <b>SCSCM</b> normal, <b>SCDEF</b> retired from defence, <b>SCVRS</b> voluntary retirement."},
+  {t:"Open <b>CSCAOP</b>, enter the CIF ID and the scheme code, then <b>Go (F4)</b>."},
+  {t:"Set mode of operation and the deposit amount."},
+  {t:"Transaction type cash or transfer, with the debit account for transfer."},
+  {t:"Add related party 2 and nomination details."},
+  {t:"Link the SB account for quarterly interest credit."},
+  {t:"<b>Submit (F10)</b> and note the account number."},
+  {t:"Verify in <b>CSCAOPV</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Age proof",t:"Deposits must be made within one month of receiving retirement benefits where the account is opened on that basis."}]},
+
+{g:"Senior citizens (SCSS)", n:"Handle TDS and the tax declaration", c:["HTDSIP","HTDSREP"],
+ k:"scss tds 15g 15h form 121 declaration htdsip htdsrep 194a",
+ s:[
+  {t:"Check the TDS already deducted with <b>HTDSIP</b>."},
+  {t:"Take the depositor's declaration if they are claiming no deduction."},
+  {t:"Feed the declaration against the account as per the current SOP."},
+  {t:"Verify from the supervisor login.",sup:1},
+  {t:"Generate the customer-wise TDS report with <b>HTDSREP</b> when required."}
+ ],
+ no:[{k:"upd",l:"Changed — read this",flag:1,t:"Under the Income-tax Rules 2026 (SB Order 02/2026, effective 01.04.2026) <b>Forms 15G and 15H are replaced by a single Form 121</b>, and Form 60 by Forms 97 and 98. Until Finacle is patched, keep using the existing 15G/15H screens and process, but take the declaration on Form 121. Send verified Part B to the Head Office; the HO allots a 26-character UIN each quarter. Records are preserved for seven years. PAN is mandatory for specified transactions — where there is no PAN, take Form 97."}]},
+
+{g:"Senior citizens (SCSS)", n:"Close or extend an SCSS account", c:["HCAACTD","HCAACVTD","TDRED"],
+ k:"scss close closure extension hcaactd tdred",
+ s:[
+  {t:"<b>To extend:</b> open <b>TDRED</b> (or HTDREN), enter the account number and the extension period, submit."},
+  {t:"Verify the extension from the supervisor login.",sup:1},
+  {t:"<b>To close:</b> open <b>HCAACTD</b>, function <b>Close</b>, enter the account ID, <b>Go (F4)</b>, set reason code and repayment mode, submit."},
+  {t:"Verify the closure in <b>HCAACVTD</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Death claim",t:"SCSS death claim closure follows a separate route — see rule 116 of the POSB (CBS) Manual."}]},
+
+/* ---------------- PPF ---------------- */
+{g:"Public provident fund", n:"Accept a PPF deposit", c:["CPDTM"],
+ k:"ppf deposit cpdtm subscription cash cheque",
+ s:[
+  {t:"Open <b>CPDTM</b>. Function: <b>Add</b>."},
+  {t:"Transaction type cash, or customer induced for cheque and transfer. <b>Go (F4)</b>."},
+  {t:"Enter the PPF account number and the amount."},
+  {t:"For a POSB cheque or transfer, enter the debit account, cheque date and number."},
+  {t:"<b>Submit (F10)</b> and note the transaction ID."},
+  {t:"Verify the transaction ID in <b>CPDTM</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"warn",l:"Ceiling",t:"Watch the annual subscription ceiling across all the depositor's PPF accounts. Excess deposits earn no interest and have to be refunded."}]},
+
+{g:"Public provident fund", n:"Open a PPF account", c:["CPPFAO","PPFAO","CPPFAV"],
+ k:"ppf open cppfao ppfao account opening",
+ s:[
+  {t:"Open <b>CPPFAO</b> and enter the CIF ID with the PPF scheme code. <b>Go (F4)</b>."},
+  {t:"Set mode of operation."},
+  {t:"Enter the initial subscription and the transaction type."},
+  {t:"Add guardian details for a minor's account, and the nomination."},
+  {t:"<b>Submit (F10)</b> and note the account number."},
+  {t:"Verify in <b>CPPFAV</b> from the supervisor login.",sup:1}
+ ]},
+
+{g:"Public provident fund", n:"Partial withdrawal from PPF", c:["CPWTM"],
+ k:"ppf partial withdrawal cpwtm sb-7c",
+ s:[
+  {t:"Check the account has completed the qualifying period and work out the admissible amount."},
+  {t:"Open <b>CPWTM</b>. Function: <b>Add</b>. Transaction type as applicable, then <b>Go (F4)</b>."},
+  {t:"Enter the PPF account number and the withdrawal amount."},
+  {t:"<b>Submit (F10)</b> and note the transaction ID."},
+  {t:"Verify from the supervisor login.",sup:1}
+ ]},
+
+{g:"Public provident fund", n:"Extend a PPF account", c:["PPFAEXT","HCEXTN"],
+ k:"ppf extension extend ppfaext hcextn maturity block",
+ s:[
+  {t:"Take the extension application from the depositor before maturity."},
+  {t:"Open <b>PPFAEXT</b> (or HCEXTN) and enter the account number."},
+  {t:"Set whether the extension is with or without further subscription, and the block period."},
+  {t:"<b>Submit</b>."},
+  {t:"Verify from the supervisor login.",sup:1}
+ ],
+ no:[{k:"upd",l:"Watch out",flag:1,t:"SB Order 10/2025 requires matured-but-unclosed small savings accounts to be identified and frozen twice a year. Get the extension in before maturity rather than after."}]},
+
+{g:"Public provident fund", n:"Close a PPF account", c:["HCAAC","CLOSE"],
+ k:"ppf close closure hcaac maturity premature",
+ s:[
+  {t:"Open <b>HCAAC</b>. Function: <b>Close</b>. Enter the account ID and <b>Go (F4)</b>."},
+  {t:"Work through the account information and closure tabs, then enter the reason code."},
+  {t:"<b>Submit (F10)</b>."},
+  {t:"Verify the closure in <b>HCAAC</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Loan outstanding",t:"Run <b>CLPR</b> and <b>HACINT</b> before closing a PPF that has a loan account against it."}]},
+
+{g:"Public provident fund", n:"PPF loan — open, disburse, repay", c:["CLPPFAO","CPWTM","CPDTM"],
+ k:"ppf loan clppfao disbursement repayment ppfwlint ppfdplr",
+ s:[
+  {t:"<b>Open:</b> <b>CLPPFAO</b>, enter the CIF and link the PPF account, submit."},
+  {t:"Verify the loan account in <b>CLPPFAOV</b> from the supervisor login.",sup:1},
+  {t:"<b>Disburse:</b> <b>CPWTM</b> handles PPF withdrawal, loan disbursement and interest recovery together."},
+  {t:"<b>Repay:</b> <b>CPDTM</b> for repayment of the loan."},
+  {t:"Verify each transaction from the supervisor login.",sup:1},
+  {t:"<b>Before closing the loan:</b> run <b>CLPR</b> and <b>HACINT</b>, then close through <b>HCAAC</b>."}
+ ]},
+
+{g:"Public provident fund", n:"Transfer PPF out to a bank", c:["HINTTM","HACXFSOL"],
+ k:"ppf transfer out bank hinttm zeroise interest transfer in ctupld",
+ s:[
+  {t:"Take the transfer application and the bank's details from the depositor."},
+  {t:"Zeroise interest for the transfer-out account in <b>HINTTM</b>."},
+  {t:"Complete the transfer-out entries and prepare the documents for despatch to the bank."},
+  {t:"Verify from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Transfer in",t:"For an account coming in from a bank, upload the transactions with <b>CTUPLD</b>. For a PO-to-PO move use <b>HACXFSOL</b>."}]}
+];
+
+PROC.push(
+
+/* ---------------- SSA ---------------- */
+{g:"Sukanya Samriddhi", n:"Open an SSA account", c:["CSSAAO","CPPFAO"],
+ k:"ssa sukanya samriddhi open girl child account",
+ s:[
+  {t:"Check eligibility: girl child under 10 years, and not more than the permitted number of accounts in the family."},
+  {t:"Create or pull up the CIF of the guardian and the girl child."},
+  {t:"Open the SSA account menu, enter the CIF ID and the SSA scheme code, then <b>Go (F4)</b>."},
+  {t:"Enter guardian details, the initial deposit and the nomination."},
+  {t:"<b>Submit (F10)</b> and note the account number."},
+  {t:"Verify from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Birth certificate",t:"The girl child's birth certificate is mandatory at opening. Chapter 11 of the POSB (CBS) Manual carries the full scheme rules."}]},
+
+{g:"Sukanya Samriddhi", n:"Accept an SSA deposit", c:["CPDTM"],
+ k:"ssa deposit sukanya cpdtm subscription default fee",
+ s:[
+  {t:"Open <b>CPDTM</b>. Function: <b>Add</b>. Transaction type as applicable, then <b>Go (F4)</b>."},
+  {t:"Enter the SSA account number and the deposit amount."},
+  {t:"Collect the default fee alongside if the account is in default for earlier years."},
+  {t:"<b>Submit (F10)</b> and note the transaction ID."},
+  {t:"Verify from the supervisor login.",sup:1}
+ ],
+ no:[{k:"warn",l:"Excess deposit",t:"An excess deposit in SSA earns no interest and needs reversal. See <b>Excess deposit in SSA or PPF</b> under Fixes."}]},
+
+/* ---------------- CERTIFICATES ---------------- */
+{g:"NSC and KVP", n:"Issue an NSC or KVP", c:["CSCOAAC","CSCOAACV"],
+ k:"nsc kvp issue open certificate cscoaac purchase",
+ s:[
+  {t:"Open <b>CSCOAAC</b> and enter the CIF ID."},
+  {t:"Pick the scheme code for the denomination — NSC VIII runs <b>NSC81</b> ₹100 through <b>NSC85</b> ₹10,000. <b>Go (F4)</b>."},
+  {t:"Set mode of operation and the purchase amount."},
+  {t:"Transaction type cash or transfer, with the debit account for transfer."},
+  {t:"Add related party 2 and nomination details."},
+  {t:"<b>Submit (F10)</b> and note the account number."},
+  {t:"Verify in <b>CSCOAACV</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Then print",t:"Print the certificate through <b>HDRP</b> once verified."}]},
+
+{g:"NSC and KVP", n:"Print a certificate", c:["HDRP","HDUDRP"],
+ k:"nsc kvp print certificate hdrp duplicate hdudrp",
+ s:[
+  {t:"Open <b>HDRP</b> and enter the account number."},
+  {t:"Check the printer and stationery alignment before printing."},
+  {t:"Print and hand over against acknowledgement."}
+ ],
+ no:[{k:"note",l:"Duplicate",t:"For a duplicate certificate use <b>HDUDRP</b>, after completing the indemnity formalities in rule 147 of the manual."}]},
+
+{g:"NSC and KVP", n:"Discharge a certificate", c:["CSCCAAC","NSCAC"],
+ k:"nsc kvp discharge encash close csccaac maturity",
+ s:[
+  {t:"Take the certificate and the discharge form, and confirm identity."},
+  {t:"Open <b>CSCCAAC</b>. Function: <b>Close</b>. Enter the account ID and <b>Go (F4)</b>."},
+  {t:"Set the closure reason code and repayment mode."},
+  {t:"<b>Submit (F10)</b>."},
+  {t:"Verify the closure from the supervisor login.",sup:1},
+  {t:"Post any cash payment pending in <b>HCASHPND</b>."}
+ ]},
+
+{g:"NSC and KVP", n:"Transfer a certificate to another holder or office", c:["HCCA"],
+ k:"nsc kvp transfer holder office hcca pledge",
+ s:[
+  {t:"Complete the transfer application and sanction as per rules 144 and 145 of the manual."},
+  {t:"Open <b>HCCA</b>. Function: <b>Modify</b>. Enter the account number, then <b>Go (F4)</b>."},
+  {t:"Replace the existing CIF with the transferee's CIF."},
+  {t:"Set <b>modify account name</b> to <b>Yes</b> — this is mandatory."},
+  {t:"Pick the reason code and <b>Submit (F10)</b>."},
+  {t:"Verify the account number in <b>HCCA</b> from the supervisor login.",sup:1}
+ ]},
+
+/* ---------------- CIF ---------------- */
+{g:"Customer (CIF)", n:"Create a CIF", c:["CDEDUP","CCRC","CIFCR"],
+ k:"cif create new customer ccrc cdedup duplicate kyc",
+ s:[
+  {t:"Run <b>CDEDUP</b> first to make sure the customer does not already have a CIF."},
+  {t:"Open <b>CCRC</b>. Function: <b>Add</b>."},
+  {t:"Enter name, date of birth, gender, father or spouse name and full address."},
+  {t:"Enter the KYC document details, PAN, mobile number and email."},
+  {t:"<b>Submit (F10)</b> and note the CIF ID."},
+  {t:"Verify the CIF in <b>CCRC</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"warn",l:"Duplicate CIFs cause real pain later",t:"Two CIFs for one customer break limit checks, TDS and claim settlement. Always run CDEDUP. If duplicates already exist, merge them through <b>HCCA</b>."},
+     {k:"upd",l:"Changed since your manual",flag:1,t:"Aadhaar-based paperless e-KYC CIF creation was introduced by SB Order 01/2025. Where e-KYC is available, biometric authentication replaces the paper KYC set."}]},
+
+{g:"Customer (CIF)", n:"Modify a CIF — address, PAN, phone, email", c:["CMRC","CIFMD"],
+ k:"cif modify cmrc address pan mobile email change name",
+ s:[
+  {t:"Take the customer's written request with supporting proof."},
+  {t:"Open <b>CMRC</b>. Function: <b>Modify</b>. Enter the CIF ID, then <b>Go (F4)</b>."},
+  {t:"Change the field required — address, PAN, mobile, email, KYC document."},
+  {t:"<b>Submit (F10)</b>."},
+  {t:"Verify the CIF in <b>CMRC</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Name changes",t:"A name change needs modification at CIF level in CMRC <i>and</i> at account level in <b>HAALM</b>. HAALM is supervisor-only, and one supervisor modifies while a second verifies."},
+     {k:"note",l:"Find the accounts",t:"To see every account under a CIF, use <b>HCRV</b>."}]},
+
+{g:"Customer (CIF)", n:"Minor turned major", c:["HCBM","CMRC","CASBAM"],
+ k:"minor major hcbm conversion guardian age 18",
+ s:[
+  {t:"Run the report in <b>HCBM</b> — report to, change status to major <b>N</b>, pick the date range, submit — then collect it from <b>HPR</b>."},
+  {t:"Take a fresh application, signature and KYC from the now-major account holder."},
+  {t:"Modify the CIF in <b>CMRC</b> to clear the minor flag."},
+  {t:"Modify the account in <b>CASBAM</b> — mode of operation and document details."},
+  {t:"Verify both the CIF and the account modification from the supervisor login.",sup:1}
+ ]},
+
+/* ---------------- COMMON / OFFICE ---------------- */
+{g:"Everyday counter work", n:"Transfer an account to another post office", c:["HACXFSOL"],
+ k:"transfer account po to po hacxfsol sol change office",
+ s:[
+  {t:"Take the transfer application (SB-10b) and confirm the destination SOL ID."},
+  {t:"Open <b>HACXFSOL</b> and enter the account number."},
+  {t:"Enter the destination SOL ID."},
+  {t:"<b>Submit</b> and note the instruction number."},
+  {t:"Verify the instruction number in <b>HACXFSOL</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Lost the instruction number?",t:"See <b>Find a forgotten instruction number</b> under Fixes."},
+     {k:"note",l:"Finding a SOL ID",t:"Look up other offices' SOL IDs through the office master or your circle's SOL list."}]},
+
+{g:"Everyday counter work", n:"Take cash from the vault", c:["HTM","HTCPI"],
+ k:"vault cash htm teller position 0406 take receive",
+ s:[
+  {t:"Open <b>HTM</b>. Function: <b>Add</b>."},
+  {t:"Transaction type: cash transfer from vault to teller."},
+  {t:"Enter the vault account <b>SOL ID + 0406</b> and the amount."},
+  {t:"<b>Submit</b> and note the transaction ID."},
+  {t:"Post and verify from the supervisor login.",sup:1},
+  {t:"Confirm your balance in <b>HTCPI</b>."}
+ ],
+ no:[{k:"note",l:"Giving cash back",t:"Same menu, reversed direction — teller to vault. Check the teller position in HTCPI before and after."}]},
+
+{g:"Everyday counter work", n:"Check teller cash position", c:["HTCPI","HTCPIAE"],
+ k:"teller cash position balance htcpi htcpiae trtwcpie",
+ s:[
+  {t:"Open <b>HTCPI</b> for your own position and <b>Go</b>."},
+  {t:"For any other teller, use <b>HTCPIAE</b> (or TRTWCPIE) — supervisor access."},
+  {t:"Tally against physical cash before handing over."}
+ ],
+ no:[{k:"note",l:"Transaction-wise report",t:"<b>HSCWRPT</b> for your own cash transactions, <b>HSCWRPTA</b> for any teller."}]},
+
+{g:"Everyday counter work", n:"Print a passbook", c:["HPBP"],
+ k:"passbook print hpbp reprint printing",
+ s:[
+  {t:"Open <b>HPBP</b> and enter the account number."},
+  {t:"Check the printer alignment and that the passbook is seated correctly."},
+  {t:"Print."}
+ ],
+ no:[{k:"note",l:"Reprinting entries",t:"To reprint entries already printed, set the starting line and page in HPBP rather than feeding a blank book."},
+     {k:"upd",l:"New since your manual",flag:1,t:"A digital POSB passbook is now available to customers through DOP channels — worth mentioning to depositors who lose books often."}]},
+
+{g:"Everyday counter work", n:"Find a Finacle account number from an old Sanchay number", c:["CNAC","TIPM"],
+ k:"cnac old account number sanchay post migration find new",
+ s:[
+  {t:"Open <b>CNAC</b>."},
+  {t:"Enter the old Sanchay Post account number along with the SOL ID."},
+  {t:"<b>Go</b> — Finacle returns the CBS account number."}
+ ],
+ no:[{k:"note",l:"Pre-migration transactions",t:"Use <b>TIPM</b> to inquire into old Sanchay Post transactions."}]},
+
+{g:"Everyday counter work", n:"View unverified transactions before closing", c:["HFTI","HAFI"],
+ k:"unverified pending transactions hfti hafi eod check",
+ s:[
+  {t:"Open <b>HFTI</b> to list financial transactions still in entered or posted state."},
+  {t:"Open <b>HAFI</b> to list unauthorised (unverified) non-financial functions."},
+  {t:"Clear every pending item before the office closes."}
+ ],
+ no:[{k:"warn",l:"This is the usual EOD blocker",t:"Unverified entries stop the day-end. Check HFTI and HAFI before you get to HSVALRPT."}]},
+
+{g:"Everyday counter work", n:"Run day-end", c:["HSVALRPT","HSCOD"],
+ k:"eod day end bod hsvalrpt hscod closing sol date",
+ s:[
+  {t:"Open <b>HSVALRPT</b> to list every pending activity for the SOL."},
+  {t:"Clear each blocker — unverified transactions, unposted cash, open zones."},
+  {t:"Confirm the teller cash is zero or handed to the vault."},
+  {t:"Run <b>HSCOD</b> to change the SOL operating date.",sup:1},
+  {t:"HO checks SOL status in <b>HSSI</b> and runs closure operations through <b>HSOLCOP</b>.",sup:1}
+ ],
+ no:[{k:"upd",l:"Changed — APT 2.0",flag:1,t:"After the APT 2.0 rollout, SB Order 09/2026 requires daily reconciliation between Finacle and APT, a <b>CBS Daily Discrepancy Reconciliation Register</b>, and a monthly report to the PAO signed jointly by the Postmaster and SBCO in-charge by the 4th. Day-end is no longer the last step — the reconciliation is."}]},
+
+{g:"Everyday counter work", n:"Print reports", c:["HPR","HFINRPT"],
+ k:"report print hpr hfinrpt spool reports lot consolidation",
+ s:[
+  {t:"System-generated reports spool to <b>HPR</b> — open it, pick the report and print."},
+  {t:"Customised and scheme-wise reports come from <b>HFINRPT</b>."},
+  {t:"Common ones: <b>HFTR</b> financial transactions, <b>HEXCPRPT</b> exceptions, <b>HACLPOA</b> office account ledger, <b>HACDET</b> TD/MIS/SCSS/RD balances."}
+ ]},
+
+{g:"Everyday counter work", n:"Open an Atal Pension Yojana account", c:["CAPY"],
+ k:"apy atal pension yojana capy pran open",
+ s:[
+  {t:"Open <b>CAPY</b>. Function: <b>Add</b>."},
+  {t:"Enter the subscriber's SB account ID as the account ID, then <b>Go (F4)</b>."},
+  {t:"Enter the PRAN if the subscriber already has one."},
+  {t:"Enter or amend the nomination details."},
+  {t:"Pick the pension amount — the premium fills in automatically."},
+  {t:"Choose the contribution frequency, then <b>Submit (F10)</b>."},
+  {t:"Verify in <b>CAPY</b> from the supervisor login. The PRAN generates after verification.",sup:1}
+ ],
+ no:[{k:"upd",l:"Changed since your manual",flag:1,t:"SB Order 13/2025 circulated a <b>revised APY subscriber registration form</b>. Use the current form, not the old one."},
+     {k:"note",l:"Contribution",t:"The contribution auto-debits from the linked SB account — for monthly frequency, on the 1st."}]},
+
+{g:"Everyday counter work", n:"Open PMJJBY or PMSBY", c:["CPMY"],
+ k:"pmjjby pmsby jan suraksha insurance cpmy open",
+ s:[
+  {t:"Open <b>CPMY</b>. Function: <b>Add</b>."},
+  {t:"Enter the subscriber's SB account ID, then <b>Go (F4)</b>."},
+  {t:"Pick the scheme — PMJJBY or PMSBY."},
+  {t:"Enter nomination details and the consent-cum-declaration reference."},
+  {t:"<b>Submit (F10)</b>."},
+  {t:"Verify in <b>CPMY</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Scheme rules",t:"Chapter 20 of the POSB (CBS) Manual carries PMJJBY, PMSBY and APY in full."}]},
+
+/* ---------------- INVENTORY ---------------- */
+{g:"Inventory", n:"Add inventory received from CSD", c:["HIMC"],
+ k:"inventory add himc csd receive stock passbook certificate",
+ s:[
+  {t:"Open <b>HIMC</b>. Function: <b>Add</b>, then <b>Go</b>."},
+  {t:"From location class <b>ZZ</b>, from location code <b>EXT</b>."},
+  {t:"To location class and code as per your office setup, then <b>Accept</b>."},
+  {t:"Pick the inventory class and type from the searcher, then enter the alpha and the start and end numbers."},
+  {t:"<b>Submit</b> and note the transaction ID."},
+  {t:"Verify the transaction ID in <b>HIMC</b> from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Lost the transaction ID?",t:"See <b>Find a forgotten inventory transaction ID</b> under Fixes."}]},
+
+{g:"Inventory", n:"Move inventory from HO to SO", c:["HCCS","HIMC","HIMI"],
+ k:"inventory transfer ho so hccs himc movement between offices",
+ s:[
+  {t:"At HO, select the receiving SO's SOL ID in <b>HCCS</b>."},
+  {t:"Open <b>HIMC</b> and move the stock to the SO's location."},
+  {t:"<b>Submit</b> and note the transaction ID."},
+  {t:"Verify from the supervisor login.",sup:1},
+  {t:"At the SO, accept the inventory and verify. Track movement in <b>HIMI</b>."}
+ ]},
+
+{g:"Inventory", n:"Split or merge inventory", c:["HISAI","HISIA","HIMAI","HIMIA"],
+ k:"inventory split merge hisai hisia himai himia location",
+ s:[
+  {t:"<b>Split, own location:</b> <b>HISAI</b>. <b>Split, other location:</b> <b>HISIA</b>."},
+  {t:"<b>Merge, own location:</b> <b>HIMAI</b>. <b>Merge, other location:</b> <b>HIMIA</b>."},
+  {t:"Enter the inventory class, type, alpha and the number range to split or merge."},
+  {t:"<b>Submit</b> and note the transaction ID."},
+  {t:"Verify from the supervisor login.",sup:1}
+ ],
+ no:[{k:"note",l:"Checking stock",t:"<b>HIIA</b> for what is available at a location, <b>HISR</b> or <b>HISRA</b> for the status report."}]},
+
+/* ---------------- CHEQUES ---------------- */
+{g:"Cheques and clearing", n:"Send bank cheques from SO to HO for clearing", c:["HOMSO","HOMSOEX"],
+ k:"outward clearing so ho bank cheque homso lodge osl",
+ s:[
+  {t:"Open <b>HOMSO</b> and lodge each instrument — cheque number, bank, branch, amount and the credit account."},
+  {t:"<b>Submit</b> for each cheque."},
+  {t:"Verify the lodgement from the supervisor login.",sup:1},
+  {t:"Generate the schedule of cheques lodged with <b>HOMSOEX</b> and send it with the instruments to the HO."}
+ ]},
+
+{g:"Cheques and clearing", n:"Lodge outward clearing at HO", c:["HMCLZOH","HOCTM","HOCTV","HPCLSO"],
+ k:"outward clearing ho zone hoctm hmclzoh lodge bank cheque",
+ s:[
+  {t:"Open the outward zone in <b>HMCLZOH</b>."},
+  {t:"Lodge each cheque in the zone through <b>HOCTM</b>."},
+  {t:"Bulk-verify the lodged cheques with <b>HOCTV</b>.",sup:1},
+  {t:"Print the outward clearing schedule with <b>HPCLSO</b> and send the instruments to the clearing house."},
+  {t:"Once realised, release to shadow balance and regularise the zone in <b>HMCLZOH</b>.",sup:1}
+ ],
+ no:[{k:"note",l:"SO files",t:"For cheques received from SOs, download the file with <b>HTRFTOPC</b> and upload at HO with <b>HCLUPLD</b>."},
+     {k:"note",l:"Tracking",t:"Inquire on lodged cheques with <b>HIOCLS</b>. Mark a cheque pending with <b>HMARKPEN</b>; revoke with <b>HREVPEND</b>."}]},
+
+{g:"Cheques and clearing", n:"Process inward clearing (POSB cheques from banks)", c:["HMICZ","HRMI","HICTMO","HPICW"],
+ k:"inward clearing posb cheque bank hmicz hrmi hictmo reject",
+ s:[
+  {t:"Open the inward zone in <b>HMICZ</b>."},
+  {t:"Upload the inward clearing file with <b>HRMI</b>."},
+  {t:"Open <b>HICTMO</b> to verify and post the records. Mark returns here for cheques that cannot be paid.",sup:1},
+  {t:"Run validation and post in <b>HMICZ</b>, then close the zone.",sup:1},
+  {t:"Print the inward clearing dump with <b>HPICW</b> and the rejects report with <b>HREJREP</b>."}
+ ]},
+
+{g:"Cheques and clearing", n:"Lodge an outstation cheque for collection", c:["HIRM","HINWREMI"],
+ k:"occ outstation cheque collection hirm realize dishonour",
+ s:[
+  {t:"Open <b>HIRM</b> and lodge the instrument with the drawee bank details."},
+  {t:"<b>Submit</b> and note the reference."},
+  {t:"Verify from the supervisor login.",sup:1},
+  {t:"On realisation or dishonour, open <b>HIRM</b> again and mark the outcome, then verify."},
+  {t:"Inquire on remittances any time through <b>HINWREMI</b>."}
+ ]}
+);
+
+/* ============ MENU CODES ============ */
+const MENUS = [
+ {g:"CIF", r:[
+  ["Check for duplicate CIFs","CDEDUP"],
+  ["Create a new CIF and verify","CCRC","CIFCR"],
+  ["Modify a CIF before verification","CCRC","CIFCR"],
+  ["Modify an existing, verified CIF","CMRC","CIFMD"],
+  ["Merge two CIFs","HCCA"],
+  ["Search a CIF / see all its accounts","HCRV"],
+  ["Search existing customers and accounts","HACS"]
+ ]},
+ {g:"Savings account", r:[
+  ["Open a new SB account","CASBAO","QDESA"],
+  ["Modify before verification","CASBAOM","QDEMSABV"],
+  ["Verify a new account","CASBAV","QDESAVF"],
+  ["Modify an existing account","CASBAM","QDEMSA"],
+  ["Fund by cash and verify","CTM"],
+  ["Fund by account transfer and verify","CXFER"],
+  ["Print the passbook","HPBP"],
+  ["Close the account and verify","HCAAC","CLOSE"],
+  ["Find the new account number for an old one","CNAC"],
+  ["Minor-to-major report","HCBM"],
+  ["Print spooled reports","HPR"],
+  ["Account transactions inquiry","HACLI"],
+  ["Account balance inquiry","HACCBAL"],
+  ["Account details inquiry","HACCDET"],
+  ["Change scheme (SBGEN ↔ SBCHQ)","HACXFRSC","TFRSCH"],
+  ["Issue an ATM card","CCMM"],
+  ["Name change at account level","HAALM"],
+  ["View specimen signature","IES"]
+ ]},
+ {g:"Term deposit", r:[
+  ["Open a TD account","CMISAOP","MISAO"],
+  ["Modify before verification","CMISAOPM","MISAMBV"],
+  ["Verify a new TD account","CMISAOPV","MISAVF"],
+  ["Modify and verify an existing TD","CMISAM","MISAMAV"],
+  ["Fund by cash","TRCDP","CTM"],
+  ["Fund by transfer","TRTFR","CXFER"],
+  ["Renewal history","HRENHIST"],
+  ["Transaction history","HTDTRAN"],
+  ["Extend and verify","TDRED","HTDREN"],
+  ["Close a TD account","HCAACTD","TDACTCL"],
+  ["Verify TD closure","HCAACVTD","TDACTCLV"],
+  ["Inquire TD details","TDINQ"],
+  ["Pay closure proceeds by cash","HCASHPND"]
+ ]},
+ {g:"Monthly income scheme", r:[
+  ["Check a depositor's existing MIS holding","CLIMIT"],
+  ["Open an MIS account","CMISAOP","MISAO"],
+  ["Modify before verification","CMISAOPM","MISAMBV"],
+  ["Verify a new MIS account","CMISAOPV","MISAVF"],
+  ["Modify and verify an existing MIS","CMISAM","MISAMAV"],
+  ["Old Sanchay Post transaction inquiry","TIPM"],
+  ["Extend and verify","TDRED","HTDREN"],
+  ["Close an MIS account","HCAACTD","TDACTCL"],
+  ["Verify MIS closure","HCAACVTD","TDACTCLV"],
+  ["Inquire MIS interest in the sundry account","HIOT"],
+  ["Pay MIS interest by cash","HTM"]
+ ]},
+ {g:"Senior citizens (SCSS)", r:[
+  ["Open an SCSS account","CSCAOP","SCSSAO"],
+  ["Modify before verification","CSCAOPM","SCSSMBV"],
+  ["Verify a new SCSS account","CSCAOPV","SCSSAV"],
+  ["Modify and verify an existing SCSS","CSCAM","SCSSMAV"],
+  ["Close an SCSS account","HCAACTD","TDACTCL"],
+  ["Verify SCSS closure","HCAACVTD","TDACTCLV"],
+  ["Extend and verify","TDRED","HTDREN"],
+  ["TDS inquiry and print","HTDSIP"],
+  ["Customer-wise TDS report","HTDSREP"]
+ ]},
+ {g:"Recurring deposit", r:[
+  ["Open a new RD account","CRDOAAC","RDAOCM"],
+  ["Modify before verification","CRDOAACM","RDMAO"],
+  ["Verify RD opening","CRDOAACV","RDAOVF"],
+  ["Modify and verify an existing RD","CRDACM","RDAMM"],
+  ["Print the passbook","HPBP"],
+  ["Accept an instalment and verify","RDAMT","CRDP"],
+  ["Check pending instalments","HPLIST","RDPENINS"],
+  ["Extend and verify","PRDCM"],
+  ["Close an RD account and verify","CRDCAAC","RDACLM"]
+ ]},
+ {g:"RD loan", r:[
+  ["Open an RD loan account","CAOLARD","RDHWAO"],
+  ["Modify before verification","CAOMLARD","RDHWAMBV"],
+  ["Verify a new RD loan account","CAOVLARD","RDHWAVF"],
+  ["Modify an existing RD loan account","CACMLARD","RDHWAMAV"],
+  ["Disburse the loan","LARDD","RDHWDP"],
+  ["Unscheduled repayment","HLAUPAY"],
+  ["Scheduled repayment","HLASPAY"],
+  ["Pay off and verify","HPAYOFF"],
+  ["Close the loan account and verify","CAACLA"]
+ ]},
+ {g:"NSC and KVP", r:[
+  ["Open a new NSC / KVP","CSCOAAC","NSCAO"],
+  ["Modify before verification","CSCOAACM","NSCAMBV"],
+  ["Verify a new certificate","CSCOAACV","NSCAOVF"],
+  ["Print the certificate","HDRP"],
+  ["Print a duplicate certificate","HDUDRP"],
+  ["Modify an existing NSC / KVP","CSCACM","NSCAM"],
+  ["Close and verify","CSCCAAC","NSCAC"],
+  ["Transfer a certificate and verify","HCCA"],
+  ["Account maintenance inquiry","HACITD","TDINQ"]
+ ]},
+ {g:"Public provident fund", r:[
+  ["Open a PPF account","CPPFAO","PPFAO"],
+  ["Modify before verification","PPFAMBV","CPPFAOM"],
+  ["Verify a new PPF account","CPPFAV"],
+  ["Modify an existing PPF account","PPFAMAVF","CPPFAM"],
+  ["Fund the account and verify","CPDTM"],
+  ["Withdraw and verify","CPWTM"],
+  ["Extend and verify","PPFAEXT","HCEXTN"],
+  ["Close and verify","HCAAC","CLOSE"],
+  ["Zeroise interest for a transfer-out account","HINTTM"],
+  ["Upload transactions to a transfer-in account","CTUPLD"],
+  ["Transfer an account CBS to CBS","HACXFSOL"]
+ ]},
+ {g:"PPF loan", r:[
+  ["Open a PPF loan account","CLPPFAO","PPFLAO"],
+  ["Modify before verification","CLPPFAOM","PPFLAMBV"],
+  ["Verify a new PPF loan account","CLPPFAOV","PPFLAVF"],
+  ["Modify an existing PPF loan account","CLPPFAM","PPFLAMAV"],
+  ["Withdrawal, disbursement and interest recovery","CPWTM","PPFWLINT"],
+  ["Repay a PPF loan","CPDTM","PPFDPLR"],
+  ["Run before closing the loan","CLPR","HACINT"],
+  ["Close the loan account and verify","HCAAC","CLOSE"]
+ ]},
+ {g:"Inventory", r:[
+  ["Add inventory and verify","HIMC"],
+  ["Select SO SOL ID for transferring inventory","HCCS"],
+  ["Split inventory — own location","HISAI"],
+  ["Split inventory — other location","HISIA"],
+  ["Merge inventory — own location","HIMAI"],
+  ["Merge inventory — other location","HIMIA"],
+  ["Inventory status report","HISR","HISRA"],
+  ["Inquire movement between locations","HIMI"],
+  ["Inquire what is available at a location","HIIA"]
+ ]},
+ {g:"Cheque book", r:[
+  ["Issue an across-the-counter cheque book","HICHB","HICHBA"],
+  ["Cheque book inquiry","HCHBI"],
+  ["Find the account from a cheque number","HINQACHQ"],
+  ["Mark or revoke stop payment","HSPP","CHSTOP"],
+  ["Verify stop payment marking or revocation","HSPPAU"],
+  ["Stop payment register","HSPRG","CHSTPR"]
+ ]},
+ {g:"Lien and freeze", r:[
+  ["Mark or remove a lien and verify","HALM","ACLNM"],
+  ["Freeze or unfreeze an account and verify","HAFSM","ACTFRS"]
+ ]},
+ {g:"Standing instructions", r:[
+  ["Create an SI and verify","HSSIM","HSIM"],
+  ["SI inquiry","HSSII"],
+  ["SI reports","HSIREPTS","SIREP"],
+  ["SI register print","HSIRP"],
+  ["SI advice print","HSIADVC"]
+ ]},
+ {g:"Cash and vault", r:[
+  ["Teller cash position — own","HTCPI"],
+  ["Teller cash position — any teller","HTCPIAE","TRTWCPIE"],
+  ["Vault transactions: enter, post, verify","HTM"],
+  ["Transaction inquiry by transaction ID","HTI"],
+  ["Teller transaction-wise cash report — own","HSCWRPT"],
+  ["Teller transaction-wise cash report — any teller","HSCWRPTA"],
+  ["Scheme-wise reports","HFINRPT"],
+  ["Pay pending cash proceeds","HCASHPND"]
+ ]},
+ {g:"Office accounts", r:[
+  ["Inquire on transactions","HIOT"],
+  ["Post into office accounts and verify","HTM"],
+  ["Ledger inquiry","HACLINQ"],
+  ["Print the office account ledger","HACLPOA"]
+ ]},
+ {g:"Outward clearing", r:[
+  ["Lodge instruments at SO or HO","HOMSO"],
+  ["Report of cheques lodged by SO or HO","HOMSOEX"],
+  ["File download of SO by HO","HTRFTOPC"],
+  ["File upload by HO","HCLUPLD"],
+  ["Open, suspend, release, regularise the zone","HMCLZOH"],
+  ["Lodge cheques in the zone","HOCTM"],
+  ["Bulk-verify lodged cheques","HOCTV"],
+  ["Print the outward clearing schedule","HPCLSO"],
+  ["Inquire on lodged cheques","HIOCLS"],
+  ["Mark cheques pending in a zone","HMARKPEN"],
+  ["Revoke pending status","HREVPEND"],
+  ["Print the outward clearing dump","HPWO"]
+ ]},
+ {g:"Inward clearing", r:[
+  ["Open, suspend, validate, post, close the zone","HMICZ"],
+  ["Upload the inward clearing file","HRMI"],
+  ["Verify, post and mark returns","HICTMO"],
+  ["Print the inward clearing dump","HPICW"],
+  ["Report of inward clearing rejects","HREJREP"]
+ ]},
+ {g:"Outstation cheques", r:[
+  ["Lodge, realise or dishonour OCC and verify","HIRM"],
+  ["Inquire on remittances","HINWREMI"]
+ ]},
+ {g:"ECS", r:[
+  ["Add an ECS mandate and verify","HECSM"],
+  ["Create the ECS dump","HEGOC"],
+  ["Run the settlement process","HEOSR"],
+  ["Rejection processing","HEORP"]
+ ]},
+ {g:"Agents", r:[
+  ["Create an agent ID and verify","HDSAMM"],
+  ["Post an agent's transactions and verify","HAGTXP"]
+ ]},
+ {g:"Day end and admin", r:[
+  ["Check unverified financial transactions","HFTI"],
+  ["Check unauthorised functions","HAFI"],
+  ["All pending activities report — by SO","HSVALRPT"],
+  ["SOL change of operating date — by SO","HSCOD"],
+  ["Check SOL status — by HO","HSSI"],
+  ["SOL closure operations — by HO","HSOLCOP"],
+  ["SOL closure for the last day — by HO","HSCOLD"],
+  ["Create a memopad","HMEMOPAD"],
+  ["Verify a created memopad","HMPAU"],
+  ["Release a stuck user session","CSAC"],
+  ["Reset a locked user ID","CRESET"]
+ ]},
+ {g:"NSS 87 and 92", r:[
+  ["Withdrawal transactions","CTM","CXFER"],
+  ["Amend nomination details and verify","HACM"],
+  ["Recover TDS before closure","HCACC"],
+  ["Close an NSS account and verify","HCAAC","CLOSE"],
+  ["Remove a freeze and verify","HAFSM"],
+  ["Original deposit amount (free text 12)","HACM"],
+  ["Form 15G / 15H update (free code 9)","HACM"]
+ ]},
+ {g:"Reports", r:[
+  ["View or print system-generated reports","HPR"],
+  ["View or print customised reports","HFINRPT"],
+  ["Financial transactions report","HFTR"],
+  ["Exceptions report","HEXCPRPT"],
+  ["TD / MIS / SCSS / RD balance details","HACDET"],
+  ["Office accounts ledger prints","HACLPOA"],
+  ["Minor turned major report","HCBM"],
+  ["All pending activities report","HSVALRPT"],
+  ["Transaction reversal request","HCRT"],
+  ["Interest adjustment","HIARM"]
+ ]}
+];
+
+/* ============ FIXES ============ */
+const FIX = [
+{g:"Transactions gone wrong", n:"Wrong deposit or withdrawal amount",
+ k:"wrong deposit withdrawal excess short reverse hcrt error book",
+ sym:"You posted ₹10,000 instead of ₹1,000, or paid out less than the form.",
+ body:[
+  {h:"Do this first",t:"Make the entry in the <b>error book</b> before you touch anything. Get sanction from higher authority where the amount or the situation calls for it."},
+  {h:"The formal route",t:"<b>HCRT</b> → operation <b>Reverse</b> → function <b>Request</b> → transaction ID → <b>Go (F4)</b> → tick the transaction → <b>Submit (F10)</b> → note the reference number → verify in the same menu. HCRT is restricted at most operative post offices, so this often will not be available to you."},
+  {h:"Excess or short deposit in SB",t:"Withdraw the wrong amount through <b>CTM</b> and redo the deposit correctly. Both entries show in the LOT — round them off and deduct from the SB deposit and withdrawal totals. If the customer is still at the counter, taking a withdrawal form for the excess is cleaner."},
+  {h:"Excess or short withdrawal in SB",t:"Deposit the wrong amount back through <b>CTM</b> and redo the withdrawal correctly, then adjust the LOT the same way."},
+  {h:"Excess deposit in RD",t:"There is no counter-level reversal. Request the customer, and escalate to the divisional office if that fails."}
+ ]},
+
+{g:"Transactions gone wrong", n:"Account opened with the wrong CIF",
+ k:"wrong cif account opened hcca modify change cif",
+ sym:"The account is verified but sitting under the wrong customer's CIF.",
+ body:[
+  {h:"Fix",t:"<b>HCCA</b> → function <b>Modify</b> → account number → <b>Go (F4)</b> → delete the existing CIF and enter the correct one → set <b>modify account name</b> to <b>Yes</b> (mandatory) → pick the reason code → <b>Submit (F10)</b>."},
+  {h:"Verify",t:"Supervisor verifies the account number in <b>HCCA</b>."}
+ ]},
+
+{g:"Transactions gone wrong", n:"Account opened without selecting the agent",
+ k:"agent not selected rd account opened wrongly mpkby commission",
+ sym:"An RD opened through an agent shows no agent against it, so commission will not compute.",
+ body:[
+  {h:"Reality check",t:"The agent cannot simply be attached afterwards through normal counter menus."},
+  {h:"Route",t:"Close the account and reopen it correctly with the agent selected, transferring the balance by value date — or raise it with the CPC through your divisional office. Record the whole thing in the error book and take sanction before closing anything."}
+ ]},
+
+{g:"Transactions gone wrong", n:"Excess deposit in SSA or PPF",
+ k:"ssa ppf excess deposit reverse refund ceiling",
+ sym:"Deposit taken beyond the annual ceiling. It earns no interest and has to come back out.",
+ body:[
+  {h:"PPF",t:"Use the PPF reversal route in <b>CPWTM</b> for the excess amount, with the error book entry and sanction in place."},
+  {h:"SSA",t:"Reverse the excess through the prescribed SSA reversal procedure and refund to the depositor. Interest is not payable on the excess for any period it stayed in the account."},
+  {h:"Prevent it",t:"Check the running total for the financial year across all the depositor's accounts before accepting."}
+ ]},
+
+{g:"Closure and verification", n:"SB closure fails",
+ k:"closure fail sb hcaac error interest credit silent unverified",
+ sym:"HCAAC refuses to close the account.",
+ body:[
+  {h:"Interest-credit account still linked",t:"Close the linked interest-credit account first, then close the SB the <b>next day</b>. They cannot both close on the same day."},
+  {h:"Account status is silent",t:"Revive it in <b>CASBAM</b> (status silent → live, revival date today), get it verified, then close."},
+  {h:"Account modification unverified",t:"Supervisor verifies the pending modification in <b>CASBAM</b>."},
+  {h:"CIF modification unverified",t:"Supervisor verifies the CIF in <b>CMRC</b>."}
+ ]},
+
+{g:"Closure and verification", n:"RD closure says \"closure pending on SI\"",
+ k:"rd closure si standing instruction pending hssim delete",
+ sym:"Finacle blocks the RD closure because a standing instruction is still live.",
+ body:[
+  {h:"Counter",t:"<b>HSSIM</b> → function <b>Delete</b> → click the searcher beside instruction number → enter the RD account number → <b>Submit</b> → click the instruction number returned → <b>Submit</b>."},
+  {h:"Supervisor",t:"Verify the instruction number in <b>HSSIM</b> and submit."},
+  {h:"Then",t:"Run the RD closure again. It goes through."}
+ ]},
+
+{g:"Closure and verification", n:"Certificate issue will not verify",
+ k:"certificate nsc kvp verification problem issue not verifying",
+ sym:"The certificate account is entered but the supervisor cannot complete verification.",
+ body:[
+  {h:"Check the obvious",t:"Confirm the CIF is verified, the scheme code matches the denomination, and the funding transaction is in place."},
+  {h:"Denomination mismatch",t:"If the amount does not match the scheme code, delete the entry before verification and re-enter with the right code."},
+  {h:"Still stuck",t:"Note the account number and reference and raise it with the CPC through your divisional office."}
+ ]},
+
+{g:"Finding lost references", n:"Forgotten transaction ID, account ID or registration number",
+ k:"forgot transaction id account number registration find hfti hacli",
+ sym:"You submitted something and did not write the number down.",
+ body:[
+  {h:"Transaction ID",t:"<b>HFTI</b> lists financial transactions by status for the SOL and date — find yours by amount and time. <b>HTI</b> then gives full details once you have the ID."},
+  {h:"Account transactions",t:"<b>HACLI</b> for a customer account, <b>HACLINQ</b> for an office account."},
+  {h:"Account number",t:"<b>HACS</b> searches customers and accounts by name. <b>HCRV</b> lists every account under a CIF."},
+  {h:"Non-financial functions",t:"<b>HAFI</b> lists unauthorised functions waiting for verification."}
+ ]},
+
+{g:"Finding lost references", n:"Forgotten instruction number after a transfer or scheme change",
+ k:"instruction number hacxfsol hacxfrsc forgot transfer scheme change",
+ sym:"You ran HACXFSOL or HACXFRSC and lost the instruction number before verification.",
+ body:[
+  {h:"Both cases",t:"Reopen the same menu — <b>HACXFSOL</b> for an office transfer, <b>HACXFRSC</b> for a scheme change — and use the searcher beside the instruction number field."},
+  {h:"Search",t:"Enter the account number in the searcher and submit. Finacle returns the pending instruction number, which you then click to verify."}
+ ]},
+
+{g:"Finding lost references", n:"Forgotten inventory transaction ID",
+ k:"inventory himc forgot transaction id movement",
+ sym:"Inventory was moved through HIMC and the transaction ID is gone.",
+ body:[
+  {h:"Fix",t:"Open <b>HIMI</b> to inquire on movement between locations. Filter by date and location to find the entry and its reference."},
+  {h:"Also",t:"<b>HISR</b> or <b>HISRA</b> gives the inventory status report if you need the whole picture."}
+ ]},
+
+{g:"Login and access", n:"\"User already logged in\"",
+ k:"user already logged in csac session browser crash login error",
+ sym:"Finacle says the user is already logged in, usually after a browser crash, network drop or an expired session.",
+ body:[
+  {h:"Try first",t:"Log out fully. Clear browsing history and cache. Clear the SSL state in browser settings."},
+  {h:"Then",t:"The system administrator or supervisor runs <b>CSAC</b>, enters the user ID and submits. That releases the session."},
+  {h:"Habit worth building",t:"Always log out properly rather than closing the browser window."}
+ ]},
+
+{g:"Login and access", n:"\"Maximum attempts reached, user ID is locked\"",
+ k:"locked user id creset password maximum attempts reset",
+ sym:"Three wrong passwords in a row and the ID locks.",
+ body:[
+  {h:"Fix",t:"The system administrator runs <b>CRESET</b>, enters the user ID and submits."},
+  {h:"If the password is genuinely forgotten",t:"Neither CSAC nor CRESET helps. Contact your SPOC or the CPC for a password reset."}
+ ]},
+
+{g:"Migration legacy", n:"Account migrated with the wrong balance",
+ k:"migration wrong balance sb rd ppf non migrated pre cbs sanchay",
+ sym:"The CBS balance does not match the passbook or the old Sanchay Post record.",
+ body:[
+  {h:"Establish the facts",t:"Compare against the passbook, the old ledger and <b>TIPM</b> for pre-migration transactions. Prepare a statement of the difference with supporting entries."},
+  {h:"Current route",t:"<b>SB Order 15/2025 (20.11.2025)</b> lays down the SOP for updating balances where pre-CBS transactions did not migrate — covering POSA, PPF and SSA, with annexures. Follow that order rather than the older workarounds.",upd:1},
+  {h:"Do not",t:"Do not use <b>HIARM</b> to fix a principal difference. SB Order 03/2024 restricts HIARM to genuine interest adjustment — using it for principal books the amount to the wrong head.",upd:1}
+ ]},
+
+{g:"Migration legacy", n:"Certificate migrated with the wrong date of issue",
+ k:"certificate wrong date of issue migration nsc kvp maturity",
+ sym:"The maturity date computes wrongly because the migrated date of issue is incorrect.",
+ body:[
+  {h:"Verify",t:"Check the physical certificate and the office records for the true date of issue."},
+  {h:"Route",t:"This cannot be corrected at counter level. Prepare the case with documentary proof and route it to the CPC through your divisional office."},
+  {h:"Meanwhile",t:"Do not discharge on the incorrect maturity value. Explain the position to the holder in writing."}
+ ]},
+
+{g:"Migration legacy", n:"Certificate not migrated into Finacle",
+ k:"certificate not migrated discharge manual nsc kvp",
+ sym:"A genuine certificate is presented for discharge but has no Finacle record.",
+ body:[
+  {h:"Establish",t:"Confirm it against the office records, the journal of certificates issued and the relevant summaries."},
+  {h:"Route",t:"Raise it with the CPC through the divisional office for creation of the account in Finacle, then discharge it normally. Keep the certificate and the discharge form with the case."}
+ ]},
+
+{g:"Migration legacy", n:"MIS interest not migrated properly",
+ k:"mis interest migration problem sundry hiot arrears",
+ sym:"Monthly interest is not accruing, or arrears are missing.",
+ body:[
+  {h:"Check",t:"<b>HIOT</b> for what is sitting in the sundry account and <b>HACLI</b> for the account's own history."},
+  {h:"Route",t:"Where the deposit date or amount migrated wrongly, the correction is a CPC case, not a counter fix. Prepare the statement and route it through the divisional office."}
+ ]},
+
+{g:"Day end", n:"Day-end will not run",
+ k:"eod day end blocked hsvalrpt pending validation hscod",
+ sym:"HSCOD refuses, or HSVALRPT shows pending activities.",
+ body:[
+  {h:"Work the list",t:"<b>HSVALRPT</b> names every blocker. Clear them one at a time."},
+  {h:"Usual culprits",t:"Unverified financial transactions (<b>HFTI</b>), unauthorised functions (<b>HAFI</b>), cash still with a teller instead of the vault (<b>HTCPI</b>), an open clearing zone (<b>HMCLZOH</b> or <b>HMICZ</b>), or an office account not brought to zero."},
+  {h:"After APT 2.0",t:"Day-end is no longer the end of the job. SB Order 09/2026 requires the Finacle–APT reconciliation and the discrepancy register entry the same day.",upd:1}
+ ]},
+
+{g:"Day end", n:"Standing instruction did not execute",
+ k:"si not executed rd standing instruction failed hssii balance",
+ sym:"The SB to RD standing instruction did not fire on the due date.",
+ body:[
+  {h:"Check the cause",t:"<b>HSSII</b> shows the instruction and its last execution. The common cause is insufficient balance in the debit SB account on the due date."},
+  {h:"Fix",t:"Accept the instalment manually through <b>CRDP</b> along with any default fee, and tell the depositor to keep the balance funded before the due date."},
+  {h:"If the instruction itself is broken",t:"Delete it in <b>HSSIM</b>, get it verified, and create it afresh."}
+ ]}
+];
+
+/* ============ REFERENCE ============ */
+const RATES = [
+ ["Post Office Savings Account","4.0%","Annual"],
+ ["Recurring Deposit (5 year)","6.7%","Quarterly compounded"],
+ ["Time Deposit — 1 year","6.9%","Quarterly compounded, paid annually"],
+ ["Time Deposit — 2 year","7.0%","Quarterly compounded, paid annually"],
+ ["Time Deposit — 3 year","7.1%","Quarterly compounded, paid annually"],
+ ["Time Deposit — 5 year","7.5%","Quarterly compounded, paid annually"],
+ ["Monthly Income Scheme","7.4%","Paid monthly"],
+ ["Senior Citizens Savings Scheme","8.2%","Paid quarterly"],
+ ["Public Provident Fund","7.1%","Annual compounding"],
+ ["Sukanya Samriddhi Account","8.2%","Annual compounding"],
+ ["National Savings Certificate VIII","7.7%","Compounded annually, paid at maturity"],
+ ["Kisan Vikas Patra","7.5%","Matures in 115 months"]
+];
+
+const SCHEMES = [
+ ["SBBAS","Savings — basic"],
+ ["SBCHQ","Savings — general, with cheque book"],
+ ["SBGEN","Savings — general, without cheque book"],
+ ["SBPEN","Savings — pensioner, with cheque book"],
+ ["SBPWC","Savings — pensioner, without cheque book"],
+ ["MISN1","Monthly Income Scheme — normal"],
+ ["RDIPN","Recurring Deposit — normal"],
+ ["TDIP1","Time Deposit — 1 year"],
+ ["TDIP2","Time Deposit — 2 years"],
+ ["TDIP3","Time Deposit — 3 years"],
+ ["TDIP5","Time Deposit — 5 years"],
+ ["SCSCM","Senior Citizens Savings Scheme"],
+ ["SCDEF","SCSS — retired from defence"],
+ ["SCVRS","SCSS — voluntary retirement"],
+ ["NSC81","NSC VIII — ₹100"],
+ ["NSC82","NSC VIII — ₹500"],
+ ["NSC83","NSC VIII — ₹1,000"],
+ ["NSC84","NSC VIII — ₹5,000"],
+ ["NSC85","NSC VIII — ₹10,000"],
+ ["NSC91","NSC IX — ₹100"],
+ ["NSC92","NSC IX — ₹500"],
+ ["NSC93","NSC IX — ₹1,000"],
+ ["NSC94","NSC IX — ₹5,000"],
+ ["NSC95","NSC IX — ₹10,000"],
+ ["LARD","Loan against Recurring Deposit"]
+];
+
+const OFFACC = [
+ ["0017","PPF and RD deposit by NDC; RD deposit by NDC through agents"],
+ ["0324","Sundry account"],
+ ["0335","TD interest payment by cash"],
+ ["0337","MIS interest payment by cash"],
+ ["0338","SCSS interest payment by cash"],
+ ["0339","Branch settlement account"],
+ ["0340","Postmaster cheque account"],
+ ["0382","New account opened by NDC"],
+ ["0406","Vault account ID"]
+];
+
+const CHAPTERS = [
+ ["1","General — SB offices, duties, distribution of work","20"],
+ ["2","Important documents — passbook, SB-103, SB-7, SB-26, SB-28, SB-27","24"],
+ ["3","General rules — eligibility, KYC, nomination, transfer, closure, TDS 194N","36"],
+ ["4","Post Office Savings Account scheme","84"],
+ ["5","POSB operation in branch offices","119"],
+ ["6","Recurring Deposit scheme","147"],
+ ["7","Time Deposit scheme","167"],
+ ["8","Monthly Income Account scheme","175"],
+ ["9","Senior Citizens Savings Scheme","183"],
+ ["10","Public Provident Fund scheme","194"],
+ ["11","Sukanya Samriddhi Account scheme","207"],
+ ["12","National Savings Scheme 1987 and 1992","214"],
+ ["13","Savings certificates — general rules","218"],
+ ["14","Kisan Vikas Patra scheme","245"],
+ ["15","National Savings Certificate (VIII issue)","247"],
+ ["16","10-year NSC (IX issue)","249"],
+ ["17","PM CARES for Children scheme 2021","251"],
+ ["18","Agency system — MPKBY, SAS, PRSS","264"],
+ ["19","Settlement of deceased claim cases","278"],
+ ["20","Jan Suraksha — PMJJBY, PMSBY, APY","305"],
+ ["App I","KYC / AML / CFT norms","344"],
+ ["App II–IV","Cheque system, clearing process, ECS","360"],
+ ["App V–VII","Internet banking, mobile banking, IVR","407"],
+ ["App VIII","CBS – CSI GL integration","416"],
+ ["App XII","TDS submission","446"],
+ ["App XVI","Role of SBCO for CBS post offices","480"],
+ ["App XVIII","Interest rates from 01.04.1981","501"]
+];
+
+/* ============ WHAT CHANGED ============ */
+const NEWS = [
+{d:"24 Jul 2026", o:"SB Order 09/2026", t:"SOP for POSB accounting and verification after APT 2.0",
+ b:"Daily reconciliation between Finacle and APT. A CBS Daily Discrepancy Reconciliation Register at every office. SBCO verifies HO cash books against consolidated Finacle reports. Monthly report to the PAO by the 4th, signed jointly by the Postmaster and SBCO in-charge. Monthly SOL-wise SFTP folders stay available for three months. Builds on SB Orders 12/2025 and 16/2025.", hi:1},
+{d:"May 2026", o:"SB Order 05/2026", t:"Personalised Cheque Books introduced",
+ b:"PCB replaces the old across-the-counter book in the covered cases. Stock handling and the issue flow differ from HICHB as described in the 2016 guide — check your circle's current SOP."},
+{d:"28 Apr 2026", o:"SB Order 04/2026", t:"Nominee changes through Internet Banking",
+ b:"Customers can now add, modify or delete nominees themselves through DOP Internet Banking, under a separate nominee menu linked to system records."},
+{d:"28 Apr 2026", o:"SB Order 03/2026", t:"e-KYC withdrawal limit raised to ₹20,000",
+ b:"Effective 28.04.2026. Applies to all deposit transactions regardless of amount, and to withdrawals up to ₹20,000. The SOP under SB Order 01/2025 is updated accordingly; everything else stands."},
+{d:"27 Apr 2026", o:"SB Order 02/2026", t:"Income-tax Rules 2026 — Form 15G/15H replaced",
+ b:"Forms 15G and 15H are consolidated into a single Form 121. Form 60 is replaced by Forms 97 and 98. PAN is mandatory for specified transactions; where the depositor has none, take Form 97. Until Finacle is patched, keep using the existing 15G/15H functionality but collect Form 121. Verified Part B goes to the Head Office, which allots a 26-character UIN each quarter. Records preserved seven years.", hi:1},
+{d:"1 Apr 2026", o:"SB Order 01/2026", t:"Interest rates from 01.04.2026",
+ b:"Rates carried forward unchanged, and again for the quarter starting 01.07.2026 — the ninth consecutive quarter without revision."},
+{d:"2 Dec 2025", o:"SB Order 16/2025", t:"Changes in accounting of POSB TDS transactions",
+ b:"Changes how TDS under sections 194A, 194EE, 194H and 194N is accounted, and who files returns for which period — CPRC versus DDOs. Corrective steps prescribed for returns already filed."},
+{d:"20 Nov 2025", o:"SB Order 15/2025", t:"SOP for balances affected by non-migrated pre-CBS transactions",
+ b:"Step-by-step procedure with annexures for correcting POSA, PPF and SSA balances where pre-CBS transactions never migrated. Use this instead of the older workarounds."},
+{d:"15 Jul 2025", o:"SB Order 10/2025", t:"Matured but unclosed accounts to be frozen",
+ b:"Small savings accounts that matured and were not closed within the prescribed period are identified and frozen twice a year. Get extensions filed before maturity."},
+{d:"2025", o:"SB Orders 01, 07, 07A / 2025", t:"e-KYC extended across schemes",
+ b:"Aadhaar-based paperless e-KYC started with CIF creation and POSA opening, then extended to MIS, TD, KVP and NSC, and later to RD and PPF operations including acceptance of deposits."},
+{d:"7 May 2025", o:"SB Order 08/2025", t:"Interest certificates downloadable online",
+ b:"Internet banking customers can download interest certificates for the current and previous financial year themselves."},
+{d:"3 Apr 2025", o:"SB Order 05/2025", t:"Nomination change fee abolished",
+ b:"The ₹50 charge for change or cancellation of nomination is removed. Do not collect it."},
+{d:"28 Mar 2025", o:"SB Order 03/2025", t:"Mahila Samman Savings Certificate discontinued",
+ b:"No new MSSC deposits after 31.03.2025. Existing accounts run to maturity. The 40% partial withdrawal functionality had been added to Finacle shortly before, under SB Order 02/2025."},
+{d:"Aug 2025", o:"IT 2.0", t:"APT 2.0 rolled out nationwide",
+ b:"Advanced Postal Technology replaced SAP for back-office work across all 23 circles, covering more than 1.7 lakh offices. Built by CEPT on MeghRaj 2.0 cloud. Finacle remains the core banking system, but accounting now flows through APT — which is what SB Order 09/2026 addresses.", hi:1},
+{d:"May 2024", o:"SB Order 03/2024", t:"HIARM restricted to genuine interest adjustment",
+ b:"HIARM was being used to adjust balance differences and restore defrauded principal, which books principal to the interest head. The manual's earlier procedure is amended — do not use HIARM for principal."}
+];
+
+</script>
+<script id="APP">
+(function(){
+const $ = s => document.querySelector(s);
+const out = $("#out"), qEl = $("#q"), clr = $("#clr"), tabsEl = $("#tabs");
+document.getElementById("stamp").textContent = "rev " + REV.replace(/ /g,"·");
+
+const TABS = [
+  {id:"proc", label:"Procedures"},
+  {id:"menu", label:"Menu codes"},
+  {id:"fix",  label:"Fixes"},
+  {id:"ref",  label:"Reference"},
+  {id:"new",  label:"What changed"}
+];
+let tab = "proc", q = "";
+
+/* ---------- helpers ---------- */
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const norm = s => String(s).toLowerCase();
+
+function hl(html, term){
+  if(!term) return html;
+  const t = term.trim().replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  if(!t) return html;
+  // only highlight in text nodes, never inside tags
+  return html.replace(new RegExp("(?![^<]*>)("+t+")","ig"), "<mark>$1</mark>");
+}
+function codeChip(c, cls){ return '<span class="code '+(cls||"")+'">'+esc(c)+'</span>'; }
+
+function matches(hay, term){
+  if(!term) return true;
+  const words = norm(term).split(/\s+/).filter(Boolean);
+  const h = norm(hay);
+  return words.every(w => h.includes(w));
+}
+
+/* Rank a procedure against the query so the thing the user actually meant
+   floats to the top: an exact menu code beats a title word beats a step body. */
+function score(p, term){
+  if(!term) return 0;
+  const w = norm(term).split(/\s+/).filter(Boolean);
+  let s = 0;
+  const name = norm(p.n), codes = norm(p.c.join(" ")), keys = norm(p.k||"");
+  w.forEach(x=>{
+    if(codes.split(/\s+/).includes(x)) s += 100;
+    else if(codes.includes(x))          s += 60;
+    if(name.startsWith(x))              s += 40;
+    else if(name.includes(x))           s += 30;
+    if(keys.includes(x))                s += 10;
+  });
+  return s;
+}
+
+/* Pull the sentence a match actually lives in, so a result never looks arbitrary. */
+function context(p, term){
+  if(!term) return "";
+  const w = norm(term).split(/\s+/).filter(Boolean)[0];
+  if(!w) return "";
+  if(norm(p.n).includes(w)) return "";
+  const pool = p.s.map(x=>({t:x.t}))
+    .concat((p.no||[]).map(n=>({t:n.t})));
+  for(const item of pool){
+    const plain = item.t.replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+    const i = norm(plain).indexOf(w);
+    if(i > -1){
+      const a = Math.max(0, i-40), b = Math.min(plain.length, i+70);
+      return (a>0?"\u2026":"") + plain.slice(a,b).trim() + (b<plain.length?"\u2026":"");
+    }
+  }
+  return "";
+}
+
+/* ---------- procedures ---------- */
+function procHay(p){
+  return [p.n, p.g, p.k, p.c.join(" "), p.s.map(x=>x.t).join(" "),
+          (p.no||[]).map(x=>x.l+" "+x.t).join(" ")].join(" ").replace(/<[^>]+>/g,"");
+}
+function renderProc(p, i){
+  const flag = (p.no||[]).some(n=>n.flag);
+  const steps = p.s.map((st,ix)=>
+    '<li class="step'+(st.sup?" sup":"")+'">'+
+      '<span class="num">'+(ix+1)+'</span>'+
+      '<div class="txt">'+(st.sup?'<span class="who">Supervisor</span>':'')+st.t+'</div>'+
+    '</li>').join("");
+  const notes = (p.no||[]).map(n=>
+    '<div class="note '+(n.k==="warn"?"warn":n.k==="upd"?"upd":"")+'">'+
+      '<span class="lbl">'+esc(n.l)+'</span>'+n.t+'</div>').join("");
+  const ctx = context(p, q);
+  return '<article class="card" data-i="'+i+'">'+
+    '<button class="cardhead" aria-expanded="false"><div class="t">'+
+      '<div class="name">'+hl(esc(p.n),q)+'</div>'+
+      '<div class="meta">'+p.c.map(c=>codeChip(c)).join("")+
+        (flag?'<span class="badge b-new">updated</span>':'')+
+      '</div>'+
+      (ctx?'<div class="ctx">'+hl(esc(ctx),q)+'</div>':'')+
+    '</div><span class="chev">›</span></button>'+
+    '<div class="cardbody"><ol class="ladder">'+steps+'</ol>'+notes+'</div></article>';
+}
+
+/* ---------- fixes ---------- */
+function fixHay(f){
+  return [f.n,f.g,f.k,f.sym,f.body.map(b=>b.h+" "+b.t).join(" ")].join(" ").replace(/<[^>]+>/g,"");
+}
+function renderFix(f){
+  const body = f.body.map(b=>
+    '<div class="note'+(b.upd?" upd":"")+'"><span class="lbl">'+esc(b.h)+'</span>'+b.t+'</div>').join("");
+  return '<article class="card">'+
+    '<button class="cardhead" aria-expanded="false"><div class="t">'+
+      '<div class="name">'+hl(esc(f.n),q)+'</div>'+
+      '<div class="meta">'+hl(esc(f.sym),q)+'</div>'+
+    '</div><span class="chev">›</span></button>'+
+    '<div class="cardbody">'+body+'</div></article>';
+}
+
+/* ---------- group + section ---------- */
+function section(title, count){
+  return '<div class="sechead"><h2>'+esc(title)+'</h2><div class="rule"></div>'+
+         '<span class="count">'+count+'</span></div>';
+}
+function byGroup(items, keyf){
+  const m = new Map();
+  items.forEach(it=>{ const g=keyf(it); if(!m.has(g)) m.set(g,[]); m.get(g).push(it); });
+  return m;
+}
+
+/* ---------- views ---------- */
+function viewProc(){
+  let hits = PROC.map((p,i)=>({p,i})).filter(o=>matches(procHay(o.p), q));
+  if(!hits.length) return empty("No procedure matches that.","Try a menu code like CASBAO, or a word like closure, nomination, vault.");
+  if(q){
+    hits = hits.map(o=>({p:o.p, i:o.i, sc:score(o.p,q)})).sort((a,b)=>b.sc-a.sc);
+    return section("Best matches", hits.length) + hits.map(o=>renderProc(o.p,o.i)).join("");
+  }
+  let h = q ? '' : '<p class="hint">'+PROC.length+' procedures. Steps on the gold rail are the supervisor\u2019s job.</p>';
+  byGroup(hits,o=>o.p.g).forEach((arr,g)=>{
+    h += section(g, arr.length) + arr.map(o=>renderProc(o.p,o.i)).join("");
+  });
+  return h;
+}
+
+function viewMenu(){
+  let h = q ? '' : '<p class="hint">Every menu code from the DOP shortcut list, grouped by what it belongs to.</p>';
+  let any = 0;
+  MENUS.forEach(grp=>{
+    const rows = grp.r.filter(r => matches(r.join(" ")+" "+grp.g, q));
+    if(!rows.length) return;
+    any += rows.length;
+    h += '<div class="mgroup"><h3>'+esc(grp.g)+'</h3>' + rows.map(r=>{
+      const codes = r.slice(1).map(c=>codeChip(c)).join("");
+      return '<div class="mrow"><div class="codes">'+codes+'</div>'+
+             '<div class="purpose">'+hl(esc(r[0]),q)+'</div></div>';
+    }).join("") + '</div>';
+  });
+  if(!any) return empty("No menu code matches that.","Search the code itself (HACLI) or what it does (balance inquiry).");
+  return h;
+}
+
+function viewFix(){
+  const hits = FIX.filter(f=>matches(fixHay(f), q));
+  if(!hits.length) return empty("Nothing here matches that.","Try the error text, like closure pending, already logged in, or wrong deposit.");
+  if(q){
+    const w = norm(q).split(/\s+/).filter(Boolean);
+    const sc = f => w.reduce((a,x)=>
+      a + (norm(f.n).includes(x)?40:0) + (norm(f.sym).includes(x)?20:0) + (norm(f.k).includes(x)?10:0), 0);
+    const ranked = hits.map(f=>({f, s:sc(f)})).sort((a,b)=>b.s-a.s);
+    return section("Best matches", ranked.length) + ranked.map(o=>renderFix(o.f)).join("");
+  }
+  let h = '<p class="hint">Common failures at the counter and what actually clears them.</p>';
+  byGroup(hits,f=>f.g).forEach((arr,g)=>{
+    h += section(g, arr.length) + arr.map(renderFix).join("");
+  });
+  return h;
+}
+
+function viewRef(){
+  const t = q;
+  let h = "";
+  const rateRows = RATES.filter(r=>matches(r.join(" "),t));
+  if(rateRows.length){
+    h += section("Interest rates", RATE_ASON) +
+      '<div class="card"><div class="scroller"><table class="tbl"><thead><tr>'+
+      '<th>Scheme</th><th>Rate</th><th>How it is paid</th></tr></thead><tbody>'+
+      rateRows.map(r=>'<tr><td>'+hl(esc(r[0]),t)+'</td><td class="num">'+esc(r[1])+
+        '</td><td>'+esc(r[2])+'</td></tr>').join("")+
+      '</tbody></table></div></div>'+
+      '<div class="note"><span class="lbl">Check before quoting</span>Rates are revised quarterly by the Ministry of Finance. Confirm against the latest SB Order before telling a depositor a figure.</div>';
+  }
+  const schRows = SCHEMES.filter(r=>matches(r.join(" "),t));
+  if(schRows.length){
+    h += section("Scheme codes", schRows.length) +
+      '<div class="card"><div class="scroller"><table class="tbl"><thead><tr>'+
+      '<th>Code</th><th>Product</th></tr></thead><tbody>'+
+      schRows.map(r=>'<tr><td class="num">'+hl(esc(r[0]),t)+'</td><td>'+hl(esc(r[1]),t)+'</td></tr>').join("")+
+      '</tbody></table></div></div>';
+  }
+  const offRows = OFFACC.filter(r=>matches(r.join(" "),t));
+  if(offRows.length){
+    h += section("Office accounts", "SOL ID + suffix") +
+      '<div class="card"><div class="scroller"><table class="tbl"><thead><tr>'+
+      '<th>Suffix</th><th>What it is</th></tr></thead><tbody>'+
+      offRows.map(r=>'<tr><td class="num">'+hl(esc(r[0]),t)+'</td><td>'+hl(esc(r[1]),t)+'</td></tr>').join("")+
+      '</tbody></table></div></div>';
+  }
+  const chRows = CHAPTERS.filter(r=>matches(r.join(" "),t));
+  if(chRows.length){
+    h += section("POSB (CBS) Manual — where to look", "up to 31.12.2021") +
+      '<div class="card"><div class="scroller"><table class="tbl"><thead><tr>'+
+      '<th>Ch.</th><th>Subject</th><th>Page</th></tr></thead><tbody>'+
+      chRows.map(r=>'<tr><td class="num">'+esc(r[0])+'</td><td>'+hl(esc(r[1]),t)+
+        '</td><td class="num">'+esc(r[2])+'</td></tr>').join("")+
+      '</tbody></table></div></div>';
+  }
+  if(!h) return empty("Nothing in the reference matches that.","Try a scheme name, a code like TDIP3, or an office account like 0382.");
+  return h;
+}
+
+function viewNew(){
+  const hits = NEWS.filter(n=>matches([n.d,n.o,n.t,n.b].join(" "), q));
+  if(!hits.length) return empty("No update matches that.","Try APT, e-KYC, TDS, nomination or an order number.");
+  let h = q ? '' : '<p class="hint">Issued after your POSB (CBS) Manual closed on 31.12.2021. The highlighted ones change what you do at the counter today.</p>';
+  h += hits.map(n=>
+    '<article class="card"><button class="cardhead" aria-expanded="false"><div class="t">'+
+    '<div class="name">'+hl(esc(n.t),q)+'</div>'+
+    '<div class="meta">'+codeChip(n.o, n.hi?"":"n")+
+      '<span style="color:var(--slate)">'+esc(n.d)+'</span>'+
+      (n.hi?'<span class="badge b-new">affects counter work</span>':'')+
+    '</div></div><span class="chev">›</span></button>'+
+    '<div class="cardbody"><div class="note'+(n.hi?" warn":"")+'"><span class="lbl">What it does</span>'+
+      hl(n.b,q)+'</div>'+
+      (n.u?'<div class="note"><span class="lbl">Source</span><a class="extlink" href="'+esc(n.u)+'" target="_blank" rel="noopener">Open the order / circular ↗</a></div>':'')+
+    '</div></article>').join("");
+  return h;
+}
+
+function empty(big, small){
+  return '<div class="empty"><div class="big">'+esc(big)+'</div><div>'+esc(small)+'</div></div>';
+}
+
+const DISC = () => '<div class="disc"><b>Read this once.</b> This is a working aid built from the POSB (CBS) Manual corrected to 31.12.2021, the DOP Finacle menu shortcut list v1.8, and SB Orders issued up to '+REV+'. Screens and rules change with every Finacle patch and every SB Order. Where this and a current SB Order disagree, <b>the SB Order wins</b> — check the order, not this. Nothing here replaces your circle\u2019s instructions or authorises any transaction.</div>';
+
+/* ---------- render ---------- */
+/* When a search has answers on other tabs too, say so instead of silently
+   hiding them — a counter clerk typing an error message should not have to
+   guess that the answer lives under Fixes. */
+function crossTab(){
+  if(!q) return "";
+  const c = counts();
+  const others = TABS.filter(t => t.id !== tab && c[t.id] > 0);
+  if(!others.length) return "";
+  return '<div class="xtab"><b>Also found</b>&nbsp;' +
+    others.map(t => '<button data-id="'+t.id+'">'+c[t.id]+' in '+t.label+'</button>').join("") +
+    '</div>';
+}
+
+function render(){
+  const v = tab==="proc" ? viewProc()
+          : tab==="menu" ? viewMenu()
+          : tab==="fix"  ? viewFix()
+          : tab==="ref"  ? viewRef()
+          : viewNew();
+  out.innerHTML = crossTab() + v + DISC();
+}
+
+/* ---------- tabs ---------- */
+function counts(){
+  return {
+    proc: PROC.filter(p=>matches(procHay(p),q)).length,
+    menu: MENUS.reduce((a,g)=>a+g.r.filter(r=>matches(r.join(" ")+" "+g.g,q)).length,0),
+    fix:  FIX.filter(f=>matches(fixHay(f),q)).length,
+    ref:  RATES.concat(SCHEMES,OFFACC,CHAPTERS).filter(r=>matches(r.join(" "),q)).length,
+    new:  NEWS.filter(n=>matches([n.d,n.o,n.t,n.b].join(" "),q)).length
+  };
+}
+function drawTabs(){
+  const c = counts();
+  tabsEl.innerHTML = TABS.map(t=>
+    '<button class="tab" role="tab" data-id="'+t.id+'" aria-selected="'+(t.id===tab)+'">'+
+    t.label + (q ? ' <span style="opacity:.75">'+c[t.id]+'</span>' : '') + '</button>').join("");
+}
+
+tabsEl.addEventListener("click", e=>{
+  const b = e.target.closest(".tab"); if(!b) return;
+  tab = b.dataset.id; drawTabs(); render(); window.scrollTo({top:0});
+});
+
+out.addEventListener("click", e=>{
+  const x = e.target.closest(".xtab button");
+  if(x){ tab = x.dataset.id; drawTabs(); render(); window.scrollTo({top:0}); return; }
+  const h = e.target.closest(".cardhead"); if(!h) return;
+  const card = h.parentElement, open = card.classList.toggle("open");
+  h.setAttribute("aria-expanded", open);
+});
+
+let tmr;
+qEl.addEventListener("input", ()=>{
+  clearTimeout(tmr);
+  tmr = setTimeout(()=>{
+    q = qEl.value.trim();
+    clr.classList.toggle("on", !!q);
+    if(q){ // jump to the tab with the most hits
+      const c = counts();
+      const best = TABS.map(t=>t.id).reduce((a,b)=> c[b]>c[a]?b:a, tab);
+      if(c[tab]===0 && c[best]>0) tab = best;
+    }
+    drawTabs(); render();
+  }, 120);
+});
+qEl.addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); qEl.blur(); } });
+clr.addEventListener("click", ()=>{
+  qEl.value=""; q=""; clr.classList.remove("on"); qEl.focus(); drawTabs(); render();
+});
+
+/* ---------- over-the-air updates ----------
+   Called by the Android shell (or any host page) with the parsed contents
+   of updates.json. Replaces the live data and re-renders. Every field is
+   optional, so a partial update never breaks the page. */
+window.applyRemoteUpdates = function(data){
+  try{
+    if(!data || typeof data !== "object") return;
+    if(data.rev){
+      REV = String(data.rev);
+      document.getElementById("stamp").textContent = "rev " + REV.replace(/ /g,"·");
+    }
+    if(data.rateAson) RATE_ASON = String(data.rateAson);
+    if(Array.isArray(data.rates) && data.rates.length){
+      RATES.length = 0; data.rates.forEach(r=>RATES.push(r));
+    }
+    if(Array.isArray(data.news) && data.news.length){
+      NEWS.length = 0; data.news.forEach(n=>NEWS.push(n));
+    }
+    drawTabs(); render();
+  }catch(e){ /* keep whatever was already on screen */ }
+};
+
+drawTabs(); render();
+})();
+
+</script>
+</body>
+</html>

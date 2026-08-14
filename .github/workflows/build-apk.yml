@@ -1,0 +1,51 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build signed release APK
+        run: ./gradlew --no-daemon assembleRelease
+
+      - name: Rename APK
+        run: cp app/build/outputs/apk/release/app-release.apk finacle-desk.apk
+
+      - name: Upload APK as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: finacle-desk-apk
+          path: finacle-desk.apk
+
+      # Keeps a single "latest" release whose finacle-desk.apk asset is
+      # replaced on every build — one stable download link to share.
+      - name: Publish / refresh the "latest" release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Finacle Desk — latest APK
+          body: |
+            Signed Android APK, rebuilt automatically from the newest data on `main`.
+            Download `finacle-desk.apk` below, send it to the phone, and install
+            (allow "install from unknown sources" when asked). Installing over an
+            older version keeps it updated in place.
+          files: finacle-desk.apk

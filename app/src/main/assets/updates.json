@@ -1,0 +1,162 @@
+{
+ "version": 1,
+ "rev": "12 August 2026",
+ "rateAson": "Q2 FY 2026-27 · 1 Jul – 30 Sep 2026",
+ "rates": [
+  [
+   "Post Office Savings Account",
+   "4.0%",
+   "Annual"
+  ],
+  [
+   "Recurring Deposit (5 year)",
+   "6.7%",
+   "Quarterly compounded"
+  ],
+  [
+   "Time Deposit — 1 year",
+   "6.9%",
+   "Quarterly compounded, paid annually"
+  ],
+  [
+   "Time Deposit — 2 year",
+   "7.0%",
+   "Quarterly compounded, paid annually"
+  ],
+  [
+   "Time Deposit — 3 year",
+   "7.1%",
+   "Quarterly compounded, paid annually"
+  ],
+  [
+   "Time Deposit — 5 year",
+   "7.5%",
+   "Quarterly compounded, paid annually"
+  ],
+  [
+   "Monthly Income Scheme",
+   "7.4%",
+   "Paid monthly"
+  ],
+  [
+   "Senior Citizens Savings Scheme",
+   "8.2%",
+   "Paid quarterly"
+  ],
+  [
+   "Public Provident Fund",
+   "7.1%",
+   "Annual compounding"
+  ],
+  [
+   "Sukanya Samriddhi Account",
+   "8.2%",
+   "Annual compounding"
+  ],
+  [
+   "National Savings Certificate VIII",
+   "7.7%",
+   "Compounded annually, paid at maturity"
+  ],
+  [
+   "Kisan Vikas Patra",
+   "7.5%",
+   "Matures in 115 months"
+  ]
+ ],
+ "news": [
+  {
+   "d": "24 Jul 2026",
+   "o": "SB Order 09/2026",
+   "t": "SOP for POSB accounting and verification after APT 2.0",
+   "b": "Daily reconciliation between Finacle and APT. A CBS Daily Discrepancy Reconciliation Register at every office. SBCO verifies HO cash books against consolidated Finacle reports. Monthly report to the PAO by the 4th, signed jointly by the Postmaster and SBCO in-charge. Monthly SOL-wise SFTP folders stay available for three months. Builds on SB Orders 12/2025 and 16/2025.",
+   "hi": 1
+  },
+  {
+   "d": "May 2026",
+   "o": "SB Order 05/2026",
+   "t": "Personalised Cheque Books introduced",
+   "b": "PCB replaces the old across-the-counter book in the covered cases. Stock handling and the issue flow differ from HICHB as described in the 2016 guide — check your circle's current SOP."
+  },
+  {
+   "d": "28 Apr 2026",
+   "o": "SB Order 04/2026",
+   "t": "Nominee changes through Internet Banking",
+   "b": "Customers can now add, modify or delete nominees themselves through DOP Internet Banking, under a separate nominee menu linked to system records."
+  },
+  {
+   "d": "28 Apr 2026",
+   "o": "SB Order 03/2026",
+   "t": "e-KYC withdrawal limit raised to ₹20,000",
+   "b": "Effective 28.04.2026. Applies to all deposit transactions regardless of amount, and to withdrawals up to ₹20,000. The SOP under SB Order 01/2025 is updated accordingly; everything else stands."
+  },
+  {
+   "d": "27 Apr 2026",
+   "o": "SB Order 02/2026",
+   "t": "Income-tax Rules 2026 — Form 15G/15H replaced",
+   "b": "Forms 15G and 15H are consolidated into a single Form 121. Form 60 is replaced by Forms 97 and 98. PAN is mandatory for specified transactions; where the depositor has none, take Form 97. Until Finacle is patched, keep using the existing 15G/15H functionality but collect Form 121. Verified Part B goes to the Head Office, which allots a 26-character UIN each quarter. Records preserved seven years.",
+   "hi": 1
+  },
+  {
+   "d": "1 Apr 2026",
+   "o": "SB Order 01/2026",
+   "t": "Interest rates from 01.04.2026",
+   "b": "Rates carried forward unchanged, and again for the quarter starting 01.07.2026 — the ninth consecutive quarter without revision."
+  },
+  {
+   "d": "2 Dec 2025",
+   "o": "SB Order 16/2025",
+   "t": "Changes in accounting of POSB TDS transactions",
+   "b": "Changes how TDS under sections 194A, 194EE, 194H and 194N is accounted, and who files returns for which period — CPRC versus DDOs. Corrective steps prescribed for returns already filed."
+  },
+  {
+   "d": "20 Nov 2025",
+   "o": "SB Order 15/2025",
+   "t": "SOP for balances affected by non-migrated pre-CBS transactions",
+   "b": "Step-by-step procedure with annexures for correcting POSA, PPF and SSA balances where pre-CBS transactions never migrated. Use this instead of the older workarounds."
+  },
+  {
+   "d": "15 Jul 2025",
+   "o": "SB Order 10/2025",
+   "t": "Matured but unclosed accounts to be frozen",
+   "b": "Small savings accounts that matured and were not closed within the prescribed period are identified and frozen twice a year. Get extensions filed before maturity."
+  },
+  {
+   "d": "2025",
+   "o": "SB Orders 01, 07, 07A / 2025",
+   "t": "e-KYC extended across schemes",
+   "b": "Aadhaar-based paperless e-KYC started with CIF creation and POSA opening, then extended to MIS, TD, KVP and NSC, and later to RD and PPF operations including acceptance of deposits."
+  },
+  {
+   "d": "7 May 2025",
+   "o": "SB Order 08/2025",
+   "t": "Interest certificates downloadable online",
+   "b": "Internet banking customers can download interest certificates for the current and previous financial year themselves."
+  },
+  {
+   "d": "3 Apr 2025",
+   "o": "SB Order 05/2025",
+   "t": "Nomination change fee abolished",
+   "b": "The ₹50 charge for change or cancellation of nomination is removed. Do not collect it."
+  },
+  {
+   "d": "28 Mar 2025",
+   "o": "SB Order 03/2025",
+   "t": "Mahila Samman Savings Certificate discontinued",
+   "b": "No new MSSC deposits after 31.03.2025. Existing accounts run to maturity. The 40% partial withdrawal functionality had been added to Finacle shortly before, under SB Order 02/2025."
+  },
+  {
+   "d": "Aug 2025",
+   "o": "IT 2.0",
+   "t": "APT 2.0 rolled out nationwide",
+   "b": "Advanced Postal Technology replaced SAP for back-office work across all 23 circles, covering more than 1.7 lakh offices. Built by CEPT on MeghRaj 2.0 cloud. Finacle remains the core banking system, but accounting now flows through APT — which is what SB Order 09/2026 addresses.",
+   "hi": 1
+  },
+  {
+   "d": "May 2024",
+   "o": "SB Order 03/2024",
+   "t": "HIARM restricted to genuine interest adjustment",
+   "b": "HIARM was being used to adjust balance differences and restore defrauded principal, which books principal to the interest head. The manual's earlier procedure is amended — do not use HIARM for principal."
+  }
+ ]
+}
