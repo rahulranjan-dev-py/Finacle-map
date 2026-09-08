@@ -24,7 +24,24 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      # The signing keystore lives only in repository secrets, never in the
+      # repo itself. Add FINACLEDESK_KEYSTORE_B64 (base64 of the .jks) and
+      # FINACLEDESK_KEYSTORE_PASSWORD under Settings → Secrets and variables
+      # → Actions.
+      - name: Reconstruct signing keystore from secret
+        env:
+          KEYSTORE_B64: ${{ secrets.FINACLEDESK_KEYSTORE_B64 }}
+        run: |
+          if [ -z "$KEYSTORE_B64" ]; then
+            echo "::error::FINACLEDESK_KEYSTORE_B64 secret is not set. Add it and FINACLEDESK_KEYSTORE_PASSWORD in Settings -> Secrets and variables -> Actions, then re-run."
+            exit 1
+          fi
+          mkdir -p signing
+          echo "$KEYSTORE_B64" | base64 -d > signing/finacledesk-release.jks
+
       - name: Build signed release APK
+        env:
+          FINACLEDESK_KEYSTORE_PASSWORD: ${{ secrets.FINACLEDESK_KEYSTORE_PASSWORD }}
         run: ./gradlew --no-daemon assembleRelease
 
       - name: Rename APK
@@ -48,4 +65,8 @@ jobs:
             Download `finacle-desk.apk` below, send it to the phone, and install
             (allow "install from unknown sources" when asked). Installing over an
             older version keeps it updated in place.
+
+            **Note:** the signing key was rotated on 8 Sep 2026. If the app was
+            installed from a build made before that date, uninstall it once and
+            then install this APK — after that, updates install in place again.
           files: finacle-desk.apk
