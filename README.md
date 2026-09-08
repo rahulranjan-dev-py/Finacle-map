@@ -19,16 +19,21 @@ version.
 
 ## Getting the APK
 
-Every push to `main` builds a signed APK automatically (GitHub Actions).
+Every push to `main` builds a signed APK and publishes it as a **numbered
+release** — `Finacle Desk v1.0.<build>` — on the repo's **Releases** page,
+with the build date, the content revision (SB Orders up to …) and the change
+that triggered it.
 
-1. Go to the repo's **Releases** page and open **"Finacle Desk — latest APK"**
-   (or open the **Actions** tab → newest "Build APK" run → download the
-   `finacle-desk-apk` artifact).
-2. Download `finacle-desk.apk` and send it to the phone (WhatsApp, USB, etc.).
+1. Open the newest release on the Releases page, or use the permanent link
+   that always points at the newest APK:
+   <https://github.com/rahulranjan-dev-py/Finacle-map/releases/latest/download/finacle-desk.apk>
+2. Download `finacle-desk.apk` and send it (or the link) to colleagues —
+   WhatsApp, USB, anything.
 3. On the phone, tap the file and install. Android will ask once to allow
    installs from that app ("unknown sources") — allow it.
 4. Newer APKs install **over** the old one (same signing key, rising version
-   number). No uninstall needed; nothing is lost.
+   number). No uninstall needed; nothing is lost. The installed version shows
+   in the app's top bar (e.g. `v1.0.7`), so anyone can check they're current.
 
 ---
 
@@ -60,8 +65,9 @@ block.
    loads — a missing comma or quote is the usual slip.
 5. Commit and push to `main`.
 
-CI then builds a fresh APK onto the **Releases → latest** page. Share that
-link (or the file) with colleagues; the new APK installs over the old one.
+CI then publishes a new numbered release (`v1.0.<build>`) on the **Releases**
+page. Share the permanent link above (or the file) with colleagues; the new
+APK installs over the old one.
 
 Where to watch for new orders: the India Post **SB Orders** page
 (<https://www.indiapost.gov.in/VAS/Pages/sborders.aspx>) and your circle's

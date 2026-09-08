@@ -10,6 +10,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import org.json.JSONObject;
+
 /**
  * Finacle Desk — offline POSB counter reference.
  *
@@ -46,6 +48,21 @@ public class MainActivity extends Activity {
                     return true;
                 }
                 return false;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                // Show the installed version in the page so users can tell
+                // whether they have the newest release.
+                String version;
+                try {
+                    version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+                } catch (Exception e) {
+                    version = "";
+                }
+                view.evaluateJavascript(
+                        "window.setAppVersion && window.setAppVersion(" + JSONObject.quote(version) + ");",
+                        null);
             }
         });
 
