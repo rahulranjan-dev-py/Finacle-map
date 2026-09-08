@@ -1,6 +1,6 @@
 {
- "version": 1,
- "rev": "12 August 2026",
+ "version": 2,
+ "rev": "8 September 2026",
  "rateAson": "Q2 FY 2026-27 · 1 Jul – 30 Sep 2026",
  "rates": [
   [
@@ -66,11 +66,41 @@
  ],
  "news": [
   {
+   "d": "3 Sep 2026",
+   "o": "SB Order 10/2026",
+   "t": "HRMS payments through the POSB Interface — revised accounting",
+   "hi": 1,
+   "u": "https://www.potoolsblog.in/2026/09/hrms-payments-through-posb-interface.html",
+   "b": "Accounting of HRMS salary / pension / claim payments through the POSB Interface is revised w.e.f. 29.07.2026. In the office's Daily Transaction Report, HRMS transactions are accounted as 'HRMS Payment' under the relevant budget code on the payment side and 'RSAO HR to CBS Receipts' on the receipt side; the matching POSB credits are accounted centrally at CPRC Chennai — no longer in the DTR of the office holding the salary account. Keep tallying the DTR with Finacle reports per SB Order 09/2026."
+  },
+  {
    "d": "24 Jul 2026",
    "o": "SB Order 09/2026",
    "t": "SOP for POSB accounting and verification after APT 2.0",
    "b": "Daily reconciliation between Finacle and APT. A CBS Daily Discrepancy Reconciliation Register at every office. SBCO verifies HO cash books against consolidated Finacle reports. Monthly report to the PAO by the 4th, signed jointly by the Postmaster and SBCO in-charge. Monthly SOL-wise SFTP folders stay available for three months. Builds on SB Orders 12/2025 and 16/2025.",
    "hi": 1
+  },
+  {
+   "d": "18 Jul 2026",
+   "o": "SB Order 08/2026",
+   "t": "Personalised Cheque Book — online request via Internet Banking",
+   "u": "https://www.govtstaff.com/2026/07/personalized-cheque-book-pcb-internet-banking-department-of-post-introduces-online-request-facility-sb-order-no-08-2026.html",
+   "b": "POSA customers with DOP Internet Banking can request a Personalised Cheque Book online without visiting the post office, operational from 18.07.2026. Redirect eligible e-banking customers to the online route and take counter requests through CPCBR only where needed."
+  },
+  {
+   "d": "Jul 2026",
+   "o": "SB Order 07/2026",
+   "t": "Interest rates w.e.f. 01.07.2026 — unchanged",
+   "u": "http://www.iproamh.com/2026/07/sb-order-072026-revision-of-interest.html",
+   "b": "Quarterly rate order for July–September 2026: every rate carried forward unchanged — the ninth consecutive quarter without revision. The next revision is due around 30 September 2026 for the October–December quarter."
+  },
+  {
+   "d": "22 Jun 2026",
+   "o": "SB Order 06/2026",
+   "t": "e-KYC operations and inter-operability at Branch Post Offices",
+   "hi": 1,
+   "u": "https://www.staffnews.in/2026/06/introduction-of-e-kyc-operations-sb-order-no-06-2026.html",
+   "b": "Aadhaar e-KYC transactions and BO inter-operability go live pan-India through the DREAM app: deposits up to ₹50,000 in POSA / RD / SSA without a pay-in slip, and POSA withdrawals up to ₹20,000 by biometric authentication without SB-7 — in eligible accounts standing at any post office. Existing CIFs convert to e-KYC CIFs by biometric authentication. From 01.09.2026, DREAM transactions are blocked in accounts not linked with a mobile number — update mobiles through CMRC now."
   },
   {
    "d": "May 2026",

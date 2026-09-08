@@ -85,6 +85,17 @@ public class MainActivity extends Activity {
         web.loadUrl("file:///android_asset/finacledesk.html");
     }
 
+    @Override
+    public void onBackPressed() {
+        // The page routes with location.hash, so WebView history mirrors
+        // in-app navigation (and the step-by-step overlay pushes a state).
+        if (web != null && web.canGoBack()) {
+            web.goBack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     /** Apply the newer of the bundled and the cached updates.json. */
     private void applyLocalUpdates() {
         String bundled = readAsset("updates.json");
