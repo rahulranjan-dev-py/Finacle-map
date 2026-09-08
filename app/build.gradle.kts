@@ -2,6 +2,13 @@ plugins {
     id("com.android.application")
 }
 
+// The release keystore is NOT committed to the repository. CI reconstructs
+// it from the FINACLEDESK_KEYSTORE_B64 secret before building; the password
+// arrives via the FINACLEDESK_KEYSTORE_PASSWORD env var. A local build
+// without the keystore produces an unsigned release APK.
+val releaseKeystore = rootProject.file("signing/finacledesk-release.jks")
+val keystorePassword: String = System.getenv("FINACLEDESK_KEYSTORE_PASSWORD") ?: ""
+
 android {
     namespace = "com.finacledesk.app"
     compileSdk = 35
@@ -16,21 +23,20 @@ android {
     }
 
     signingConfigs {
-        create("shared") {
-            storeFile = rootProject.file(project.property("FINACLEDESK_STORE_FILE") as String)
-            storePassword = project.property("FINACLEDESK_STORE_PASSWORD") as String
-            keyAlias = project.property("FINACLEDESK_KEY_ALIAS") as String
-            keyPassword = project.property("FINACLEDESK_KEY_PASSWORD") as String
+        if (releaseKeystore.exists()) {
+            create("shared") {
+                storeFile = releaseKeystore
+                storePassword = keystorePassword
+                keyAlias = "finacledesk"
+                keyPassword = keystorePassword
+            }
         }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("shared")
-        }
-        debug {
-            signingConfig = signingConfigs.getByName("shared")
+            signingConfig = if (releaseKeystore.exists()) signingConfigs.getByName("shared") else null
         }
     }
 

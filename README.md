@@ -108,7 +108,6 @@ app/src/main/assets/finacledesk.html   ← the whole reference UI (offline)
 app/src/main/assets/updates.json       ← SB Orders + rates (the file you edit)
 app/src/main/java/.../MainActivity.java← WebView shell + update fetcher
 .github/workflows/build-apk.yml        ← builds + signs + publishes the APK
-signing/finacledesk.jks                ← shared signing key (see note)
 ```
 
 On launch the app loads the HTML, then applies the newest of: bundled
@@ -116,16 +115,34 @@ On launch the app loads the HTML, then applies the newest of: bundled
 copy. Links inside the app open in the phone's browser. Minimum Android
 version: 7.0 (API 24).
 
-**Signing note:** the keystore and its password are committed on purpose so
-that every build — CI or a teammate's laptop — signs identically, which is
-what lets new APKs install over old ones. The key signs this internal app
-and protects nothing else. If it ever leaks in a way that worries you,
-generate a new keystore; colleagues then uninstall/reinstall once.
+## Signing
+
+The release keystore is **not** in the repository (the repo is public). CI
+rebuilds it from two GitHub Actions secrets before every build
+(**Settings → Secrets and variables → Actions**):
+
+| Secret | Contents |
+|---|---|
+| `FINACLEDESK_KEYSTORE_B64` | the `.jks` file, base64-encoded (`base64 -w0 file.jks`) |
+| `FINACLEDESK_KEYSTORE_PASSWORD` | its store/key password (alias is `finacledesk`) |
+
+If the secrets are missing the build fails with a clear error. If the key is
+ever lost or must be rotated again: generate a new keystore
+(`keytool -genkeypair -keystore new.jks -alias finacledesk -keyalg RSA
+-keysize 2048 -validity 10950`), update both secrets, and tell users to
+uninstall/reinstall once — an APK signed with a different key will not
+install over the old one.
+
+> History note: builds before 8 Sep 2026 were signed with a keystore that
+> was committed to this repo while it was private. That key was retired when
+> the repo went public; phones on those builds need one uninstall/reinstall.
 
 ## Building locally
 
 Open the project in Android Studio (or run `./gradlew assembleRelease` with
 the Android SDK installed). Output: `app/build/outputs/apk/release/`.
+Without the keystore and `FINACLEDESK_KEYSTORE_PASSWORD` env var, the local
+release APK is unsigned — fine for testing, not for distribution.
 
 ---
 
