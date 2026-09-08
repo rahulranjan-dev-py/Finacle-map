@@ -47,25 +47,48 @@ jobs:
           name: finacle-desk-v${{ steps.meta.outputs.version }}
           path: finacle-desk.apk
 
-      # One numbered release per build. GitHub marks the newest as "Latest",
-      # so this link always serves the newest APK:
+      # One numbered, published release per build, marked "Latest" so this
+      # permanent link always serves the newest APK:
       #   https://github.com/rahulranjan-dev-py/Finacle-map/releases/latest/download/finacle-desk.apk
       - name: Publish release v${{ steps.meta.outputs.version }}
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v${{ steps.meta.outputs.version }}
-          name: Finacle Desk v${{ steps.meta.outputs.version }}
-          make_latest: true
-          body: |
-            **Version ${{ steps.meta.outputs.version }}** · build ${{ github.run_number }} · ${{ steps.meta.outputs.date }}
-            Content revision: SB Orders up to **${{ steps.meta.outputs.rev }}**
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          VERSION: ${{ steps.meta.outputs.version }}
+          DATE: ${{ steps.meta.outputs.date }}
+          REV: ${{ steps.meta.outputs.rev }}
+          CHANGE: ${{ github.event.head_commit.message || 'Manual rebuild' }}
+        run: |
+          set -euo pipefail
+          TAG="v$VERSION"
 
-            **What changed in this build**
-            ${{ github.event.head_commit.message || 'Manual rebuild' }}
+          # A draft left behind by an interrupted publish would shadow the tag;
+          # remove any drafts so every release listed is a real, published one.
+          gh release list --limit 50 --json tagName,isDraft \
+            --jq '.[] | select(.isDraft) | .tagName' | while read -r draft; do
+              [ -n "$draft" ] && gh release delete "$draft" --yes || true
+            done
 
-            **Install**
-            Download `finacle-desk.apk` below and open it on the phone (allow
-            "install from unknown sources" when asked). It installs over any
-            older version in place — nothing to uninstall. The version shows
-            in the app's top bar.
-          files: finacle-desk.apk
+          cat > notes.md <<EOF
+          **Version $VERSION** · build ${{ github.run_number }} · $DATE
+          Content revision: SB Orders up to **$REV**
+
+          **What changed in this build**
+          $CHANGE
+
+          **Install**
+          Download \`finacle-desk.apk\` below and open it on the phone (allow
+          "install from unknown sources" when asked). It installs over any older
+          version in place — nothing to uninstall. The version shows in the
+          app's top bar.
+          EOF
+
+          gh release create "$TAG" finacle-desk.apk \
+            --title "Finacle Desk $TAG" \
+            --notes-file notes.md \
+            --latest \
+            --target "$GITHUB_SHA"
+
+          # Fail loudly if the release did not end up published with its asset.
+          gh release view "$TAG" --json isDraft,url,assets \
+            --jq 'if .isDraft then error("release is still a draft") elif (.assets|length)==0 then error("no asset attached") else "Published: \(.url)" end'
