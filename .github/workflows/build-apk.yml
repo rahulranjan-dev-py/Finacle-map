@@ -27,25 +27,45 @@ jobs:
       - name: Build signed release APK
         run: ./gradlew --no-daemon assembleRelease
 
+      # Version 1.0.<run number> matches versionName/versionCode in
+      # app/build.gradle.kts, so the release, the APK and the "v…" shown
+      # inside the app all agree.
+      - name: Work out version and content revision
+        id: meta
+        run: |
+          echo "version=1.0.${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+          echo "date=$(date -u '+%d %b %Y')" >> "$GITHUB_OUTPUT"
+          rev=$(sed -n 's/^let REV = "\(.*\)";/\1/p' app/src/main/assets/finacledesk.html | head -1)
+          echo "rev=${rev:-unknown}" >> "$GITHUB_OUTPUT"
+
       - name: Rename APK
         run: cp app/build/outputs/apk/release/app-release.apk finacle-desk.apk
 
       - name: Upload APK as workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: finacle-desk-apk
+          name: finacle-desk-v${{ steps.meta.outputs.version }}
           path: finacle-desk.apk
 
-      # Keeps a single "latest" release whose finacle-desk.apk asset is
-      # replaced on every build — one stable download link to share.
-      - name: Publish / refresh the "latest" release
+      # One numbered release per build. GitHub marks the newest as "Latest",
+      # so this link always serves the newest APK:
+      #   https://github.com/rahulranjan-dev-py/Finacle-map/releases/latest/download/finacle-desk.apk
+      - name: Publish release v${{ steps.meta.outputs.version }}
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: latest
-          name: Finacle Desk — latest APK
+          tag_name: v${{ steps.meta.outputs.version }}
+          name: Finacle Desk v${{ steps.meta.outputs.version }}
+          make_latest: true
           body: |
-            Signed Android APK, rebuilt automatically from the newest data on `main`.
-            Download `finacle-desk.apk` below, send it to the phone, and install
-            (allow "install from unknown sources" when asked). Installing over an
-            older version keeps it updated in place.
+            **Version ${{ steps.meta.outputs.version }}** · build ${{ github.run_number }} · ${{ steps.meta.outputs.date }}
+            Content revision: SB Orders up to **${{ steps.meta.outputs.rev }}**
+
+            **What changed in this build**
+            ${{ github.event.head_commit.message || 'Manual rebuild' }}
+
+            **Install**
+            Download `finacle-desk.apk` below and open it on the phone (allow
+            "install from unknown sources" when asked). It installs over any
+            older version in place — nothing to uninstall. The version shows
+            in the app's top bar.
           files: finacle-desk.apk

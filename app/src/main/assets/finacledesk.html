@@ -2115,7 +2115,10 @@ function drawNav(active){
 }
 
 /* ---------- shared bits ---------- */
-const DISC = () => '<div class="disc"><b>Read this once.</b> This is a working aid built from the POSB (CBS) Manual corrected to 31.12.2021, the DOP Finacle menu shortcut list v1.8, and SB Orders issued up to '+esc(REV)+'. Screens and rules change with every Finacle patch and every SB Order. Where this and a current SB Order disagree, <b>the SB Order wins</b> — check the order, not this. Nothing here replaces your circle’s instructions or authorises any transaction.</div>';
+/* Set by the Android shell after load (see MainActivity); empty in a browser. */
+let APP_VERSION = "";
+const DISC = () => '<div class="disc"><b>Read this once.</b> This is a working aid built from the POSB (CBS) Manual corrected to 31.12.2021, the DOP Finacle menu shortcut list v1.8, and SB Orders issued up to '+esc(REV)+'. Screens and rules change with every Finacle patch and every SB Order. Where this and a current SB Order disagree, <b>the SB Order wins</b> — check the order, not this. Nothing here replaces your circle’s instructions or authorises any transaction.'+
+  (APP_VERSION ? '<br><span class="mono">Finacle Desk app v'+esc(APP_VERSION)+' · content revision '+esc(REV)+'</span>' : '')+'</div>';
 function empty(big, small){
   return '<div class="empty"><div class="eico">'+I.emptySearch+'</div>'+
     '<div class="big">'+esc(big)+'</div><div>'+esc(small)+'</div></div>';
@@ -2124,7 +2127,8 @@ const codeChip = c => '<span class="code">'+esc(c)+'</span>';
 
 /* ---------- views ---------- */
 function vHome(){
-  bar('<h1>Finacle <span class="brandred">Desk</span></h1><span class="stamp" id="stamp">rev '+esc(REV).replace(/ /g,"·")+'</span>'+themeBtnHtml);
+  bar('<h1>Finacle <span class="brandred">Desk</span></h1><span class="stamp" id="stamp">'+
+      (APP_VERSION ? 'v'+esc(APP_VERSION) : 'rev '+esc(REV).replace(/ /g,"·"))+'</span>'+themeBtnHtml);
   let h = '<button class="searchgo" data-nav="#search">'+I.search+'Search a task, menu code, or error…</button>';
 
   const recent = load(K_RECENT, []).map(itemOf).filter(Boolean);
@@ -2555,6 +2559,13 @@ window.addEventListener("scroll", ()=>{
   });
 }, {passive:true});
 
+
+/* The Android shell calls this with the installed app's version name so
+   colleagues can see which build they are on. */
+window.setAppVersion = function(v){
+  APP_VERSION = String(v || "").trim();
+  if(!wiz) render();
+};
 
 render();
 })();
