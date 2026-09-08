@@ -10,9 +10,10 @@ are the supervisor's job, warns where the old manual is out of date, and the
 search understands menu codes, task names and error messages.
 
 Everything works with **no internet** — the whole reference is bundled inside
-the APK. When the phone does have network, the app also checks this repository
-for a newer `updates.json` (new SB Orders, revised interest rates) and applies
-it without needing a reinstall.
+the APK and the app makes no network calls at all (it doesn't even ask for the
+internet permission). New SB Orders and rate revisions ship as a new APK from
+the **Releases** page; share that link and colleagues install over the old
+version.
 
 ---
 
@@ -33,51 +34,34 @@ Every push to `main` builds a signed APK automatically (GitHub Actions).
 
 ## Adding a new SB Order / DoP update
 
-This is the routine you'll do most often. One file holds all of it:
+This is the routine you'll do most often. Everything lives in
+**`app/src/main/assets/finacledesk.html`**, inside the `<script id="DATA">`
+block.
 
-**`app/src/main/assets/updates.json`**
+1. Find `const NEWS = [` and add the new order at the **top** of the list:
 
-1. Add the new order at the **top** of the `"news"` array:
-
-   ```json
-   {
-    "d": "18 Aug 2026",
-    "o": "SB Order 11/2026",
-    "t": "One-line title of what the order does",
-    "b": "The details, written for the counter. What changes, from when, what to do differently.",
-    "hi": 1,
-    "u": "https://www.indiapost.gov.in/VAS/Pages/sborders.aspx"
-   }
+   ```js
+   {d:"18 Sep 2026", o:"SB Order 11/2026", t:"One-line title of what the order does", hi:1,
+    u:"https://www.indiapost.gov.in/VAS/Pages/sborders.aspx",
+    b:"The details, written for the counter. What changes, from when, what to do differently."},
    ```
 
-   - `d` date, `o` order number, `t` title, `b` body.
-   - `hi: 1` marks it **"affects counter work"** (red highlight). Leave it out
+   - `d` date, `o` order number, `t` title, `b` body (may contain `<b>` for emphasis).
+   - `hi:1` marks it **"affects counter work"** (red highlight). Leave it out
      for routine orders.
    - `u` is optional — a link to the order PDF/circular; the app shows an
      "Open the order" link that opens in the phone's browser.
+   - Mind the comma after the closing `}` — every entry but the last needs one.
 
-2. **Increase `"version"` by 1** (top of the file). The app only applies data
-   with a higher version than what it already has — forget this and phones
-   will ignore the change.
-3. Update `"rev"` to today's date (shown in the app's masthead and disclaimer).
-4. If the quarterly interest rates changed, edit `"rates"` and `"rateAson"` too.
+2. Update `let REV = "…"` near the top of the block to today's date (shown in
+   the app's masthead and disclaimer).
+3. If the quarterly interest rates changed, edit `RATES` and `RATE_ASON` too.
+4. Open the HTML in a browser on your computer once to make sure it still
+   loads — a missing comma or quote is the usual slip.
 5. Commit and push to `main`.
 
-What happens next:
-
-- **CI builds a fresh APK** with the new data baked in (Releases → latest).
-- **Phones that already have the app** fetch the new `updates.json` over the
-  air on next launch — *if the file is publicly reachable* (see below).
-
-> **Note — this repo is currently private.** Over-the-air updates fetch
-> `updates.json` from this repo's raw URL, which requires the repo to be
-> **public**. Until then, updates reach colleagues only via a rebuilt APK.
-> Two options:
-> 1. Make the repo public (Settings → General → Danger Zone → Change
->    visibility) — OTA then works as-is, nothing to change.
-> 2. Keep it private and host `updates.json` anywhere public (e.g. a GitHub
->    Gist), then point `UPDATES_URL` in
->    `app/src/main/java/com/finacledesk/app/MainActivity.java` at that URL.
+CI then builds a fresh APK onto the **Releases → latest** page. Share that
+link (or the file) with colleagues; the new APK installs over the old one.
 
 Where to watch for new orders: the India Post **SB Orders** page
 (<https://www.indiapost.gov.in/VAS/Pages/sborders.aspx>) and your circle's
@@ -95,25 +79,25 @@ That content lives in **`app/src/main/assets/finacledesk.html`** inside the
 - `FIX` — error → what actually clears it
 - `RATES`, `SCHEMES`, `OFFACC`, `CHAPTERS` — reference tables
 
-Edit, push to `main`, and the next APK carries it. (These need a reinstall to
-reach phones — only `updates.json` travels over the air.) You can preview the
-HTML by opening it in any browser on your computer.
+Newer entries added after the original research sit in a second block,
+`<script id="DATA2">`, which appends to the same arrays — either place works.
+Edit, push to `main`, and the next APK carries it. You can preview the HTML by
+opening it in any browser on your computer.
 
 ---
 
 ## How the app is put together
 
 ```
-app/src/main/assets/finacledesk.html   ← the whole reference UI (offline)
-app/src/main/assets/updates.json       ← SB Orders + rates (the file you edit)
-app/src/main/java/.../MainActivity.java← WebView shell + update fetcher
+app/src/main/assets/finacledesk.html   ← the whole app: UI + all content (offline)
+app/src/main/java/.../MainActivity.java← thin WebView shell, no network code
 .github/workflows/build-apk.yml        ← builds + signs + publishes the APK
 ```
 
-On launch the app loads the HTML, then applies the newest of: bundled
-`updates.json` → last downloaded copy cached on the phone → freshly fetched
-copy. Links inside the app open in the phone's browser. Minimum Android
-version: 7.0 (API 24).
+The app is a single HTML file inside a WebView. It requests no permissions;
+links inside it open in the phone's browser. Bookmarks, recently-viewed and
+the theme choice are stored on the phone. Minimum Android version: 7.0
+(API 24).
 
 ## Signing
 
