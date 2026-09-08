@@ -3,74 +3,77 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#14202E">
+<meta name="theme-color" content="#10161E">
 <title>Finacle Desk — India Post counter reference</title>
 <script>(function(){try{var t=localStorage.getItem("fd-theme");if(!t)t=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
 <style>
 :root{
-  --masth:57px;
-  /* brand — constant across themes */
-  --mast-bg:#14202E;
-  --mast-bg-2:#1B2A3A;
-  --mast-ink:#FFFFFF;
-  --mast-dim:#93A5B8;
-  --post-red:#C8102E;
-  --post-red-dk:#96001F;
-
   /* light theme */
-  --ink:#14202E;
+  --bg:#EEF1F4;
+  --bg-2:#E4E9EF;
+  --card:#FFFFFF;
+  --card-2:#F5F8FA;
+  --ink:#141B24;
   --ink-2:#3D4E60;
-  --slate:#66788B;
-  --paper:#EEF1F4;
-  --surface:#FFFFFF;
-  --surface-2:#F5F8FA;
-  --line:#D3DAE2;
+  --dim:#66788B;
+  --line:#D6DDE5;
   --line-soft:#E5EAF0;
-  --red-text:#96001F;
-  --red-soft:#FDE9EC;
-  --red-line:#F5C6CE;
-  --chip-bg:#FCEDEF;
-  --chip-line:#F2CBD1;
-  --sup-gold:#B57A00;
-  --sup-gold-bg:#FFF6E0;
-  --sup-gold-line:#EDD9A6;
+  --accent:#C8102E;
+  --accent-ink:#96001F;
+  --accent-soft:#FDE9EC;
+  --accent-line:#F2CBD1;
+  --gold:#B57A00;
+  --gold-bg:#FFF6E0;
+  --gold-line:#EDD9A6;
+  --green:#0B6E4F;
+  --green-bg:#E6F4EE;
+  --green-line:#BFE3D3;
   --warn-bg:#FFF3F4;
-  --btype-bg:#14202E;
-  --btype-ink:#FFFFFF;
+  --code-bg:#F1E9DC;
+  --code-ink:#8A5D00;
+  --btype-bg:#141B24;
+  --btype-ink:#fff;
   --mark:#FFE9A8;
-  --shadow:0 1px 2px rgba(20,32,46,.05),0 2px 10px rgba(20,32,46,.06);
+  --navbg:#FFFFFF;
+  --shadow:0 1px 2px rgba(20,32,46,.05),0 3px 12px rgba(20,32,46,.07);
   --shadow-up:0 -2px 14px rgba(20,32,46,.10);
-  --shadow-fab:0 4px 14px rgba(20,32,46,.28);
+  --wizbg:#EEF1F4;
 
-  --r:14px;
-  --r-sm:9px;
+  --r:18px;
+  --r-sm:11px;
   --mono:ui-monospace,"SFMono-Regular","SF Mono","Cascadia Mono","Roboto Mono",Menlo,Consolas,"Liberation Mono",monospace;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
 }
 html[data-theme="dark"]{
-  --ink:#E7EDF3;
-  --ink-2:#B9C5D1;
-  --slate:#8496A8;
-  --paper:#0D141C;
-  --surface:#18222E;
-  --surface-2:#1F2B39;
-  --line:#2B3948;
-  --line-soft:#233140;
-  --red-text:#F58A9A;
-  --red-soft:#3A1B23;
-  --red-line:#57262F;
-  --chip-bg:#341C23;
-  --chip-line:#4C2830;
-  --sup-gold:#D9A83F;
-  --sup-gold-bg:#2A2310;
-  --sup-gold-line:#4A3D1C;
+  --bg:#0B0F15;
+  --bg-2:#10161E;
+  --card:#161D27;
+  --card-2:#1D2632;
+  --ink:#EAEFF5;
+  --ink-2:#BAC6D3;
+  --dim:#7E90A3;
+  --line:#27323F;
+  --line-soft:#202B37;
+  --accent:#F0576B;
+  --accent-ink:#F58A9A;
+  --accent-soft:#391B23;
+  --accent-line:#57262F;
+  --gold:#D9A83F;
+  --gold-bg:#2A2310;
+  --gold-line:#4A3D1C;
+  --green:#4ADE9C;
+  --green-bg:#12291F;
+  --green-line:#1F4534;
   --warn-bg:#301A20;
+  --code-bg:#2E2614;
+  --code-ink:#E3B95C;
   --btype-bg:#3D4E60;
-  --btype-ink:#E7EDF3;
+  --btype-ink:#EAEFF5;
   --mark:#5C4D14;
-  --shadow:0 1px 2px rgba(0,0,0,.25),0 2px 10px rgba(0,0,0,.22);
-  --shadow-up:0 -2px 14px rgba(0,0,0,.35);
-  --shadow-fab:0 4px 14px rgba(0,0,0,.5);
+  --navbg:#10161E;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 3px 14px rgba(0,0,0,.28);
+  --shadow-up:0 -2px 14px rgba(0,0,0,.4);
+  --wizbg:#0B0F15;
 }
 
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -78,390 +81,405 @@ html{color-scheme:light}
 html[data-theme="dark"]{color-scheme:dark}
 html,body{margin:0;padding:0}
 body{
-  background:var(--paper);color:var(--ink);font-family:var(--sans);
+  background:var(--bg);color:var(--ink);font-family:var(--sans);
   font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
   transition:background .25s ease,color .25s ease;
 }
-button{font:inherit;color:inherit;cursor:pointer}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:transparent;padding:0}
 input{font:inherit}
+a{color:var(--accent-ink)}
+.mono{font-family:var(--mono)}
 
-/* ---------- masthead ---------- */
-.topbar{position:sticky;top:calc(-1 * var(--masth));z-index:40}
-.topbar.scrolled{box-shadow:0 2px 12px rgba(0,0,0,.22)}
-.mast{
-  background:linear-gradient(160deg,var(--mast-bg-2),var(--mast-bg) 60%);
-  color:var(--mast-ink);
-  padding:11px 16px;display:flex;align-items:center;gap:11px;
+/* ---------- app bar ---------- */
+.appbar{
+  position:sticky;top:0;z-index:40;
+  background:var(--bg-2);
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;
+  border-bottom:1px solid transparent;
+  transition:background .25s ease;
 }
-.seal{
-  width:30px;height:30px;border-radius:50%;flex:none;
-  background:radial-gradient(circle at 32% 28%,#E23A52,var(--post-red) 58%,var(--post-red-dk));
-  display:grid;place-items:center;
-  font-weight:800;font-size:11.5px;letter-spacing:.02em;color:#fff;
-  box-shadow:0 0 0 2px rgba(255,255,255,.22),0 2px 6px rgba(0,0,0,.35);
+.appbar.scrolled{border-bottom-color:var(--line-soft);box-shadow:var(--shadow)}
+.appbar h1{font-size:22px;margin:0;font-weight:800;letter-spacing:-.02em;flex:1;min-width:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.appbar h1 .brandred{color:var(--accent)}
+.appbar.sub h1{font-size:18px;font-weight:750}
+.navbtn{
+  width:38px;height:38px;border-radius:12px;flex:none;
+  display:grid;place-items:center;color:var(--ink);
+  background:transparent;
 }
-.mast h1{font-size:16px;margin:0;font-weight:750;letter-spacing:-.01em}
-.mast .sub{
-  font-size:10px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--mast-dim);font-weight:650;margin-top:1px;
-}
-.mast .spacer{flex:1}
+.navbtn:active{background:var(--card-2)}
+.navbtn svg{width:21px;height:21px;display:block}
+.navbtn.saved-on{color:var(--accent)}
 .stamp{
-  font-family:var(--mono);font-size:10px;letter-spacing:.06em;
-  border:1px solid #46586C;color:#A9BBCD;padding:3px 8px;border-radius:6px;
-  white-space:nowrap;background:rgba(255,255,255,.04);
+  font-family:var(--mono);font-size:10px;color:var(--dim);
+  border:1px solid var(--line);border-radius:6px;padding:2px 7px;white-space:nowrap;
 }
-.iconbtn{
-  border:1px solid #46586C;background:rgba(255,255,255,.05);color:#C4D2DF;
-  width:32px;height:32px;border-radius:9px;flex:none;
-  display:grid;place-items:center;padding:0;
-  transition:background .15s ease,color .15s ease;
-}
-.iconbtn:active{background:rgba(255,255,255,.14)}
-.iconbtn svg{width:17px;height:17px;display:block}
 html[data-theme="dark"] .icon-moon{display:none}
 html:not([data-theme="dark"]) .icon-sun{display:none}
 
-/* ---------- search ---------- */
-.searchwrap{background:var(--mast-bg);padding:2px 12px 10px}
-.searchbox{position:relative}
-.searchbox input{
-  width:100%;padding:13px 44px 13px 42px;border-radius:12px;
-  border:2px solid transparent;background:var(--surface);color:var(--ink);
-  font-size:16px;outline:none;
-  box-shadow:0 2px 8px rgba(0,0,0,.18);
-  transition:border-color .15s ease,background .25s ease;
+/* ---------- layout ---------- */
+#app{max-width:760px;margin:0 auto;padding:4px 16px calc(92px + env(safe-area-inset-bottom))}
+.view{animation:viewIn .22s ease}
+@keyframes viewIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--dim);font-weight:700;margin:22px 2px 10px;
 }
-.searchbox input::placeholder{color:var(--slate)}
-.searchbox input:focus{border-color:var(--post-red)}
+.eyebrow.red{color:var(--accent)}
+.eyebrow:first-child{margin-top:12px}
+
+/* ---------- home: search field ---------- */
+.searchgo{
+  width:100%;display:flex;align-items:center;gap:12px;
+  background:var(--card);border:1px solid var(--line);
+  border-radius:999px;padding:14px 20px;margin-top:10px;
+  color:var(--dim);font-size:16px;text-align:left;
+  box-shadow:var(--shadow);
+}
+.searchgo svg{width:19px;height:19px;flex:none}
+.searchgo:active{background:var(--card-2)}
+
+/* ---------- home: recently viewed ---------- */
+.recentrow{
+  display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;
+  margin:0 -16px;padding:2px 16px 6px;
+}
+.recentrow::-webkit-scrollbar{display:none}
+.recentcard{
+  flex:none;width:230px;text-align:left;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);
+  padding:12px 14px;box-shadow:var(--shadow);
+}
+.recentcard .rnum{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--gold)}
+.recentcard .rname{
+  font-size:15px;font-weight:650;margin-top:3px;line-height:1.35;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.recentcard:active{background:var(--card-2)}
+
+/* ---------- home: sections grid ---------- */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.seccard{
+  position:relative;text-align:left;overflow:hidden;
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px 15px 14px 18px;box-shadow:var(--shadow);
+  transition:transform .12s ease;
+}
+.seccard:active{transform:scale(.985);background:var(--card-2)}
+.seccard:before{
+  content:"";position:absolute;left:0;top:12px;bottom:12px;width:4px;
+  border-radius:0 4px 4px 0;background:var(--sc,#888);
+}
+.seccard .snum{font-size:26px;font-weight:800;color:var(--sc,#888);line-height:1}
+.seccard .sname{font-size:16.5px;font-weight:720;letter-spacing:-.01em;line-height:1.25;margin-top:10px}
+.seccard .scount{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:8px}
+
+/* home: updates banner */
+.updbanner{
+  width:100%;display:flex;align-items:center;gap:12px;text-align:left;
+  background:var(--card);border:1px solid var(--accent-line);
+  border-radius:var(--r);padding:13px 15px;box-shadow:var(--shadow);
+}
+.updbanner .ubico{
+  width:36px;height:36px;border-radius:11px;flex:none;display:grid;place-items:center;
+  background:var(--accent-soft);color:var(--accent);
+}
+.updbanner .ubico svg{width:19px;height:19px}
+.updbanner .ubt{flex:1;min-width:0}
+.updbanner .ubname{display:block;font-weight:720;font-size:15px}
+.updbanner .ubsub{display:block;font-size:12px;color:var(--dim);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.updbanner:active{background:var(--card-2)}
+
+/* ---------- section page ---------- */
+.secdesc{color:var(--ink-2);font-size:15.5px;line-height:1.55;margin:6px 2px 0}
+.codestrip{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 4px}
+.code{
+  font-family:var(--mono);font-size:12px;font-weight:650;
+  background:var(--code-bg);color:var(--code-ink);
+  border-radius:7px;padding:3px 9px;letter-spacing:.02em;white-space:nowrap;display:inline-block;
+}
+.code:before{content:"▸ ";font-size:9px}
+.code.plain:before{content:""}
+
+.plist{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;box-shadow:var(--shadow);margin-top:12px}
+.prow{
+  width:100%;display:flex;align-items:center;gap:13px;text-align:left;
+  padding:15px 15px;border-bottom:1px solid var(--line-soft);
+}
+.prow:last-child{border-bottom:0}
+.prow:active{background:var(--card-2)}
+.prow .pnum{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);flex:none;min-width:34px}
+.prow .pt{flex:1;min-width:0}
+.prow .pname{font-size:15.5px;font-weight:650;line-height:1.35}
+.prow .pmeta{display:flex;align-items:center;gap:8px;margin-top:5px;font-size:12.5px;color:var(--dim);flex-wrap:wrap}
+.prow .chev{flex:none;color:var(--dim)}
+.prow .chev svg{width:16px;height:16px;display:block}
+.prow .psym{font-size:12.5px;color:var(--dim);margin-top:4px;line-height:1.4}
+
+/* ---------- process page ---------- */
+.prochead{
+  position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);padding:16px 16px 15px 20px;box-shadow:var(--shadow);overflow:hidden;
+  margin-top:12px;
+}
+.prochead:before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--sc,var(--accent));
+}
+.prochead .peyebrow{
+  font-family:var(--mono);font-size:12px;font-weight:700;color:var(--accent);
+  letter-spacing:.06em;
+}
+.prochead .peyebrow .sep{color:var(--dim);margin:0 4px}
+.prochead h2{margin:6px 0 0;font-size:22px;font-weight:800;letter-spacing:-.015em;line-height:1.25}
+.prochead .codestrip{margin:12px 0 0}
+.tag{
+  font-size:11px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--card-2);border:1px solid var(--line);color:var(--ink-2);
+  border-radius:7px;padding:3px 9px;white-space:nowrap;display:inline-block;
+}
+
+.wizbtn{
+  width:100%;display:flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--accent);color:#fff;
+  border-radius:999px;padding:15px 20px;margin:14px 0 4px;
+  font-size:16.5px;font-weight:750;
+  box-shadow:var(--shadow);
+}
+html[data-theme="dark"] .wizbtn{background:#F0576B;color:#1A0A0E}
+.wizbtn svg{width:18px;height:18px}
+.wizbtn:active{filter:brightness(1.08)}
+
+/* flow */
+.flow{margin-top:14px}
+.fpill{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  border:1.5px solid var(--green-line);background:var(--green-bg);color:var(--green);
+  border-radius:999px;padding:12px 18px;font-weight:700;font-size:15.5px;text-align:center;
+}
+.fpill .dot{width:9px;height:9px;border-radius:50%;background:var(--green);flex:none}
+.farrow{display:grid;place-items:center;color:var(--dim);padding:7px 0}
+.farrow svg{width:16px;height:16px}
+.fstep{
+  position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r-sm);padding:12px 15px 13px 18px;box-shadow:var(--shadow);overflow:hidden;
+}
+.fstep:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#7E9BD6}
+.fstep.sup:before{background:var(--gold)}
+.fstep .slbl{
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;color:var(--dim);
+}
+.fstep.sup .slbl{color:var(--gold)}
+.fstep .stxt{font-size:15.5px;line-height:1.5;margin-top:4px}
+.fstep.sup{background:var(--gold-bg);border-color:var(--gold-line)}
+
+/* notes */
+.note{
+  border-left:3px solid var(--dim);background:var(--card);
+  border:1px solid var(--line);border-left:3px solid var(--dim);
+  padding:11px 13px;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:10px 0 0;
+  font-size:13.5px;line-height:1.5;color:var(--ink-2);
+}
+.note.warn{border-left-color:var(--accent);background:var(--warn-bg);border-color:var(--accent-line)}
+.note.upd{border-left-color:var(--gold);background:var(--gold-bg);border-color:var(--gold-line)}
+.note b{color:var(--ink)}
+.note .lbl{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:700;margin-bottom:3px;color:var(--dim);
+}
+.note.warn .lbl{color:var(--accent-ink)}
+.note.upd .lbl{color:var(--gold)}
+.kbd{
+  font-family:var(--mono);font-size:12px;font-weight:650;background:var(--card-2);
+  border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--ink-2);white-space:nowrap;
+}
+
+/* ---------- wizard ---------- */
+.wiz{position:fixed;inset:0;z-index:100;background:var(--wizbg);display:none;flex-direction:column}
+.wiz.on{display:flex}
+.wizhead{display:flex;align-items:center;gap:13px;padding:16px 16px 12px}
+.wizx{
+  width:44px;height:44px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:var(--card-2);color:var(--ink);
+}
+.wizx svg{width:19px;height:19px}
+.wizhead .wt{flex:1;min-width:0}
+.wizhead .wname{font-size:16.5px;font-weight:750;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wizhead .wpos{font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-top:2px}
+.wizbar{height:4px;background:var(--line-soft);border-radius:99px;margin:0 16px;overflow:hidden}
+.wizbar i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .25s ease}
+.wizbody{flex:1;display:grid;place-items:center;padding:20px 16px;overflow:hidden;touch-action:pan-y}
+.wizcard{
+  width:100%;max-width:560px;
+  background:var(--card);border:1px solid var(--line);border-radius:26px;
+  padding:44px 26px 48px;text-align:center;box-shadow:var(--shadow);
+  animation:wizIn .22s ease;
+}
+@keyframes wizIn{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+.wizcard.back{animation:wizBack .22s ease}
+@keyframes wizBack{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}
+.wbadge{
+  display:inline-block;font-family:var(--mono);font-size:12px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;
+  background:var(--card-2);color:var(--dim);border-radius:999px;padding:6px 16px;
+}
+.wbadge.start,.wbadge.done{background:var(--green-bg);color:var(--green)}
+.wbadge.sup{background:var(--gold-bg);color:var(--gold)}
+.wbadge.warn{background:var(--warn-bg);color:var(--accent-ink)}
+.wnum{font-size:56px;font-weight:800;color:var(--accent);line-height:1.1;margin-top:16px}
+.wnum.gold{color:var(--gold)}
+.wtxt{font-size:23px;font-weight:650;line-height:1.35;margin-top:14px;letter-spacing:-.01em}
+.wtxt.smaller{font-size:18px;font-weight:550}
+.wtxt .code{font-size:.72em;vertical-align:2px}
+.wsub{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-top:14px}
+.wizfoot{
+  display:flex;gap:12px;padding:14px 16px calc(18px + env(safe-area-inset-bottom));
+}
+.wbtn{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:9px;
+  border-radius:999px;padding:16px;font-size:17px;font-weight:700;
+  background:var(--card);border:1px solid var(--line);color:var(--ink);
+}
+.wbtn svg{width:18px;height:18px}
+.wbtn.primary{background:var(--accent);border-color:transparent;color:#fff}
+html[data-theme="dark"] .wbtn.primary{background:#F0576B;color:#1A0A0E}
+.wbtn:disabled{opacity:.4}
+.wbtn:active:not(:disabled){filter:brightness(1.07)}
+
+/* ---------- search ---------- */
+.searchbox{position:relative;margin-top:10px}
+.searchbox input{
+  width:100%;padding:14px 46px 14px 46px;border-radius:999px;
+  border:2px solid var(--line);background:var(--card);color:var(--ink);
+  font-size:16px;outline:none;box-shadow:var(--shadow);
+}
+.searchbox input::placeholder{color:var(--dim)}
+.searchbox input:focus{border-color:var(--accent)}
 .searchbox input::-webkit-search-decoration,
 .searchbox input::-webkit-search-cancel-button,
 .searchbox input::-webkit-search-results-button{-webkit-appearance:none;appearance:none}
-.searchbox .ico{
-  position:absolute;left:14px;top:50%;transform:translateY(-50%);
-  color:var(--slate);pointer-events:none;display:grid;place-items:center;
-}
-.searchbox .ico svg{width:17px;height:17px;display:block}
+.searchbox .sico{position:absolute;left:17px;top:50%;transform:translateY(-50%);color:var(--dim);display:grid;place-items:center}
+.searchbox .sico svg{width:18px;height:18px}
 .clearbtn{
-  position:absolute;right:9px;top:50%;transform:translateY(-50%);
-  border:0;background:var(--line-soft);color:var(--ink-2);
-  width:28px;height:28px;border-radius:50%;display:none;
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  background:var(--card-2);color:var(--ink-2);
+  width:30px;height:30px;border-radius:50%;display:none;
   align-items:center;justify-content:center;font-size:17px;line-height:1;
 }
 .clearbtn.on{display:flex}
-.chiprow{
-  display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;
-  padding:10px 1px 2px;
-}
+.chiprow{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:12px -16px 0;padding:0 16px 4px}
 .chiprow::-webkit-scrollbar{display:none}
-.chiprow.off{display:none}
 .chip{
-  border:1px solid #3B4C5E;background:rgba(255,255,255,.06);color:#B7C6D4;
-  border-radius:999px;padding:4px 12px;font-size:12.5px;font-weight:600;
-  white-space:nowrap;flex:none;
-  transition:background .15s ease,color .15s ease;
+  border:1px solid var(--line);background:var(--card);color:var(--ink-2);
+  border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;white-space:nowrap;flex:none;
 }
-.chip:active{background:rgba(255,255,255,.16);color:#fff}
+.chip:active{background:var(--card-2)}
+mark{background:var(--mark);color:inherit;padding:0 1px;border-radius:2px}
 
-/* ---------- top tabs (wide screens) ---------- */
-.tabs{
-  display:flex;gap:2px;background:var(--mast-bg);padding:0 8px;
-  overflow-x:auto;scrollbar-width:none;
-  border-bottom:3px solid var(--post-red);
+/* ---------- menus / reference ---------- */
+.subtabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:12px -16px 2px;padding:0 16px 4px}
+.subtabs::-webkit-scrollbar{display:none}
+.subtab{
+  border:1px solid var(--line);background:var(--card);color:var(--ink-2);
+  border-radius:999px;padding:7px 15px;font-size:13.5px;font-weight:650;white-space:nowrap;flex:none;
 }
-.tabs::-webkit-scrollbar{display:none}
-.tab{
-  border:0;background:transparent;color:#8FA2B5;
-  padding:9px 14px 10px;font-size:12.5px;font-weight:700;
-  letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;
-  border-radius:8px 8px 0 0;
-  transition:color .15s ease,background .15s ease;
-}
-.tab[aria-selected="true"]{background:var(--post-red);color:#fff}
-
-/* ---------- bottom navigation (phones) ---------- */
-.bnav{
-  position:fixed;left:0;right:0;bottom:0;z-index:50;
-  display:flex;align-items:stretch;
-  background:var(--surface);
-  border-top:1px solid var(--line);
-  box-shadow:var(--shadow-up);
-  padding:6px 4px calc(6px + env(safe-area-inset-bottom));
-  transition:background .25s ease;
-}
-.bitem{
-  flex:1;border:0;background:transparent;padding:3px 0 2px;
-  display:flex;flex-direction:column;align-items:center;gap:2px;
-  color:var(--slate);min-width:0;
-  transition:color .15s ease;
-}
-.bitem .bico{
-  position:relative;display:grid;place-items:center;
-  width:52px;height:28px;border-radius:999px;
-  transition:background .18s ease;
-}
-.bitem svg{width:21px;height:21px;display:block}
-.bitem .blbl{
-  font-size:10px;font-weight:650;letter-spacing:.02em;
-  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-}
-.bitem[aria-selected="true"]{color:var(--red-text)}
-.bitem[aria-selected="true"] .bico{background:var(--red-soft)}
-.bcount{
-  position:absolute;top:-3px;right:2px;
-  background:var(--post-red);color:#fff;
-  font-size:9px;font-weight:800;font-family:var(--mono);
-  min-width:15px;height:15px;padding:0 4px;border-radius:999px;
-  display:grid;place-items:center;line-height:1;
-  box-shadow:0 0 0 2px var(--surface);
-}
-
-/* ---------- layout ---------- */
-main{
-  max-width:940px;margin:0 auto;
-  padding:14px 12px calc(86px + env(safe-area-inset-bottom));
-}
-.hint{font-size:12.5px;color:var(--slate);margin:2px 2px 14px}
-.sechead{display:flex;align-items:baseline;gap:9px;margin:24px 2px 9px}
-.sechead:first-child{margin-top:4px}
-.sechead h2{
-  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-  margin:0;color:var(--red-text);font-weight:800;
-}
-.sechead .rule{flex:1;height:1px;background:var(--line)}
-.sechead .count{font-family:var(--mono);font-size:11px;color:var(--slate)}
-
-/* ---------- cards ---------- */
-.card{
-  background:var(--surface);border:1px solid var(--line);
-  border-radius:var(--r);margin-bottom:9px;overflow:hidden;
-  box-shadow:var(--shadow);
-  transition:background .25s ease,border-color .25s ease;
-}
-.card.open{border-color:var(--slate)}
-.cardhead{
-  width:100%;border:0;background:transparent;text-align:left;
-  padding:14px 15px;display:flex;align-items:center;gap:10px;
-}
-.cardhead:active{background:var(--surface-2)}
-@media (hover:hover){.cardhead:hover{background:var(--surface-2)}}
-.cardhead .t{flex:1;min-width:0}
-.cardhead .name{font-weight:660;font-size:15px;line-height:1.35;letter-spacing:-.005em}
-.cardhead .meta{
-  font-size:11.5px;color:var(--slate);margin-top:4px;
-  display:flex;flex-wrap:wrap;gap:5px;align-items:center;
-}
-.ctx{
-  font-size:12.5px;color:var(--slate);margin-top:6px;line-height:1.45;
-  border-left:2px solid var(--line);padding-left:8px;
-}
-.chev{
-  flex:none;color:var(--slate);font-size:13px;
-  transition:transform .2s ease;
-}
-.card.open .chev{transform:rotate(90deg)}
-.cardbody{display:none;padding:2px 15px 16px;border-top:1px solid var(--line-soft)}
-.card.open .cardbody{display:block;animation:bodyIn .22s ease}
-@keyframes bodyIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
-
-/* cross-tab strip */
-.xtab{
-  display:flex;flex-wrap:wrap;gap:6px;align-items:center;
-  background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--sup-gold);
-  border-radius:0 10px 10px 0;padding:9px 12px;margin:0 0 12px;
-  font-size:13px;color:var(--ink-2);box-shadow:var(--shadow);
-}
-.xtab b{color:var(--ink)}
-.xtab button{
-  border:1px solid var(--line);background:var(--surface-2);border-radius:8px;
-  padding:3px 10px;font-size:12.5px;font-weight:650;color:var(--red-text);
-  transition:background .15s ease;
-}
-.xtab button:active{background:var(--red-soft)}
-@media (hover:hover){.xtab button:hover{background:var(--red-soft);border-color:var(--chip-line)}}
-
-/* ---------- code chip ---------- */
-.code{
-  font-family:var(--mono);font-size:12px;font-weight:600;
-  background:var(--chip-bg);color:var(--red-text);
-  border:1px solid var(--chip-line);border-radius:6px;padding:2px 7px;
-  letter-spacing:.02em;white-space:nowrap;display:inline-block;
-}
-.code.g{background:var(--sup-gold-bg);color:var(--sup-gold);border-color:var(--sup-gold-line)}
-.code.n{background:var(--surface-2);color:var(--ink-2);border-color:var(--line)}
-
-/* ---------- badges ---------- */
-.badge{
-  font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
-  padding:2.5px 7px;border-radius:5px;white-space:nowrap;
-}
-.b-new{background:var(--red-soft);color:var(--red-text);border:1px solid var(--red-line)}
-.b-role{background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
-.b-type{background:var(--btype-bg);color:var(--btype-ink)}
-
-/* ---------- the step ladder ---------- */
-.ladder{margin:14px 0 0;padding:0;list-style:none;position:relative}
-.step{position:relative;padding:0 0 15px 36px}
-.step:before{
-  content:"";position:absolute;left:12px;top:22px;bottom:-2px;width:2px;
-  background:var(--line);
-}
-.step:last-child:before{display:none}
-.step .num{
-  position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;
-  background:var(--surface);border:2px solid var(--post-red);color:var(--red-text);
-  font-family:var(--mono);font-size:11px;font-weight:700;
-  display:grid;place-items:center;
-}
-.step.sup .num{border-color:var(--sup-gold);color:var(--sup-gold)}
-.step.sup:before{background:var(--sup-gold-line)}
-.step .txt{padding-top:3px;font-size:14.5px;line-height:1.5}
-.step.sup .txt{
-  background:var(--sup-gold-bg);border:1px solid var(--sup-gold-line);
-  border-radius:9px;padding:7px 11px;margin-top:-3px;
-}
-.step .who{
-  display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
-  font-weight:800;color:var(--sup-gold);margin-bottom:2px;
-}
-
-/* ---------- notes ---------- */
-.note{
-  border-left:3px solid var(--slate);background:var(--surface-2);
-  padding:10px 12px;border-radius:0 9px 9px 0;margin:11px 0 0;
-  font-size:13.5px;line-height:1.5;color:var(--ink-2);
-}
-.note.warn{border-left-color:var(--post-red);background:var(--warn-bg)}
-.note.upd{border-left-color:var(--sup-gold);background:var(--sup-gold-bg)}
-.note b{color:var(--ink)}
-.note .lbl{
-  display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
-  font-weight:800;margin-bottom:3px;color:var(--slate);
-}
-.note.warn .lbl{color:var(--red-text)}
-.note.upd .lbl{color:var(--sup-gold)}
-
-/* ---------- menu code table ---------- */
-.mrow{
-  display:flex;gap:12px;align-items:flex-start;padding:11px 13px;
-  border-bottom:1px solid var(--line-soft);background:var(--surface);
-  transition:background .25s ease;
-}
-.mrow:last-child{border-bottom:0}
-.mrow .codes{flex:none;width:112px;display:flex;flex-direction:column;gap:3px;align-items:flex-start}
-.mrow .purpose{font-size:14px;line-height:1.45;padding-top:1px}
-.mgroup{
-  background:var(--surface);border:1px solid var(--line);
-  border-radius:var(--r);overflow:hidden;margin-bottom:9px;
-  box-shadow:var(--shadow);
-  transition:background .25s ease,border-color .25s ease;
-}
+.subtab.on{background:var(--accent);border-color:transparent;color:#fff}
+html[data-theme="dark"] .subtab.on{background:#F0576B;color:#1A0A0E}
+.mgroup{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:12px;box-shadow:var(--shadow)}
 .mgroup > h3{
-  margin:0;padding:10px 13px;font-size:11px;letter-spacing:.13em;
-  text-transform:uppercase;background:var(--surface-2);
-  border-bottom:1px solid var(--line);color:var(--ink-2);font-weight:800;
+  margin:0;padding:11px 15px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;background:var(--card-2);
+  border-bottom:1px solid var(--line);color:var(--ink-2);font-weight:700;
 }
-
-/* ---------- reference tables ---------- */
+.mrow{display:flex;gap:12px;align-items:flex-start;padding:12px 15px;border-bottom:1px solid var(--line-soft)}
+.mrow:last-child{border-bottom:0}
+.mrow .codes{flex:none;width:118px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.mrow .purpose{font-size:14.5px;line-height:1.45;padding-top:2px}
 .tbl{width:100%;border-collapse:collapse;font-size:14px}
 .tbl th{
-  text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--slate);font-weight:800;padding:8px 11px;
+  text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--dim);font-weight:700;padding:9px 13px;
   border-bottom:1.5px solid var(--line);white-space:nowrap;
 }
-.tbl td{padding:9px 11px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+.tbl td{padding:10px 13px;border-bottom:1px solid var(--line-soft);vertical-align:top}
 .tbl tr:last-child td{border-bottom:0}
 .tbl td.num{font-family:var(--mono);font-weight:600;white-space:nowrap}
 .scroller{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:12px;box-shadow:var(--shadow)}
 
-/* ---------- empty state ---------- */
-.empty{text-align:center;padding:52px 20px;color:var(--slate)}
-.empty .eico{margin:0 auto 12px;width:44px;height:44px;color:var(--line);display:grid;place-items:center}
-.empty .eico svg{width:44px;height:44px}
-.empty .big{font-size:15px;color:var(--ink-2);font-weight:650;margin-bottom:5px}
+/* ---------- updates ---------- */
+.ucard{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:15px 16px;margin-top:12px;box-shadow:var(--shadow);
+}
+.ucard .uhead{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ucard .udate{font-family:var(--mono);font-size:12px;color:var(--dim)}
+.ucard h3{margin:9px 0 0;font-size:16.5px;font-weight:750;line-height:1.35;letter-spacing:-.01em}
+.ucard .ubody{font-size:14px;line-height:1.55;color:var(--ink-2);margin-top:8px}
+.ucard .usrc{margin-top:10px}
+.badge{
+  font-size:10px;font-weight:750;letter-spacing:.09em;text-transform:uppercase;
+  padding:3px 8px;border-radius:6px;white-space:nowrap;
+}
+.b-hot{background:var(--accent-soft);color:var(--accent-ink);border:1px solid var(--accent-line)}
+.b-ord{background:var(--btype-bg);color:var(--btype-ink)}
+.extlink{color:var(--accent-ink);font-weight:650;text-decoration:underline;text-underline-offset:2px;font-size:13.5px}
 
-/* ---------- disclaimer ---------- */
+/* ---------- empty / disclaimer ---------- */
+.empty{text-align:center;padding:56px 20px;color:var(--dim)}
+.empty .eico{margin:0 auto 12px;width:46px;height:46px;color:var(--line)}
+.empty .eico svg{width:46px;height:46px}
+.empty .big{font-size:15.5px;color:var(--ink-2);font-weight:650;margin-bottom:5px}
 .disc{
-  margin-top:28px;padding:13px 15px;border-radius:var(--r);
-  background:var(--surface-2);border:1px dashed var(--line);
+  margin-top:26px;padding:14px 16px;border-radius:var(--r);
+  background:var(--card-2);border:1px dashed var(--line);
   font-size:12px;line-height:1.55;color:var(--ink-2);
 }
 .disc b{color:var(--ink)}
 
-/* ---------- misc ---------- */
-mark{background:var(--mark);color:inherit;padding:0 1px;border-radius:2px}
-.extlink{color:var(--red-text);font-weight:650;text-decoration:underline;text-underline-offset:2px}
-
-.fab{
-  position:fixed;right:14px;bottom:calc(82px + env(safe-area-inset-bottom));z-index:45;
-  width:42px;height:42px;border-radius:50%;border:0;
-  background:var(--mast-bg);color:#fff;box-shadow:var(--shadow-fab);
-  display:grid;place-items:center;
-  opacity:0;transform:translateY(8px) scale(.9);pointer-events:none;
-  transition:opacity .2s ease,transform .2s ease;
+/* ---------- bottom nav ---------- */
+.bnav{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  display:flex;align-items:stretch;
+  background:var(--navbg);border-top:1px solid var(--line);
+  box-shadow:var(--shadow-up);
+  padding:8px 4px calc(8px + env(safe-area-inset-bottom));
+  transition:background .25s ease;
 }
-.fab svg{width:19px;height:19px}
-.fab.show{opacity:1;transform:none;pointer-events:auto}
-
-/* ---------- wide screens ---------- */
-@media (max-width:719.98px){
-  .tabs{display:none}
+.bitem{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;
+  color:var(--dim);min-width:0;padding:2px 0;
 }
-@media (min-width:720px){
-  .mast{padding:13px 20px}
-  .mast h1{font-size:17px}
-  main{padding:18px 20px 70px}
-  .mrow .codes{width:150px}
-  .bnav{display:none}
-  .fab{bottom:22px}
-}
+.bitem svg{width:22px;height:22px;display:block}
+.bitem .blbl{font-size:11px;font-weight:650;letter-spacing:.01em}
+.bitem.on{color:var(--accent)}
 
+@media (min-width:640px){
+  .grid{grid-template-columns:1fr 1fr 1fr}
+}
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important}
 }
-:focus-visible{outline:3px solid var(--post-red);outline-offset:2px;border-radius:4px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+/* appbar inner alignment */
+.appbar{display:block;padding:0}
+.abin{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:14px 16px;width:100%}
 </style>
 </head>
 <body>
 
-<div class="topbar">
-<header class="mast">
-  <div class="seal">IP</div>
-  <div>
-    <h1>Finacle Desk</h1>
-    <div class="sub">POSB counter reference</div>
-  </div>
-  <div class="spacer"></div>
-  <div class="stamp" id="stamp">rev 12·08·2026</div>
-  <button class="iconbtn" id="themeBtn" aria-label="Switch light / dark theme">
-    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-  </button>
-</header>
-
-<div class="searchwrap">
-  <div class="searchbox">
-    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
-    <input id="q" type="search" autocomplete="off" autocapitalize="off" spellcheck="false"
-           placeholder="Search a task, menu code, or error…" aria-label="Search">
-    <button class="clearbtn" id="clr" aria-label="Clear search">×</button>
-  </div>
-  <div class="chiprow" id="chips" aria-label="Quick searches"></div>
-</div>
-
-<nav class="tabs" role="tablist" id="tabs"></nav>
-</div>
-
-<main id="out" role="tabpanel" aria-label="Results"></main>
-
+<div class="appbar" id="appbar"></div>
+<div id="app"></div>
 <nav class="bnav" id="bnav" aria-label="Sections"></nav>
-<button class="fab" id="fab" aria-label="Back to top">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
-</button>
+<div class="wiz" id="wiz" role="dialog" aria-label="Step-by-step mode"></div>
 
 <script id="DATA">
-let REV = "12 August 2026";
+let REV = "8 September 2026";
 let RATE_ASON = "Q2 FY 2026-27 · 1 Jul – 30 Sep 2026";
 
 /* ============ PROCEDURES ============
@@ -1752,57 +1770,490 @@ const NEWS = [
 ];
 
 </script>
+<script id="DATA2">
+/* ============ ADDITIONS — researched 8 Sep 2026 ============
+   Sourced from SB Orders and long-standing DoP staff guides; each entry
+   links its source. Items from older staff guides say so — confirm against
+   your circle's current SOP where marked.
+================================================================= */
+const SRC = (u,extra) => ({k:"note", l:"Source",
+  t:'<a class="extlink" href="'+u+'" target="_blank" rel="noopener">Reference ↗</a>'+(extra?" · "+extra:"")});
+
+/* ---------------- CLAIMS AND SERVICES ---------------- */
+PROC.push(
+{g:"Claims and services", n:"Settle a deceased claim (death claim closure)", c:["CMRC","HCAAC","HINTTM"],
+ k:"death deceased claim settlement nominee form 11 dtclm succession closure",
+ s:[
+  {t:"Take the claim on <b>Form-11</b> with the death certificate and the claimant's / nominee's KYC. The Postmaster records sanction on part 2 of Form-11 itself — no separate sanction memo (SB Order 01/2023)."},
+  {t:"Settle within <b>one working day</b> where there is a nomination, and within <b>seven working days</b> on other proof."},
+  {t:"Open <b>CMRC</b>. Function: <b>Modify</b>. Set the depositor's status to <b>Deceased</b> and submit."},
+  {t:"Verify the CIF modification in <b>CMRC</b>.",sup:1},
+  {t:"Close the account through <b>HCAAC</b> with closure reason code <b>DTCLM</b> — mandatory, because Finacle computes the admissible interest from this reason code."},
+  {t:"Verify the closure from the supervisor login.",sup:1},
+  {t:"<b>SCSS / SSA:</b> configure the applicable interest through <b>HINTTM</b> before closure — interest runs from the day after the date of death (SB Order 29/2021)."},
+  {t:"After settlement, suspend the deceased customer's CIF in <b>CMRC</b> so no new account can be opened on it, and get it verified.",sup:1}
+ ],
+ no:[{k:"warn",l:"Limits without nomination",t:"With no nomination and no legal evidence, up to <b>₹5 lakh</b> is payable six months after death on the prescribed documents. Above ₹5 lakh a <b>succession certificate</b> is required (SB Order 36/2020)."},
+     {k:"note",l:"Where the rules live",t:"Chapter 19 of the POSB (CBS) Manual carries deceased claim cases in full."},
+     SRC("https://dopfinacle.blogspot.com/2021/08/death-claim-procedure-of-any-type-of.html","staff-guide steps — confirm your circle's current SOP")]},
+
+{g:"Claims and services", n:"TDS on cash withdrawals — section 194N", c:["HTDSIP"],
+ k:"tds 194n cash withdrawal 20 lakh 1 crore itr tax deduction",
+ s:[
+  {t:"TDS is driven by the depositor's <b>aggregate cash withdrawals</b> across accounts in the financial year."},
+  {t:"Depositor has filed ITR for any of the last three years: <b>2%</b> on the amount above <b>₹1 crore</b>."},
+  {t:"No ITR for all three preceding years: <b>2%</b> above <b>₹20 lakh</b> and <b>5%</b> above <b>₹1 crore</b>."},
+  {t:"CEPT circulates the identified account-holder lists; deduction follows the SOP's percentage input. Check TDS already deducted with <b>HTDSIP</b>."}
+ ],
+ no:[{k:"warn",l:"Before you quote",t:"Thresholds are statutory and can change with a Finance Act — confirm the current year's position before telling a depositor."},
+     SRC("https://www.incometax.gov.in/iec/foportal/help/tds-on-cash-withdrawal-us-194n-faq")]},
+
+{g:"Claims and services", n:"MSSC — servicing existing certificates", c:["MSSC"],
+ k:"mssc mahila samman savings certificate withdrawal closure discontinued",
+ s:[
+  {t:"<b>No fresh MSSC deposits</b> are accepted since 01.04.2025. Existing accounts run to maturity — two-year tenure, 7.5% compounded quarterly, paid at closure."},
+  {t:"A one-time <b>partial withdrawal up to 40%</b> of the eligible balance is available after one year, and is implemented in Finacle."},
+  {t:"Premature closure continues per the scheme rules for live certificates."}
+ ],
+ no:[{k:"note",l:"Menu code",t:"No menu code for the 40% withdrawal is published in the sources we could verify — follow your circle's SOP for the screen flow."},
+     SRC("https://cleartax.in/s/mahila-samman-saving-certificate")]},
+
+{g:"Claims and services", n:"Tell customers: IVR self-service line", c:["IVR"],
+ k:"ivr 1800 2666 868 balance enquiry block atm phone self service toll free",
+ s:[
+  {t:"Give the toll-free number <b>1800 2666 868</b> — it works only from the depositor's <b>registered mobile</b>."},
+  {t:"Balance enquiry across schemes: press <b>5</b>, then enter the account number followed by #."},
+  {t:"Block a lost or stolen ATM card immediately: press <b>6</b>."},
+  {t:"Also available: transaction enquiry for SB and TD, and a new ATM card request. Service hours 9 am–6 pm, Monday to Saturday (SB Order 28/2021)."}
+ ],
+ no:[{k:"note",l:"Why push this",t:"Every balance call and card block handled on IVR is one less queue at the counter — and card blocking on IVR works even when the office is closed."},
+     SRC("https://utilities.cept.gov.in/dop/pdfbind.ashx?id=5981")]},
+
+{g:"Claims and services", n:"Tell customers: ePassbook", c:["PostInfo"],
+ k:"epassbook e-passbook digital passbook statement mini balance postinfo",
+ s:[
+  {t:"Free digital passbook for POSB accounts including <b>PPF and SSA</b> — introduced 12.10.2022 by SB Order 19/2022."},
+  {t:"Access with the <b>registered mobile + OTP</b> through the link on the India Post / IPPB websites or the <b>PostInfo</b> app. No internet or mobile banking registration needed."},
+  {t:"Offers balance view, mini statement and statement download."}
+ ],
+ no:[{k:"note",l:"Good for",t:"Depositors who lose printed passbooks often, and anyone asking for balance between visits."},
+     SRC("https://utilities.cept.gov.in/dop/pdfbind.ashx?id=7236")]}
+);
+
+/* ---------------- added to existing sections ---------------- */
+PROC.push(
+{g:"Savings account", n:"Hotlist (block) an ATM card", c:["CCMM"],
+ k:"atm card block hotlist hot listing lost stolen ccmm",
+ s:[
+  {t:"Open <b>CCMM</b> and pull up the customer's card record — account number, kit number, card number and status display."},
+  {t:"Set Action to <b>Hot Listing</b> and <b>Submit</b> — you should see \"customer records modified successfully\"."},
+  {t:"Verify in <b>CCMM</b> from the supervisor login — the hotlisting takes effect in the card system only on verification.",sup:1}
+ ],
+ no:[{k:"warn",l:"Do not sit on it",t:"Until the supervisor verifies, the card is still live. Verify immediately for a lost or stolen card."},
+     {k:"note",l:"Customer can self-block",t:"IVR <b>1800 2666 868</b>, option 6, from the registered mobile — works even outside office hours."},
+     SRC("https://www.potoolsblog.in/2020/07/procedure-to-block-hot-listing-posb-atm.html")]},
+
+{g:"Savings account", n:"Request a Personalised Cheque Book (PCB)", c:["CPCBR","HCHBM"],
+ k:"pcb personalised personalized cheque book request cpcbr online",
+ s:[
+  {t:"Check first: signature verified, <b>mobile number linked</b>, minimum balance ₹500, KYC and address current in the CIF."},
+  {t:"Enter the request in <b>CPCBR</b>."},
+  {t:"Verify all pending CPCBR requests before day end.",sup:1},
+  {t:"The book is printed centrally with the customer's name, account number and DoP IFSC, and delivered <b>free of cost</b> to the recorded address. Issued cheque numbers show in <b>HCHBM</b>."}
+ ],
+ no:[{k:"upd",l:"New since your manual",flag:1,t:"PCB was introduced by SB Order 05/2026 (effective 08.05.2026). Since <b>SB Order 08/2026</b> internet-banking customers can raise the request online themselves — redirect eligible customers there."},
+     SRC("https://www.staffnews.in/2026/05/introduction-of-personalized-cheque-book-sb-order-no-05-2026.html","menu flow per SOP circulation — confirm your circle's SOP")]},
+
+{g:"Customer (CIF)", n:"Update the mobile number in a CIF", c:["CMRC"],
+ k:"mobile number update change cif cmrc registered phone",
+ s:[
+  {t:"Take the depositor's written request and verify the signature."},
+  {t:"Open <b>CMRC</b>. Function: <b>Modify</b>. Update the mobile number and submit."},
+  {t:"Verify the CIF modification in <b>CMRC</b>.",sup:1},
+  {t:"File the request with the account's records."}
+ ],
+ no:[{k:"warn",l:"Deadline that bites",flag:1,t:"From <b>01.09.2026</b>, DREAM / BO e-KYC transactions are blocked in accounts with no linked mobile number (SB Order 06/2026). Update proactively — do not wait for the customer to be refused at a BO."}]},
+
+{g:"Customer (CIF)", n:"Seed Aadhaar for DBT (APBS mapping)", c:["CMRC"],
+ k:"aadhaar seeding dbt apbs mandate movein fresh npci mapper subsidy",
+ s:[
+  {t:"Take the customer's <b>DBT mandate form</b>."},
+  {t:"Open <b>CMRC</b> → APBS Payment Details. Set <b>Aadhaar Mandate Available = Yes</b>."},
+  {t:"Type of mandate: <b>Fresh</b> for first-time seeding, <b>MOVEIN</b> when the customer's DBT was mapped to another bank."},
+  {t:"Verify the CIF modification from the supervisor login.",sup:1},
+  {t:"Next day, confirm the seeding succeeded in the APBS mapper report on the MIS server (DoP as destination bank)."}
+ ],
+ no:[SRC("https://www.postalstudy.in/2022/11/procedure-sop-for-aadhar-seeding-in.html","staff-guide steps — confirm your circle's current SOP")]},
+
+{g:"Everyday counter work", n:"Freeze or unfreeze an account", c:["HAFSM"],
+ k:"freeze unfreeze account hafsm court order pledge death intimation",
+ s:[
+  {t:"Since 18.05.2016 <b>HAFSM is not available at sub offices</b> — SOs send the request to the HO Postmaster."},
+  {t:"HO supervisor: open <b>HAFSM</b>, function <b>Freeze</b> or <b>Unfreeze</b>, enter the account or CIF ID, <b>Go</b>, select the accounts, <b>Submit</b>.",sup:1},
+  {t:"A <b>second</b> supervisor verifies in HAFSM.",sup:1}
+ ],
+ no:[{k:"note",l:"When this is used",t:"Death intimation before claim, pledge to a court or authority, and court or department orders."},
+     SRC("https://dopfinacle.blogspot.com/2015/09/account-maintenance-freeze-in-dop.html","staff-guide steps — confirm your circle's current SOP")]},
+
+{g:"Everyday counter work", n:"Mark or remove a lien", c:["HALM","HACCBAL"],
+ k:"lien mark remove halm amount loan pledge balance",
+ s:[
+  {t:"<b>Mark:</b> open <b>HALM</b>, function <b>Add</b>, enter the account ID, <b>Go</b>, then the lien amount, start / effective dates and the reason. <b>Submit</b>."},
+  {t:"<b>Remove:</b> HALM, function <b>Modify</b>, set the lien amount to <b>0</b>, submit."},
+  {t:"Verify from the supervisor login.",sup:1},
+  {t:"The lien thereafter shows against the balance in <b>HACCBAL</b>."}
+ ],
+ no:[SRC("https://dopfinacle.blogspot.com/2015/09/account-maintenance-lien-in-dop-finacle.html","staff-guide steps — confirm your circle's current SOP")]}
+);
+
+/* ---------------- new fixes ---------------- */
+FIX.push(
+{g:"Closure and verification", n:"\"The same user cannot verify the record\"",
+ k:"same user cannot verify enterer authorizer supervisor opened wrong login hafi",
+ sym:"The supervisor cannot verify — Finacle insists the enterer and the authoriser are the same person.",
+ body:[
+  {h:"Why it happens",t:"The account was opened (or first funded) in the <b>supervisor's login</b> instead of the counter PA's — or HTV was invoked before the account verifications were complete."},
+  {h:"Fix",t:"Trace the record in <b>HAFI</b> (Entered By = the user ID, Authorized = Not Authorized). Then, from the <b>counter PA login</b>, open the scheme's modify-before-verification menu, enter the account number and submit — the record re-stamps to the PA. The supervisor then verifies normally."},
+  {h:"Prevent it",t:"Do openings and transactions only in the counter PA login. Run <b>HTV</b> only after every opening and voucher verification is done."},
+  {h:"Source",t:'<a class="extlink" href="https://dopfinacle.blogspot.com/2016/09/solution-for-account-verification-error.html" target="_blank" rel="noopener">Reference ↗</a> · staff-guide fix — confirm locally'}
+ ]},
+
+{g:"Closure and verification", n:"NSC / KVP closure says \"No records fetched\"",
+ k:"nsc kvp no records fetched csccaac registration number closure error",
+ sym:"CSCCAAC refuses to pull up the certificate for closure.",
+ body:[
+  {h:"Check the registration number",t:"It must carry the <b>R suffix</b>. Also confirm the right product and the right CIF ID."},
+  {h:"Already attempted?",t:"On a slow network the closure may have gone through earlier and be sitting unverified. Check <b>HAFI</b> — then cancel or verify that earlier closure instead of re-entering."},
+  {h:"Bulk menu trap",t:"<b>CNSBCV</b> (bulk closure) is for <b>matured</b> certificates only — never route a premature closure through it."},
+  {h:"Source",t:'<a class="extlink" href="https://dopfinacle.blogspot.com/2016/07/solution-for-nsckvp-closure-error-no.html" target="_blank" rel="noopener">Reference ↗</a> · staff-guide fix — confirm locally'}
+ ]},
+
+{g:"Closure and verification", n:"SOL transfer says \"the previous process is not yet verified\"",
+ k:"sol transfer hacxfsol previous process not verified pending transactions",
+ sym:"HACXFSOL blocks the transfer-out because something on the account is pending.",
+ body:[
+  {h:"Cause",t:"Unauthorised transactions are hanging on the account — teller entries, clearing, standing instructions."},
+  {h:"Fix",t:"Supervisor opens <b>HPR</b>, finds the pending transactions on the account and authorises them. Then re-initiate <b>HACXFSOL</b> with the Transfer option."},
+  {h:"Source",t:'<a class="extlink" href="http://pofinacleguide.blogspot.com/2016/07/solution-for-the-sol-transfer-error-the-previous-process-is-not-yet-verified-in-dop-finacle.html" target="_blank" rel="noopener">Reference ↗</a> · staff-guide fix — confirm locally'}
+ ]},
+
+{g:"Transactions gone wrong", n:"ATM card will not activate / kit number problems",
+ k:"atm card activate kit number personalised ccmm req status delivered inactive",
+ sym:"A card stays inactive, or CCMM complains about the kit number.",
+ body:[
+  {h:"Personalised card + kit number",t:"Kit numbers must <b>not</b> be entered for personalised cards. Remove it in CCMM <b>Modify</b> — the card then activates."},
+  {h:"Wrong details entered",t:"Use CCMM <b>Delete</b> to remove the record, then re-enter correctly with <b>Add</b>."},
+  {h:"Status logic",t:"A card activates only from <b>Delivered / Inactive</b> status. Status <b>REQ</b> in CCMM Inquire means it was never activated."},
+  {h:"\"Kit number already used\" wrongly",t:"Raise it with the ATM cell — do not force another kit."},
+  {h:"Source",t:'<a class="extlink" href="https://potools.blogspot.com/2017/06/atm-card-issues-and-solutions-in-dop.html" target="_blank" rel="noopener">Reference ↗</a> · staff-guide fix — confirm locally'}
+ ]},
+
+{g:"Day end", n:"Who runs what at day end (HISCOD vs HSCOD)",
+ k:"hiscod hscod eod day end blocking validation cpc spoc 5 pm",
+ sym:"Confusion about which day-end menus the post office itself runs.",
+ body:[
+  {h:"The PO's job",t:"Clear the blockers, then submit <b>HISCOD</b> before the cut-off (traditionally 5 PM): <b>HFTI</b> for entered/posted transactions, <b>HIMCZ</b> for open clearing zones, <b>HIMC</b> / <b>HICHB</b> for unverified inventory and cheque-book movements, <b>HAFI</b> for unverified records."},
+  {h:"Not the PO's job",t:"<b>HSCOD</b>, <b>HSOLCOP</b> and <b>HSCOLD</b> are executed by the CPC / SPOC — do not run them at the office."},
+  {h:"After APT 2.0",t:"Day end now also includes the Finacle–APT reconciliation and discrepancy register of SB Order 09/2026 — see <b>Run day-end</b> under Everyday counter work.",upd:1},
+  {h:"Source",t:'<a class="extlink" href="https://dopfinacle.blogspot.com/2015/11/finacle-procedure-eod-dos-and-donts.html" target="_blank" rel="noopener">Reference ↗</a> · pre-APT staff guide — confirm locally'}
+ ]}
+);
+
+/* ---------------- menu code additions ---------------- */
+(function(){
+  const add = (g, row) => { const grp = MENUS.find(x=>x.g===g); if(grp) grp.r.push(row); };
+  add("Cheque book", ["Personalised cheque book request and verification (from 08.05.2026)","CPCBR"]);
+  add("Cheque book", ["View issued personalised cheque numbers","HCHBM"]);
+  add("NSC and KVP", ["Bulk closure — matured certificates only","CNSBCV"]);
+  add("Day end and admin", ["Pre-EOD submission by the PO (HSCOD / HSOLCOP / HSCOLD are CPC jobs)","HISCOD"]);
+})();
+
+/* ---------------- what changed — new orders ---------------- */
+NEWS.unshift(
+{d:"3 Sep 2026", o:"SB Order 10/2026", t:"HRMS payments through the POSB Interface — revised accounting", hi:1,
+ u:"https://www.potoolsblog.in/2026/09/hrms-payments-through-posb-interface.html",
+ b:"Accounting of HRMS salary / pension / claim payments through the POSB Interface is revised w.e.f. 29.07.2026. In the office's Daily Transaction Report, HRMS transactions are accounted as 'HRMS Payment' under the relevant budget code on the payment side and 'RSAO HR to CBS Receipts' on the receipt side; the matching POSB credits are accounted centrally at CPRC Chennai — no longer in the DTR of the office holding the salary account. Keep tallying the DTR with Finacle reports per SB Order 09/2026."});
+NEWS.splice(2, 0,
+{d:"18 Jul 2026", o:"SB Order 08/2026", t:"Personalised Cheque Book — online request via Internet Banking",
+ u:"https://www.govtstaff.com/2026/07/personalized-cheque-book-pcb-internet-banking-department-of-post-introduces-online-request-facility-sb-order-no-08-2026.html",
+ b:"POSA customers with DOP Internet Banking can request a Personalised Cheque Book online without visiting the post office, operational from 18.07.2026. Redirect eligible e-banking customers to the online route and take counter requests through CPCBR only where needed."},
+{d:"Jul 2026", o:"SB Order 07/2026", t:"Interest rates w.e.f. 01.07.2026 — unchanged",
+ u:"http://www.iproamh.com/2026/07/sb-order-072026-revision-of-interest.html",
+ b:"Quarterly rate order for July–September 2026: every rate carried forward unchanged — the ninth consecutive quarter without revision. The next revision is due around 30 September 2026 for the October–December quarter."},
+{d:"22 Jun 2026", o:"SB Order 06/2026", t:"e-KYC operations and inter-operability at Branch Post Offices", hi:1,
+ u:"https://www.staffnews.in/2026/06/introduction-of-e-kyc-operations-sb-order-no-06-2026.html",
+ b:"Aadhaar e-KYC transactions and BO inter-operability go live pan-India through the DREAM app: deposits up to ₹50,000 in POSA / RD / SSA without a pay-in slip, and POSA withdrawals up to ₹20,000 by biometric authentication without SB-7 — in eligible accounts standing at any post office. Existing CIFs convert to e-KYC CIFs by biometric authentication. From 01.09.2026, DREAM transactions are blocked in accounts not linked with a mobile number — update mobiles through CMRC now."});
+</script>
 <script id="APP">
 (function(){
+"use strict";
 const $ = s => document.querySelector(s);
-const out = $("#out"), qEl = $("#q"), clr = $("#clr"), tabsEl = $("#tabs"),
-      bnavEl = $("#bnav"), chipsEl = $("#chips"), fabEl = $("#fab");
-document.getElementById("stamp").textContent = "rev " + REV.replace(/ /g,"·");
-
-const ICONS = {
-  proc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg>',
-  menu:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>',
-  fix:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
-  ref:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
-  "new":'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>'
-};
-
-const TABS = [
-  {id:"proc", label:"Procedures",  short:"Procedures"},
-  {id:"menu", label:"Menu codes",  short:"Codes"},
-  {id:"fix",  label:"Fixes",       short:"Fixes"},
-  {id:"ref",  label:"Reference",   short:"Reference"},
-  {id:"new",  label:"What changed",short:"Updates"}
-];
-let tab = "proc", q = "";
+const appEl = $("#app"), barEl = $("#appbar"), navEl = $("#bnav"), wizEl = $("#wiz");
 
 /* ---------- helpers ---------- */
 const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const norm = s => String(s).toLowerCase();
-
+const strip = s => String(s).replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
 function hl(html, term){
   if(!term) return html;
   const t = term.trim().replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
   if(!t) return html;
-  // only highlight in text nodes, never inside tags
   return html.replace(new RegExp("(?![^<]*>)("+t+")","ig"), "<mark>$1</mark>");
 }
-function codeChip(c, cls){ return '<span class="code '+(cls||"")+'">'+esc(c)+'</span>'; }
-
 function matches(hay, term){
   if(!term) return true;
   const words = norm(term).split(/\s+/).filter(Boolean);
   const h = norm(hay);
   return words.every(w => h.includes(w));
 }
+function store(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function load(k, d){ try{ const v = JSON.parse(localStorage.getItem(k)); return v==null?d:v; }catch(e){ return d; } }
 
-/* Rank a procedure against the query so the thing the user actually meant
-   floats to the top: an exact menu code beats a title word beats a step body. */
+/* ---------- icons ---------- */
+const I = {
+  search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+  back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>',
+  chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
+  down:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v14"/><path d="m6 12 6 6 6-6"/></svg>',
+  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg>',
+  menus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg>',
+  bell:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>',
+  bookmark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>',
+  bookmarkFill:'<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>',
+  play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a.6.6 0 0 0 .92.5l10.2-6.5a.6.6 0 0 0 0-1L8.92 5a.6.6 0 0 0-.92.5z"/></svg>',
+  x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
+  next:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>',
+  moon:'<svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>',
+  sun:'<svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>',
+  emptySearch:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M8.5 11h5"/></svg>'
+};
+
+/* ---------- sections model ---------- */
+const SECMETA = {
+  "Savings account":        {c:"#E23A52", d:"Everyday savings work: cash & cheque transactions, opening, closure, cheque books, nominations, ATM & net/mobile banking."},
+  "Recurring deposit":      {c:"#4C8DFF", d:"Instalments, opening, closure, extension, standing instructions, agent bulk lists and RD loans."},
+  "Time deposit":           {c:"#34B27B", d:"Opening, closure, annual interest payment, extension and re-deposit of TD accounts."},
+  "Monthly income scheme":  {c:"#D9A83F", d:"Deposit limits, opening, monthly interest payment and closure of MIS accounts."},
+  "Senior citizens (SCSS)": {c:"#9B6DD6", d:"Opening, TDS and tax declarations, extension and closure for senior citizen accounts."},
+  "Public provident fund":  {c:"#2AA79B", d:"Deposits, withdrawals, extension, closure, PPF loans and account transfers."},
+  "Sukanya Samriddhi":      {c:"#E06A9E", d:"Opening and deposits for the girl child, default fees and annual ceilings."},
+  "NSC and KVP":            {c:"#E0813F", d:"Issue, printing, discharge and transfer of savings certificates."},
+  "Customer (CIF)":         {c:"#6B7BD6", d:"Creating, modifying and merging customer records; minor turned major."},
+  "Everyday counter work":  {c:"#3FB5C9", d:"Vault cash, teller position, passbooks, transfers, day-end, reports and Jan Suraksha schemes."},
+  "Inventory":              {c:"#A3A63F", d:"Receiving, moving, splitting and merging stock of passbooks, cards and certificates."},
+  "Cheques and clearing":   {c:"#5D9EE0", d:"Outward and inward clearing, outstation cheques and SO–HO cheque movement."},
+  "Claims and services":    {c:"#B85CC4", d:"Deceased claims, TDS on cash withdrawals, MSSC servicing, and the self-service channels to point customers to."}
+};
+const FIXCOLOR = "#8A93B0";
+
+const SECTIONS = [];
+(function(){
+  const m = new Map();
+  PROC.forEach((p,idx)=>{
+    if(!m.has(p.g)){
+      const meta = SECMETA[p.g] || {c:"#888", d:""};
+      m.set(p.g, SECTIONS.length);
+      SECTIONS.push({name:p.g, color:meta.c, desc:meta.d, kind:"proc", items:[]});
+    }
+    SECTIONS[m.get(p.g)].items.push(idx);
+  });
+  SECTIONS.push({
+    name:"Fixes & troubleshooting", color:FIXCOLOR, kind:"fix",
+    desc:"When Finacle refuses: the errors that actually happen at the counter, and what clears them.",
+    items: FIX.map((f,idx)=>idx)
+  });
+})();
+function secOf(kind, idx){
+  for(let s=0;s<SECTIONS.length;s++){
+    const sec=SECTIONS[s];
+    if(sec.kind!==kind) continue;
+    const j=sec.items.indexOf(idx);
+    if(j>-1) return {s, j};
+  }
+  return null;
+}
+const numOf = (kind, idx) => { const o=secOf(kind, idx); return o?(o.s+1)+"."+(o.j+1):""; };
+
+/* ---------- recent / saved ---------- */
+const K_RECENT="fd-recent", K_SAVED="fd-saved";
+function pushRecent(key){
+  let r = load(K_RECENT, []).filter(x=>x!==key);
+  r.unshift(key); if(r.length>8) r=r.slice(0,8);
+  store(K_RECENT, r);
+}
+const isSaved = key => load(K_SAVED, []).includes(key);
+function toggleSaved(key){
+  let s = load(K_SAVED, []);
+  s = s.includes(key) ? s.filter(x=>x!==key) : [key].concat(s);
+  store(K_SAVED, s);
+}
+function itemOf(key){
+  const kind = key[0]==="f" ? "fix" : "proc";
+  const idx = parseInt(key.slice(1),10);
+  const arr = kind==="fix" ? FIX : PROC;
+  if(!(idx>=0 && idx<arr.length)) return null;
+  return {kind, idx, it:arr[idx], num:numOf(kind,idx), href:"#"+(kind==="fix"?"fix":"proc")+"/"+idx};
+}
+
+/* ---------- app bar + nav ---------- */
+function bar(html, cls){
+  barEl.className = "appbar" + (cls?" "+cls:"");
+  barEl.innerHTML = '<div class="abin">'+html+'</div>';
+}
+const themeBtnHtml = '<button class="navbtn" id="themeBtn" aria-label="Switch light / dark theme">'+I.moon+I.sun+'</button>';
+function backBtn(href){ return '<button class="navbtn" data-nav="'+href+'" aria-label="Back">'+I.back+'</button>'; }
+
+const NAV = [
+  {id:"home",   label:"Home",    icon:I.home},
+  {id:"search", label:"Search",  icon:I.search},
+  {id:"menus",  label:"Menus",   icon:I.menus},
+  {id:"updates",label:"Updates", icon:I.bell},
+  {id:"saved",  label:"Saved",   icon:I.bookmark}
+];
+function drawNav(active){
+  navEl.innerHTML = NAV.map(n=>
+    '<button class="bitem'+(n.id===active?" on":"")+'" data-nav="#'+n.id+'">'+
+    n.icon+'<span class="blbl">'+n.label+'</span></button>').join("");
+}
+
+/* ---------- shared bits ---------- */
+const DISC = () => '<div class="disc"><b>Read this once.</b> This is a working aid built from the POSB (CBS) Manual corrected to 31.12.2021, the DOP Finacle menu shortcut list v1.8, and SB Orders issued up to '+esc(REV)+'. Screens and rules change with every Finacle patch and every SB Order. Where this and a current SB Order disagree, <b>the SB Order wins</b> — check the order, not this. Nothing here replaces your circle’s instructions or authorises any transaction.</div>';
+function empty(big, small){
+  return '<div class="empty"><div class="eico">'+I.emptySearch+'</div>'+
+    '<div class="big">'+esc(big)+'</div><div>'+esc(small)+'</div></div>';
+}
+const codeChip = c => '<span class="code">'+esc(c)+'</span>';
+
+/* ---------- views ---------- */
+function vHome(){
+  bar('<h1>Finacle <span class="brandred">Desk</span></h1><span class="stamp" id="stamp">rev '+esc(REV).replace(/ /g,"·")+'</span>'+themeBtnHtml);
+  let h = '<button class="searchgo" data-nav="#search">'+I.search+'Search a task, menu code, or error…</button>';
+
+  const recent = load(K_RECENT, []).map(itemOf).filter(Boolean);
+  if(recent.length){
+    h += '<div class="eyebrow">Recently viewed</div><div class="recentrow">'+
+      recent.map(r=>'<button class="recentcard" data-nav="'+r.href+'">'+
+        '<div class="rnum">'+r.num+'</div>'+
+        '<div class="rname">'+esc(r.it.n)+'</div></button>').join("")+'</div>';
+  }
+
+  const latest = NEWS[0];
+  h += '<div class="eyebrow">What changed</div>'+
+    '<button class="updbanner" data-nav="#updates"><span class="ubico">'+I.bell+'</span>'+
+    '<span class="ubt"><span class="ubname">'+NEWS.length+' orders & updates</span>'+
+    (latest?'<span class="ubsub">Latest: '+esc(latest.o)+' — '+esc(latest.t)+'</span>':'')+
+    '</span><span class="chev" style="color:var(--dim)">'+I.chev+'</span></button>';
+
+  h += '<div class="eyebrow">Sections</div><div class="grid">'+
+    SECTIONS.map((s,i)=>'<button class="seccard" style="--sc:'+s.color+'" data-nav="#sec/'+i+'">'+
+      '<div class="snum">'+(i+1)+'</div>'+
+      '<div class="sname">'+esc(s.name)+'</div>'+
+      '<div class="scount">'+s.items.length+' '+(s.kind==="fix"?"fixes":"processes")+'</div>'+
+    '</button>').join("")+'</div>';
+
+  h += DISC();
+  return h;
+}
+
+function vSection(si){
+  const sec = SECTIONS[si]; if(!sec) return goHome();
+  bar(backBtn("#home")+'<h1>'+esc(sec.name)+'</h1>', "sub");
+  let h = '<div class="eyebrow red">Section '+(si+1)+'</div>'+
+    '<div style="font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.2">'+esc(sec.name)+'</div>'+
+    '<p class="secdesc">'+esc(sec.desc)+'</p>';
+
+  if(sec.kind==="proc"){
+    const topCodes = [...new Set(sec.items.flatMap(i=>PROC[i].c))].slice(0,4);
+    h += '<div class="codestrip">'+topCodes.map(codeChip).join("")+'</div>';
+    h += '<div class="plist">'+sec.items.map((pi,j)=>{
+      const p = PROC[pi];
+      return '<button class="prow" data-nav="#proc/'+pi+'">'+
+        '<span class="pnum">'+(si+1)+'.'+(j+1)+'</span>'+
+        '<span class="pt"><span class="pname">'+esc(p.n)+'</span>'+
+        '<span class="pmeta">'+codeChip(p.c[0])+'<span>'+p.s.length+' steps</span></span></span>'+
+        '<span class="chev">'+I.chev+'</span></button>';
+    }).join("")+'</div>';
+  } else {
+    h += '<div class="plist">'+sec.items.map((fi,j)=>{
+      const f = FIX[fi];
+      return '<button class="prow" data-nav="#fix/'+fi+'">'+
+        '<span class="pnum">'+(si+1)+'.'+(j+1)+'</span>'+
+        '<span class="pt"><span class="pname">'+esc(f.n)+'</span>'+
+        '<span class="psym">'+esc(f.sym)+'</span></span>'+
+        '<span class="chev">'+I.chev+'</span></button>';
+    }).join("")+'</div>';
+  }
+  return h;
+}
+
+function noteHtml(n){
+  return '<div class="note '+(n.k==="warn"?"warn":n.k==="upd"?"upd":"")+'">'+
+    '<span class="lbl">'+esc(n.l)+'</span>'+n.t+'</div>';
+}
+
+function vProc(pi){
+  const p = PROC[pi]; if(!p) return goHome();
+  const key = "p"+pi, o = secOf("proc", pi);
+  pushRecent(key);
+  bar(backBtn("#sec/"+o.s)+'<h1>'+esc(p.g)+'</h1>'+
+      '<button class="navbtn'+(isSaved(key)?" saved-on":"")+'" id="saveBtn" aria-label="Save">'+
+      (isSaved(key)?I.bookmarkFill:I.bookmark)+'</button>', "sub");
+
+  const sec = SECTIONS[o.s];
+  let h = '<div class="prochead" style="--sc:'+sec.color+'">'+
+    '<div class="peyebrow">'+numOf("proc",pi)+'<span class="sep">·</span>Process</div>'+
+    '<h2>'+esc(p.n)+'</h2>'+
+    '<div class="codestrip">'+p.c.map(codeChip).join("")+'<span class="tag">'+esc(p.g)+'</span></div>'+
+    '</div>';
+
+  h += '<button class="wizbtn" id="wizGo">'+I.play+'Step-by-step mode</button>';
+
+  h += '<div class="flow">'+
+    '<div class="fpill"><span class="dot"></span>Start — '+esc(p.n)+'</div>'+
+    p.s.map((st,i)=>'<div class="farrow">'+I.down+'</div>'+
+      '<div class="fstep'+(st.sup?" sup":"")+'"><div class="slbl">'+(st.sup?"Step "+(i+1)+" · Supervisor":"Step "+(i+1))+'</div>'+
+      '<div class="stxt">'+st.t+'</div></div>').join("")+
+    '<div class="farrow">'+I.down+'</div>'+
+    '<div class="fpill">'+I.check.replace('<svg','<svg style="width:17px;height:17px"')+'Verified & complete</div>'+
+    '</div>';
+
+  if(p.no && p.no.length) h += '<div class="eyebrow">Notes & cautions</div>'+p.no.map(noteHtml).join("");
+  return h;
+}
+
+function vFix(fi){
+  const f = FIX[fi]; if(!f) return goHome();
+  const key = "f"+fi, o = secOf("fix", fi);
+  pushRecent(key);
+  bar(backBtn("#sec/"+o.s)+'<h1>Fixes</h1>'+
+      '<button class="navbtn'+(isSaved(key)?" saved-on":"")+'" id="saveBtn" aria-label="Save">'+
+      (isSaved(key)?I.bookmarkFill:I.bookmark)+'</button>', "sub");
+
+  let h = '<div class="prochead" style="--sc:'+FIXCOLOR+'">'+
+    '<div class="peyebrow">'+numOf("fix",fi)+'<span class="sep">·</span>Fix</div>'+
+    '<h2>'+esc(f.n)+'</h2>'+
+    '<div class="codestrip"><span class="tag">'+esc(f.g)+'</span></div>'+
+    '</div>';
+  h += '<div class="note warn"><span class="lbl">Symptom</span>'+esc(f.sym)+'</div>';
+  h += f.body.map(b=>'<div class="note'+(b.upd?" upd":"")+'"><span class="lbl">'+esc(b.h)+'</span>'+b.t+'</div>').join("");
+  return h;
+}
+
+/* ---------- search ---------- */
+let q = "";
+const CHIPS = ["CTM","Closure","Nomination","Cheque book","ATM card","Day-end","Silent account","Interest rates","Deceased claim"];
+function procHay(p, pi){
+  return [numOf("proc",pi), p.n, p.g, p.k, p.c.join(" "), p.s.map(x=>x.t).join(" "),
+          (p.no||[]).map(x=>x.l+" "+x.t).join(" ")].join(" ").replace(/<[^>]+>/g,"");
+}
+function fixHay(f, fi){
+  return [numOf("fix",fi), f.n, f.g, f.k, f.sym, f.body.map(b=>b.h+" "+b.t).join(" ")].join(" ").replace(/<[^>]+>/g,"");
+}
 function score(p, term){
-  if(!term) return 0;
   const w = norm(term).split(/\s+/).filter(Boolean);
   let s = 0;
-  const name = norm(p.n), codes = norm(p.c.join(" ")), keys = norm(p.k||"");
+  const name = norm(p.n), codes = norm((p.c||[]).join(" ")), keys = norm(p.k||"");
   w.forEach(x=>{
     if(codes.split(/\s+/).includes(x)) s += 100;
     else if(codes.includes(x))          s += 60;
@@ -1812,335 +2263,316 @@ function score(p, term){
   });
   return s;
 }
+function vSearch(){
+  bar(backBtn("#home")+'<h1>Search</h1>', "sub");
+  return '<div class="searchbox"><span class="sico">'+I.search+'</span>'+
+    '<input id="q" type="search" autocomplete="off" autocapitalize="off" spellcheck="false" '+
+    'placeholder="Search a task, menu code, or error…" aria-label="Search" value="'+esc(q)+'">'+
+    '<button class="clearbtn'+(q?" on":"")+'" id="clr" aria-label="Clear search">×</button></div>'+
+    '<div class="chiprow" id="chips" '+(q?'hidden':'')+'>'+CHIPS.map(c=>'<button class="chip">'+esc(c)+'</button>').join("")+'</div>'+
+    '<div id="results">'+resultsHtml()+'</div>';
+}
+function resultsHtml(){
+  if(!q) return '<div class="empty" style="padding:40px 20px"><div>Type a task, a menu code like <b>CASBAO</b>, or the text of an error.</div></div>';
+  let h = "", total = 0;
 
-/* Pull the sentence a match actually lives in, so a result never looks arbitrary. */
-function context(p, term){
-  if(!term) return "";
-  const w = norm(term).split(/\s+/).filter(Boolean)[0];
-  if(!w) return "";
-  if(norm(p.n).includes(w)) return "";
-  const pool = p.s.map(x=>({t:x.t}))
-    .concat((p.no||[]).map(n=>({t:n.t})));
-  for(const item of pool){
-    const plain = item.t.replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
-    const i = norm(plain).indexOf(w);
-    if(i > -1){
-      const a = Math.max(0, i-40), b = Math.min(plain.length, i+70);
-      return (a>0?"\u2026":"") + plain.slice(a,b).trim() + (b<plain.length?"\u2026":"");
-    }
+  let procs = PROC.map((p,pi)=>({p,pi})).filter(o=>matches(procHay(o.p,o.pi), q))
+    .map(o=>({...o, sc:score(o.p,q)})).sort((a,b)=>b.sc-a.sc).slice(0,20);
+  if(procs.length){
+    total += procs.length;
+    h += '<div class="eyebrow">Processes</div><div class="plist">'+procs.map(o=>
+      '<button class="prow" data-nav="#proc/'+o.pi+'">'+
+      '<span class="pnum">'+numOf("proc",o.pi)+'</span>'+
+      '<span class="pt"><span class="pname">'+hl(esc(o.p.n),q)+'</span>'+
+      '<span class="pmeta">'+o.p.c.slice(0,2).map(codeChip).join("")+'<span>'+esc(o.p.g)+'</span></span></span>'+
+      '<span class="chev">'+I.chev+'</span></button>').join("")+'</div>';
   }
-  return "";
-}
-
-/* ---------- procedures ---------- */
-function procHay(p){
-  return [p.n, p.g, p.k, p.c.join(" "), p.s.map(x=>x.t).join(" "),
-          (p.no||[]).map(x=>x.l+" "+x.t).join(" ")].join(" ").replace(/<[^>]+>/g,"");
-}
-function renderProc(p, i){
-  const flag = (p.no||[]).some(n=>n.flag);
-  const steps = p.s.map((st,ix)=>
-    '<li class="step'+(st.sup?" sup":"")+'">'+
-      '<span class="num">'+(ix+1)+'</span>'+
-      '<div class="txt">'+(st.sup?'<span class="who">Supervisor</span>':'')+st.t+'</div>'+
-    '</li>').join("");
-  const notes = (p.no||[]).map(n=>
-    '<div class="note '+(n.k==="warn"?"warn":n.k==="upd"?"upd":"")+'">'+
-      '<span class="lbl">'+esc(n.l)+'</span>'+n.t+'</div>').join("");
-  const ctx = context(p, q);
-  return '<article class="card" data-i="'+i+'">'+
-    '<button class="cardhead" aria-expanded="false"><div class="t">'+
-      '<div class="name">'+hl(esc(p.n),q)+'</div>'+
-      '<div class="meta">'+p.c.map(c=>codeChip(c)).join("")+
-        (flag?'<span class="badge b-new">updated</span>':'')+
-      '</div>'+
-      (ctx?'<div class="ctx">'+hl(esc(ctx),q)+'</div>':'')+
-    '</div><span class="chev">›</span></button>'+
-    '<div class="cardbody"><ol class="ladder">'+steps+'</ol>'+notes+'</div></article>';
-}
-
-/* ---------- fixes ---------- */
-function fixHay(f){
-  return [f.n,f.g,f.k,f.sym,f.body.map(b=>b.h+" "+b.t).join(" ")].join(" ").replace(/<[^>]+>/g,"");
-}
-function renderFix(f){
-  const body = f.body.map(b=>
-    '<div class="note'+(b.upd?" upd":"")+'"><span class="lbl">'+esc(b.h)+'</span>'+b.t+'</div>').join("");
-  return '<article class="card">'+
-    '<button class="cardhead" aria-expanded="false"><div class="t">'+
-      '<div class="name">'+hl(esc(f.n),q)+'</div>'+
-      '<div class="meta">'+hl(esc(f.sym),q)+'</div>'+
-    '</div><span class="chev">›</span></button>'+
-    '<div class="cardbody">'+body+'</div></article>';
-}
-
-/* ---------- group + section ---------- */
-function section(title, count){
-  return '<div class="sechead"><h2>'+esc(title)+'</h2><div class="rule"></div>'+
-         '<span class="count">'+count+'</span></div>';
-}
-function byGroup(items, keyf){
-  const m = new Map();
-  items.forEach(it=>{ const g=keyf(it); if(!m.has(g)) m.set(g,[]); m.get(g).push(it); });
-  return m;
-}
-
-/* ---------- views ---------- */
-function viewProc(){
-  let hits = PROC.map((p,i)=>({p,i})).filter(o=>matches(procHay(o.p), q));
-  if(!hits.length) return empty("No procedure matches that.","Try a menu code like CASBAO, or a word like closure, nomination, vault.");
-  if(q){
-    hits = hits.map(o=>({p:o.p, i:o.i, sc:score(o.p,q)})).sort((a,b)=>b.sc-a.sc);
-    return section("Best matches", hits.length) + hits.map(o=>renderProc(o.p,o.i)).join("");
+  let fixes = FIX.map((f,fi)=>({f,fi})).filter(o=>matches(fixHay(o.f,o.fi), q))
+    .map(o=>({...o, sc:score({n:o.f.n,c:[],k:o.f.k+" "+o.f.sym},q)})).sort((a,b)=>b.sc-a.sc).slice(0,12);
+  if(fixes.length){
+    total += fixes.length;
+    h += '<div class="eyebrow">Fixes</div><div class="plist">'+fixes.map(o=>
+      '<button class="prow" data-nav="#fix/'+o.fi+'">'+
+      '<span class="pnum">'+numOf("fix",o.fi)+'</span>'+
+      '<span class="pt"><span class="pname">'+hl(esc(o.f.n),q)+'</span>'+
+      '<span class="psym">'+hl(esc(o.f.sym),q)+'</span></span>'+
+      '<span class="chev">'+I.chev+'</span></button>').join("")+'</div>';
   }
-  let h = q ? '' : '<p class="hint">'+PROC.length+' procedures. Steps on the gold rail are the supervisor\u2019s job.</p>';
-  byGroup(hits,o=>o.p.g).forEach((arr,g)=>{
-    h += section(g, arr.length) + arr.map(o=>renderProc(o.p,o.i)).join("");
-  });
+  const mrows = [];
+  MENUS.forEach(grp=>grp.r.forEach(r=>{ if(matches(r.join(" ")+" "+grp.g, q)) mrows.push({g:grp.g, r}); }));
+  if(mrows.length){
+    total += mrows.length;
+    h += '<div class="eyebrow">Menu codes</div><div class="mgroup">'+mrows.slice(0,15).map(o=>
+      '<div class="mrow"><div class="codes">'+o.r.slice(1).map(codeChip).join("")+'</div>'+
+      '<div class="purpose">'+hl(esc(o.r[0]),q)+' <span style="color:var(--dim);font-size:12px">· '+esc(o.g)+'</span></div></div>').join("")+'</div>';
+  }
+  const refRows = RATES.filter(r=>matches(r.join(" "),q)).map(r=>[r[0], r[1]])
+    .concat(SCHEMES.filter(r=>matches(r.join(" "),q)))
+    .concat(OFFACC.filter(r=>matches(r.join(" "),q)).map(r=>["SOL ID + "+r[0], r[1]]));
+  if(refRows.length){
+    total += refRows.length;
+    h += '<div class="eyebrow">Reference</div><div class="tcard"><table class="tbl"><tbody>'+
+      refRows.slice(0,12).map(r=>'<tr><td class="num">'+hl(esc(r[0]),q)+'</td><td>'+hl(esc(r[1]),q)+'</td></tr>').join("")+
+      '</tbody></table></div>';
+  }
+  const news = NEWS.filter(n=>matches([n.d,n.o,n.t,n.b].join(" "), q));
+  if(news.length){
+    total += news.length;
+    h += '<div class="eyebrow">Updates</div>'+news.slice(0,6).map(updCard).join("");
+  }
+  if(!total) return empty("Nothing matches that.","Try a menu code (CASBAO), a task (closure), or an error message.");
   return h;
 }
 
-function viewMenu(){
-  let h = q ? '' : '<p class="hint">Every menu code from the DOP shortcut list, grouped by what it belongs to.</p>';
-  let any = 0;
-  MENUS.forEach(grp=>{
-    const rows = grp.r.filter(r => matches(r.join(" ")+" "+grp.g, q));
-    if(!rows.length) return;
-    any += rows.length;
-    h += '<div class="mgroup"><h3>'+esc(grp.g)+'</h3>' + rows.map(r=>{
-      const codes = r.slice(1).map(c=>codeChip(c)).join("");
-      return '<div class="mrow"><div class="codes">'+codes+'</div>'+
-             '<div class="purpose">'+hl(esc(r[0]),q)+'</div></div>';
-    }).join("") + '</div>';
-  });
-  if(!any) return empty("No menu code matches that.","Search the code itself (HACLI) or what it does (balance inquiry).");
-  return h;
-}
-
-function viewFix(){
-  const hits = FIX.filter(f=>matches(fixHay(f), q));
-  if(!hits.length) return empty("Nothing here matches that.","Try the error text, like closure pending, already logged in, or wrong deposit.");
-  if(q){
-    const w = norm(q).split(/\s+/).filter(Boolean);
-    const sc = f => w.reduce((a,x)=>
-      a + (norm(f.n).includes(x)?40:0) + (norm(f.sym).includes(x)?20:0) + (norm(f.k).includes(x)?10:0), 0);
-    const ranked = hits.map(f=>({f, s:sc(f)})).sort((a,b)=>b.s-a.s);
-    return section("Best matches", ranked.length) + ranked.map(o=>renderFix(o.f)).join("");
-  }
-  let h = '<p class="hint">Common failures at the counter and what actually clears them.</p>';
-  byGroup(hits,f=>f.g).forEach((arr,g)=>{
-    h += section(g, arr.length) + arr.map(renderFix).join("");
-  });
-  return h;
-}
-
-function viewRef(){
-  const t = q;
-  let h = "";
-  const rateRows = RATES.filter(r=>matches(r.join(" "),t));
-  if(rateRows.length){
-    h += section("Interest rates", RATE_ASON) +
-      '<div class="card"><div class="scroller"><table class="tbl"><thead><tr>'+
-      '<th>Scheme</th><th>Rate</th><th>How it is paid</th></tr></thead><tbody>'+
-      rateRows.map(r=>'<tr><td>'+hl(esc(r[0]),t)+'</td><td class="num">'+esc(r[1])+
-        '</td><td>'+esc(r[2])+'</td></tr>').join("")+
+/* ---------- menus / reference ---------- */
+let menuTab = "codes";
+const MENUTABS = [
+  {id:"codes", label:"Menu codes"},
+  {id:"rates", label:"Interest rates"},
+  {id:"schemes", label:"Scheme codes"},
+  {id:"offacc", label:"Office accounts"},
+  {id:"manual", label:"Manual chapters"}
+];
+function vMenus(){
+  bar('<h1>Menus & reference</h1>'+themeBtnHtml);
+  let h = '<div class="subtabs">'+MENUTABS.map(t=>
+    '<button class="subtab'+(t.id===menuTab?" on":"")+'" data-mtab="'+t.id+'">'+t.label+'</button>').join("")+'</div>';
+  if(menuTab==="codes"){
+    h += MENUS.map(grp=>'<div class="mgroup"><h3>'+esc(grp.g)+'</h3>'+
+      grp.r.map(r=>'<div class="mrow"><div class="codes">'+r.slice(1).map(codeChip).join("")+'</div>'+
+      '<div class="purpose">'+esc(r[0])+'</div></div>').join("")+'</div>').join("");
+  } else if(menuTab==="rates"){
+    h += '<div class="eyebrow">'+esc(RATE_ASON)+'</div>'+
+      '<div class="tcard"><div class="scroller"><table class="tbl"><thead><tr><th>Scheme</th><th>Rate</th><th>How it is paid</th></tr></thead><tbody>'+
+      RATES.map(r=>'<tr><td>'+esc(r[0])+'</td><td class="num">'+esc(r[1])+'</td><td>'+esc(r[2])+'</td></tr>').join("")+
       '</tbody></table></div></div>'+
       '<div class="note"><span class="lbl">Check before quoting</span>Rates are revised quarterly by the Ministry of Finance. Confirm against the latest SB Order before telling a depositor a figure.</div>';
-  }
-  const schRows = SCHEMES.filter(r=>matches(r.join(" "),t));
-  if(schRows.length){
-    h += section("Scheme codes", schRows.length) +
-      '<div class="card"><div class="scroller"><table class="tbl"><thead><tr>'+
-      '<th>Code</th><th>Product</th></tr></thead><tbody>'+
-      schRows.map(r=>'<tr><td class="num">'+hl(esc(r[0]),t)+'</td><td>'+hl(esc(r[1]),t)+'</td></tr>').join("")+
+  } else if(menuTab==="schemes"){
+    h += '<div class="tcard"><div class="scroller"><table class="tbl"><thead><tr><th>Code</th><th>Product</th></tr></thead><tbody>'+
+      SCHEMES.map(r=>'<tr><td class="num">'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>').join("")+
+      '</tbody></table></div></div>';
+  } else if(menuTab==="offacc"){
+    h += '<div class="eyebrow">SOL ID + suffix</div>'+
+      '<div class="tcard"><div class="scroller"><table class="tbl"><thead><tr><th>Suffix</th><th>What it is</th></tr></thead><tbody>'+
+      OFFACC.map(r=>'<tr><td class="num">'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>').join("")+
+      '</tbody></table></div></div>';
+  } else {
+    h += '<div class="eyebrow">POSB (CBS) Manual — corrected to 31.12.2021</div>'+
+      '<div class="tcard"><div class="scroller"><table class="tbl"><thead><tr><th>Ch.</th><th>Subject</th><th>Page</th></tr></thead><tbody>'+
+      CHAPTERS.map(r=>'<tr><td class="num">'+esc(r[0])+'</td><td>'+esc(r[1])+'</td><td class="num">'+esc(r[2])+'</td></tr>').join("")+
       '</tbody></table></div></div>';
   }
-  const offRows = OFFACC.filter(r=>matches(r.join(" "),t));
-  if(offRows.length){
-    h += section("Office accounts", "SOL ID + suffix") +
-      '<div class="card"><div class="scroller"><table class="tbl"><thead><tr>'+
-      '<th>Suffix</th><th>What it is</th></tr></thead><tbody>'+
-      offRows.map(r=>'<tr><td class="num">'+hl(esc(r[0]),t)+'</td><td>'+hl(esc(r[1]),t)+'</td></tr>').join("")+
-      '</tbody></table></div></div>';
-  }
-  const chRows = CHAPTERS.filter(r=>matches(r.join(" "),t));
-  if(chRows.length){
-    h += section("POSB (CBS) Manual — where to look", "up to 31.12.2021") +
-      '<div class="card"><div class="scroller"><table class="tbl"><thead><tr>'+
-      '<th>Ch.</th><th>Subject</th><th>Page</th></tr></thead><tbody>'+
-      chRows.map(r=>'<tr><td class="num">'+esc(r[0])+'</td><td>'+hl(esc(r[1]),t)+
-        '</td><td class="num">'+esc(r[2])+'</td></tr>').join("")+
-      '</tbody></table></div></div>';
-  }
-  if(!h) return empty("Nothing in the reference matches that.","Try a scheme name, a code like TDIP3, or an office account like 0382.");
   return h;
 }
 
-function viewNew(){
-  const hits = NEWS.filter(n=>matches([n.d,n.o,n.t,n.b].join(" "), q));
-  if(!hits.length) return empty("No update matches that.","Try APT, e-KYC, TDS, nomination or an order number.");
-  let h = q ? '' : '<p class="hint">Issued after your POSB (CBS) Manual closed on 31.12.2021. The highlighted ones change what you do at the counter today.</p>';
-  h += hits.map(n=>
-    '<article class="card"><button class="cardhead" aria-expanded="false"><div class="t">'+
-    '<div class="name">'+hl(esc(n.t),q)+'</div>'+
-    '<div class="meta">'+codeChip(n.o, n.hi?"":"n")+
-      '<span style="color:var(--slate)">'+esc(n.d)+'</span>'+
-      (n.hi?'<span class="badge b-new">affects counter work</span>':'')+
-    '</div></div><span class="chev">›</span></button>'+
-    '<div class="cardbody"><div class="note'+(n.hi?" warn":"")+'"><span class="lbl">What it does</span>'+
-      hl(n.b,q)+'</div>'+
-      (n.u?'<div class="note"><span class="lbl">Source</span><a class="extlink" href="'+esc(n.u)+'" target="_blank" rel="noopener">Open the order / circular ↗</a></div>':'')+
-    '</div></article>').join("");
-  return h;
-}
-
-function empty(big, small){
-  return '<div class="empty">'+
-    '<div class="eico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M8.5 11h5"/></svg></div>'+
-    '<div class="big">'+esc(big)+'</div><div>'+esc(small)+'</div></div>';
-}
-
-const DISC = () => '<div class="disc"><b>Read this once.</b> This is a working aid built from the POSB (CBS) Manual corrected to 31.12.2021, the DOP Finacle menu shortcut list v1.8, and SB Orders issued up to '+REV+'. Screens and rules change with every Finacle patch and every SB Order. Where this and a current SB Order disagree, <b>the SB Order wins</b> — check the order, not this. Nothing here replaces your circle\u2019s instructions or authorises any transaction.</div>';
-
-/* ---------- render ---------- */
-/* When a search has answers on other tabs too, say so instead of silently
-   hiding them — a counter clerk typing an error message should not have to
-   guess that the answer lives under Fixes. */
-function crossTab(){
-  if(!q) return "";
-  const c = counts();
-  const others = TABS.filter(t => t.id !== tab && c[t.id] > 0);
-  if(!others.length) return "";
-  return '<div class="xtab"><b>Also found</b>&nbsp;' +
-    others.map(t => '<button data-id="'+t.id+'">'+c[t.id]+' in '+t.label+'</button>').join("") +
+/* ---------- updates ---------- */
+function updCard(n){
+  return '<div class="ucard"><div class="uhead">'+
+    '<span class="badge b-ord">'+esc(n.o)+'</span>'+
+    '<span class="udate">'+esc(n.d)+'</span>'+
+    (n.hi?'<span class="badge b-hot">affects counter work</span>':'')+
+    '</div><h3>'+esc(n.t)+'</h3>'+
+    '<div class="ubody">'+n.b+'</div>'+
+    (n.u?'<div class="usrc"><a class="extlink" href="'+esc(n.u)+'" target="_blank" rel="noopener">Open the order / source ↗</a></div>':'')+
     '</div>';
 }
-
-function render(){
-  const v = tab==="proc" ? viewProc()
-          : tab==="menu" ? viewMenu()
-          : tab==="fix"  ? viewFix()
-          : tab==="ref"  ? viewRef()
-          : viewNew();
-  out.innerHTML = crossTab() + v + DISC();
+function vUpdates(){
+  bar('<h1>What changed</h1><span class="stamp">rev '+esc(REV).replace(/ /g,"·")+'</span>'+themeBtnHtml);
+  return '<div class="secdesc" style="margin-top:10px">Orders and rulings issued after the POSB (CBS) Manual closed on 31.12.2021. The highlighted ones change what you do at the counter today.</div>'+
+    NEWS.map(updCard).join("") + DISC();
 }
 
-/* ---------- tabs ---------- */
-function counts(){
-  return {
-    proc: PROC.filter(p=>matches(procHay(p),q)).length,
-    menu: MENUS.reduce((a,g)=>a+g.r.filter(r=>matches(r.join(" ")+" "+g.g,q)).length,0),
-    fix:  FIX.filter(f=>matches(fixHay(f),q)).length,
-    ref:  RATES.concat(SCHEMES,OFFACC,CHAPTERS).filter(r=>matches(r.join(" "),q)).length,
-    new:  NEWS.filter(n=>matches([n.d,n.o,n.t,n.b].join(" "),q)).length
-  };
-}
-function drawTabs(){
-  const c = counts();
-  tabsEl.innerHTML = TABS.map(t=>
-    '<button class="tab" role="tab" data-id="'+t.id+'" aria-selected="'+(t.id===tab)+'">'+
-    t.label + (q ? ' <span style="opacity:.75">'+c[t.id]+'</span>' : '') + '</button>').join("");
-  bnavEl.innerHTML = TABS.map(t=>
-    '<button class="bitem" data-id="'+t.id+'" aria-selected="'+(t.id===tab)+'">'+
-    '<span class="bico">'+ICONS[t.id]+
-      (q && c[t.id] ? '<span class="bcount">'+(c[t.id]>99?"99+":c[t.id])+'</span>' : '')+
-    '</span><span class="blbl">'+t.short+'</span></button>').join("");
+/* ---------- saved ---------- */
+function vSaved(){
+  bar('<h1>Saved</h1>'+themeBtnHtml);
+  const items = load(K_SAVED, []).map(itemOf).filter(Boolean);
+  if(!items.length) return '<div class="empty"><div class="eico">'+I.bookmark+'</div>'+
+    '<div class="big">Nothing saved yet.</div><div>Open any process and tap the bookmark to keep it here for one-tap access.</div></div>';
+  return '<div class="plist" style="margin-top:14px">'+items.map(r=>
+    '<button class="prow" data-nav="'+r.href+'">'+
+    '<span class="pnum">'+r.num+'</span>'+
+    '<span class="pt"><span class="pname">'+esc(r.it.n)+'</span>'+
+    '<span class="pmeta"><span>'+esc(r.it.g)+'</span></span></span>'+
+    '<span class="chev">'+I.chev+'</span></button>').join("")+'</div>';
 }
 
-function switchTab(id){
-  tab = id; drawTabs(); render(); window.scrollTo({top:0});
+/* ---------- wizard ---------- */
+let wiz = null; /* {cards, idx, dir} */
+function wizCards(p){
+  const cards = [{k:"start", t:"Start — "+esc(p.n)}];
+  p.s.forEach((st,i)=>cards.push({k:st.sup?"sup":"step", n:i+1, t:st.t}));
+  (p.no||[]).filter(n=>n.k==="warn").forEach(n=>cards.push({k:"warn", l:n.l, t:n.t}));
+  cards.push({k:"done", t:"Verified & complete"});
+  return cards;
 }
-tabsEl.addEventListener("click", e=>{
-  const b = e.target.closest(".tab"); if(!b) return;
-  switchTab(b.dataset.id);
-});
-bnavEl.addEventListener("click", e=>{
-  const b = e.target.closest(".bitem"); if(!b) return;
-  switchTab(b.dataset.id);
-});
-
-out.addEventListener("click", e=>{
-  const x = e.target.closest(".xtab button");
-  if(x){ switchTab(x.dataset.id); return; }
-  const h = e.target.closest(".cardhead"); if(!h) return;
-  const card = h.parentElement, open = card.classList.toggle("open");
-  h.setAttribute("aria-expanded", open);
-});
-
-function applyQuery(val){
-  q = val.trim();
-  clr.classList.toggle("on", !!q);
-  chipsEl.classList.toggle("off", !!q);
-  if(q){ // jump to the tab with the most hits
-    const c = counts();
-    const best = TABS.map(t=>t.id).reduce((a,b)=> c[b]>c[a]?b:a, tab);
-    if(c[tab]===0 && c[best]>0) tab = best;
+function openWiz(p){
+  wiz = {cards:wizCards(p), idx:0, name:p.n, dir:1};
+  history.pushState({wiz:1}, "");
+  wizEl.classList.add("on");
+  drawWiz();
+}
+function closeWiz(fromPop){
+  if(!wiz) return;
+  wiz = null;
+  wizEl.classList.remove("on");
+  if(!fromPop) history.back();
+}
+function drawWiz(){
+  const c = wiz.cards[wiz.idx], total = wiz.cards.length;
+  const pct = Math.round(((wiz.idx+1)/total)*100);
+  let badge, body;
+  if(c.k==="start"){
+    badge = '<span class="wbadge start">Start</span>';
+    body = '<div class="wtxt">'+c.t+'</div>';
+  } else if(c.k==="done"){
+    badge = '<span class="wbadge done">Complete</span>';
+    body = '<div class="wtxt">'+c.t+'</div>';
+  } else if(c.k==="warn"){
+    badge = '<span class="wbadge warn">Caution</span>';
+    body = '<div class="wtxt smaller">'+c.t+'</div>';
+  } else {
+    badge = '<span class="wbadge">Step</span>';
+    body = '<div class="wnum'+(c.k==="sup"?" gold":"")+'">'+c.n+'</div>'+
+      '<div class="wtxt">'+c.t+'</div>'+
+      (c.k==="sup"?'<div class="wsub">Supervisor login</div>':'');
   }
-  drawTabs(); render();
+  const last = wiz.idx===total-1;
+  wizEl.innerHTML =
+    '<div class="wizhead"><button class="wizx" id="wizX">'+I.x+'</button>'+
+    '<div class="wt"><div class="wname">'+esc(wiz.name)+'</div>'+
+    '<div class="wpos">'+(wiz.idx+1)+' of '+total+' · swipe through</div></div></div>'+
+    '<div class="wizbar"><i style="width:'+pct+'%"></i></div>'+
+    '<div class="wizbody" id="wizBody"><div class="wizcard'+(wiz.dir<0?" back":"")+'">'+badge+body+'</div></div>'+
+    '<div class="wizfoot">'+
+    '<button class="wbtn" id="wizBack" '+(wiz.idx===0?"disabled":"")+'>'+I.back+'Back</button>'+
+    '<button class="wbtn primary" id="wizNext">'+(last?I.check+"Done":"Next "+I.next)+'</button>'+
+    '</div>';
 }
-let tmr;
-qEl.addEventListener("input", ()=>{
-  clearTimeout(tmr);
-  tmr = setTimeout(()=>applyQuery(qEl.value), 120);
+function wizStep(d){
+  if(!wiz) return;
+  const nx = wiz.idx + d;
+  if(nx < 0) return;
+  if(nx >= wiz.cards.length){ closeWiz(); return; }
+  wiz.idx = nx; wiz.dir = d; drawWiz();
+}
+wizEl.addEventListener("click", e=>{
+  if(e.target.closest("#wizX")) closeWiz();
+  else if(e.target.closest("#wizBack")) wizStep(-1);
+  else if(e.target.closest("#wizNext")){
+    if(wiz && wiz.idx===wiz.cards.length-1) closeWiz(); else wizStep(1);
+  }
 });
-qEl.addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); qEl.blur(); } });
-clr.addEventListener("click", ()=>{
-  qEl.value=""; applyQuery(""); qEl.focus();
+let tX = null;
+wizEl.addEventListener("touchstart", e=>{ tX = e.touches[0].clientX; }, {passive:true});
+wizEl.addEventListener("touchend", e=>{
+  if(tX==null) return;
+  const dx = e.changedTouches[0].clientX - tX; tX = null;
+  if(Math.abs(dx) > 45) wizStep(dx < 0 ? 1 : -1);
+}, {passive:true});
+window.addEventListener("popstate", ()=>{ if(wiz) closeWiz(true); });
+
+/* ---------- router ---------- */
+let route = null;
+function goHome(){ location.hash = "#home"; return ""; }
+function render(){
+  const hash = (location.hash || "#home").slice(1);
+  const parts = hash.split("/");
+  route = {view:parts[0]||"home", arg:parts[1]};
+  let navActive = "home", html = "";
+  switch(route.view){
+    case "sec":     html = vSection(parseInt(route.arg,10)); break;
+    case "proc":    html = vProc(parseInt(route.arg,10)); break;
+    case "fix":     html = vFix(parseInt(route.arg,10)); break;
+    case "search":  html = vSearch(); navActive = "search"; break;
+    case "menus":   html = vMenus(); navActive = "menus"; break;
+    case "updates": html = vUpdates(); navActive = "updates"; break;
+    case "saved":   html = vSaved(); navActive = "saved"; break;
+    default:        html = vHome(); navActive = "home";
+  }
+  appEl.innerHTML = '<div class="view">'+html+'</div>';
+  drawNav(navActive);
+  window.scrollTo({top:0});
+  afterRender();
+}
+window.addEventListener("hashchange", ()=>{ if(!wiz) render(); });
+
+function afterRender(){
+  const qEl = $("#q");
+  if(qEl){
+    if(!q) setTimeout(()=>qEl.focus(), 60);
+    let tmr;
+    qEl.addEventListener("input", ()=>{
+      clearTimeout(tmr);
+      tmr = setTimeout(()=>{
+        q = qEl.value.trim();
+        $("#clr").classList.toggle("on", !!q);
+        $("#chips").hidden = !!q;
+        $("#results").innerHTML = resultsHtml();
+      }, 130);
+    });
+    qEl.addEventListener("keydown", e=>{ if(e.key==="Enter"){ e.preventDefault(); qEl.blur(); } });
+    $("#clr").addEventListener("click", ()=>{
+      qEl.value=""; q=""; $("#clr").classList.remove("on");
+      $("#chips").hidden = false; $("#results").innerHTML = resultsHtml(); qEl.focus();
+    });
+    $("#chips").addEventListener("click", e=>{
+      const b = e.target.closest(".chip"); if(!b) return;
+      qEl.value = b.textContent; q = b.textContent;
+      $("#clr").classList.add("on"); $("#chips").hidden = true;
+      $("#results").innerHTML = resultsHtml();
+    });
+  }
+  const saveBtn = $("#saveBtn");
+  if(saveBtn){
+    const key = route.view==="fix" ? "f"+route.arg : "p"+route.arg;
+    saveBtn.addEventListener("click", ()=>{
+      toggleSaved(key);
+      saveBtn.classList.toggle("saved-on", isSaved(key));
+      saveBtn.innerHTML = isSaved(key) ? I.bookmarkFill : I.bookmark;
+    });
+  }
+  const wizGo = $("#wizGo");
+  if(wizGo) wizGo.addEventListener("click", ()=>openWiz(PROC[parseInt(route.arg,10)]));
+}
+
+/* clicks: navigation + subtabs + theme */
+document.addEventListener("click", e=>{
+  const nav = e.target.closest("[data-nav]");
+  if(nav){ location.hash = nav.dataset.nav; return; }
+  const mt = e.target.closest("[data-mtab]");
+  if(mt){ menuTab = mt.dataset.mtab; render(); return; }
+  if(e.target.closest("#themeBtn")){
+    const cur = document.documentElement.getAttribute("data-theme")==="dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", cur);
+    try{ localStorage.setItem("fd-theme", cur); }catch(err){}
+  }
 });
 
-/* ---------- quick-search chips ---------- */
-const CHIPS = ["CTM","Closure","Nomination","Cheque book","ATM card","Day-end","Silent account","Interest rates"];
-chipsEl.innerHTML = CHIPS.map(c=>'<button class="chip">'+esc(c)+'</button>').join("");
-chipsEl.addEventListener("click", e=>{
-  const b = e.target.closest(".chip"); if(!b) return;
-  qEl.value = b.textContent; applyQuery(qEl.value); window.scrollTo({top:0});
-});
-
-/* ---------- light / dark theme ---------- */
-const themeBtn = $("#themeBtn");
-themeBtn.addEventListener("click", ()=>{
-  const cur = document.documentElement.getAttribute("data-theme")==="dark" ? "light" : "dark";
-  document.documentElement.setAttribute("data-theme", cur);
-  try{ localStorage.setItem("fd-theme", cur); }catch(e){}
-});
-
-/* ---------- scroll: back-to-top + masthead shadow ---------- */
-const topbar = document.querySelector(".topbar");
+/* appbar shadow on scroll */
 let sTick = false;
 window.addEventListener("scroll", ()=>{
   if(sTick) return; sTick = true;
   requestAnimationFrame(()=>{
-    const y = window.scrollY;
-    fabEl.classList.toggle("show", y > 600);
-    topbar.classList.toggle("scrolled", y > 8);
+    barEl.classList.toggle("scrolled", window.scrollY > 6);
     sTick = false;
   });
 }, {passive:true});
-fabEl.addEventListener("click", ()=>window.scrollTo({top:0, behavior:"smooth"}));
 
 /* ---------- over-the-air updates ----------
-   Called by the Android shell (or any host page) with the parsed contents
-   of updates.json. Replaces the live data and re-renders. Every field is
-   optional, so a partial update never breaks the page. */
+   Called by the Android shell with the parsed contents of updates.json.
+   Every field is optional; a partial update never breaks the page. */
 window.applyRemoteUpdates = function(data){
   try{
     if(!data || typeof data !== "object") return;
-    if(data.rev){
-      REV = String(data.rev);
-      document.getElementById("stamp").textContent = "rev " + REV.replace(/ /g,"·");
-    }
+    if(data.rev) REV = String(data.rev);
     if(data.rateAson) RATE_ASON = String(data.rateAson);
-    if(Array.isArray(data.rates) && data.rates.length){
-      RATES.length = 0; data.rates.forEach(r=>RATES.push(r));
-    }
-    if(Array.isArray(data.news) && data.news.length){
-      NEWS.length = 0; data.news.forEach(n=>NEWS.push(n));
-    }
-    drawTabs(); render();
-  }catch(e){ /* keep whatever was already on screen */ }
+    if(Array.isArray(data.rates) && data.rates.length){ RATES.length = 0; data.rates.forEach(r=>RATES.push(r)); }
+    if(Array.isArray(data.news) && data.news.length){ NEWS.length = 0; data.news.forEach(n=>NEWS.push(n)); }
+    if(!wiz) render();
+  }catch(e){ /* keep whatever is on screen */ }
 };
 
-drawTabs(); render();
+render();
 })();
 
 </script>
