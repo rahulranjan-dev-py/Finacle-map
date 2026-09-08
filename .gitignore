@@ -11,6 +11,3 @@ local.properties
 captures/
 .externalNativeBuild/
 .cxx/
-
-# Signing keystores are never committed — CI rebuilds them from secrets
-signing/*.jks

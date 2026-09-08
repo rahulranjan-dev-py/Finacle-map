@@ -101,32 +101,28 @@ the theme choice are stored on the phone. Minimum Android version: 7.0
 
 ## Signing
 
-The release keystore is **not** in the repository (the repo is public). CI
-rebuilds it from two GitHub Actions secrets before every build
-(**Settings → Secrets and variables → Actions**):
+The signing keystore (`signing/finacledesk.jks`) and its password
+(`gradle.properties`) are committed **on purpose**, so that every build — CI
+or a laptop — signs identically, which is what lets a new APK install over
+the old one with nothing to configure.
 
-| Secret | Contents |
-|---|---|
-| `FINACLEDESK_KEYSTORE_B64` | the `.jks` file, base64-encoded (`base64 -w0 file.jks`) |
-| `FINACLEDESK_KEYSTORE_PASSWORD` | its store/key password (alias is `finacledesk`) |
+What that means in practice: the app has no accounts, no network access and
+no data of its own, so the key protects nothing except "who may publish an
+update that installs over the existing app". With the repo public, anyone
+could in principle build such an APK — but they would still have to get a
+colleague to install it by hand. Share APKs only from this repo's Releases
+page or directly from you, and that risk is contained. If you would rather
+not have the key public at all, make the repo private again (Settings →
+General → Danger Zone) and share the APK file itself instead of the release
+link; nothing in the app depends on the repo being public.
 
-If the secrets are missing the build fails with a clear error. If the key is
-ever lost or must be rotated again: generate a new keystore
-(`keytool -genkeypair -keystore new.jks -alias finacledesk -keyalg RSA
--keysize 2048 -validity 10950`), update both secrets, and tell users to
-uninstall/reinstall once — an APK signed with a different key will not
-install over the old one.
-
-> History note: builds before 8 Sep 2026 were signed with a keystore that
-> was committed to this repo while it was private. That key was retired when
-> the repo went public; phones on those builds need one uninstall/reinstall.
+If the key is ever changed, colleagues must uninstall and reinstall once —
+Android refuses an update signed with a different key.
 
 ## Building locally
 
 Open the project in Android Studio (or run `./gradlew assembleRelease` with
 the Android SDK installed). Output: `app/build/outputs/apk/release/`.
-Without the keystore and `FINACLEDESK_KEYSTORE_PASSWORD` env var, the local
-release APK is unsigned — fine for testing, not for distribution.
 
 ---
 
